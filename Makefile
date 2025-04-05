@@ -4,9 +4,10 @@ CFLAGS = -Wall -Wextra -Werror -Iincludes
 SRCLOC = src
 UTILSLOC = utils
 LIBFT_A = libft/libft.a
-LINUX_MINIMLX_A = minilibx-linux/libmlx_Linux.a -lX11 -lXext -lm
+LINUX_MINIMLX_A = minilibx-linux/libmlx_Linux.a  -lX11 -lXext -lm
 MACOS_MINIMLX_A = minilibx/libmlx.a -framework OpenGL -framework AppKit
 MINIMLX_A =
+OS = $(shell uname -s)
 
 ifeq ($(OS), Linux)
 	MINIMLX_A +=$(LINUX_MINIMLX_A)
@@ -14,14 +15,15 @@ else ifeq ($(OS), Darwin)
 	MINIMLX_A +=$(MACOS_MINIMLX_A)
 endif
 
-SRCS = $(SRCLOC)/main.c
+SRCS = $(SRCLOC)/main.c 
 
 OBJS       = $(SRCS:.c=.o)
 
 all: libft libmlx $(PROGRAM_NAME)
 
 $(PROGRAM_NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(LIBFT_A) $(OBJS) -o $(PROGRAM_NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(MINIMLX_A) -o $(PROGRAM_NAME)
+
 
 libft_all:
 	cd libft ; make

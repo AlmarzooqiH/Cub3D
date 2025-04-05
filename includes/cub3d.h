@@ -12,8 +12,15 @@
 
 #ifndef CUB3D_H
 # define CUB3D_H
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include "struct.h"
 # include "error.h"
-# include <stdio.h>
 # include "../libft/libft.h"
+
+# define CUBE "Cub3D"
+
+# define WIDTH 800
+# define HEIGHT 800
 #endif

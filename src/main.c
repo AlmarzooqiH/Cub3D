@@ -12,10 +12,21 @@
 
 #include "../includes/cub3d.h"
 
-int	main(int argc, char const *argv[])
+int	main(int ac, char const *av[])
 {
-	(void) argc;
-	(void) argv;
+	t_d	*p;
+
+	p = ft_calloc(sizeof(t_d), 1);
+	if (!p)
+		return (1);
+	(void)ac;
+	(void)av;
 	printf("Hello, World!\n");
+	p->mlx = mlx_init();
+	p->win = mlx_new_window(p->mlx, WIDTH, HEIGHT, CUBE);
+	sleep(10);
+	mlx_destroy_window(p->mlx, p->win);
+	free(p->mlx);
+	free(p);
 	return (0);
 }

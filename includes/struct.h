@@ -12,4 +12,18 @@
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+# ifdef __linux__
+# include "../minilibx-linux/mlx.h"
+# endif
+# ifdef __APPLE__
+#include "../minilibx/mlx.h"
+# endif
+typedef	struct s_2d
+{
+	void	*mlx;
+	void	*win;
+	int		endian;
+} t_d;
+
 #endif
