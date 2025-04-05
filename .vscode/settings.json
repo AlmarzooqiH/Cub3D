@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "struct.h": "c"
+        "struct.h": "c",
+        "cub3d.h": "c",
+        "error.h": "c"
     }
 }

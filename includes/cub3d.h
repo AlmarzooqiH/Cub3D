@@ -14,4 +14,6 @@
 # define CUB3D_H
 # include "struct.h"
 # include "error.h"
+# include <stdio.h>
+# include "../libft/libft.h"
 #endif
