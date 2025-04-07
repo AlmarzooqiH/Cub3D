@@ -19,4 +19,6 @@
 /*      Mlx failure messages        */
 # define FTIM "Failed to init mlx\n\0"
 # define FTIW "Failed to init the window\n\0"
+# define FTCI "Failed to create an image\n\0"
+# define FTGID "Failed to get the image data\n\0"
 #endif
