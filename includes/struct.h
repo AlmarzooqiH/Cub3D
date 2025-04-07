@@ -15,6 +15,13 @@
 
 # ifdef __linux__
 # include "../minilibx-linux/mlx.h"
+# define ESC 65307
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define LK 65361
+# define RK 65363
 # endif
 # ifdef __APPLE__
 #include "../minilibx/mlx.h"
