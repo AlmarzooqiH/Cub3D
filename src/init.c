@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/07 06:59:22 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/07 07:52:40 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @param	p the t_d struct. (Can be found in includes/struct.h)
  * @return (void)
  */
-void	free_p(t_d *p)
+int	free_p(t_d *p)
 {
 	if (p->img)
 		mlx_destroy_image(p->mlx, p->img);
@@ -28,6 +28,7 @@ void	free_p(t_d *p)
 	if (p)
 		free(p);
 	exit(EXIT_SUCCESS);
+	return (1);
 }
 
 /**
@@ -55,5 +56,6 @@ t_d	*init(void)
 	if (!p->imgd)
 		return (disp_err(FTGID), free_p(p), NULL);
 	mlx_key_hook(p->win, key_hook, p);
+	mlx_hook(p->win, WIN_EXIT, 0, free_p, (void *)p);
 	return (p);
 }

@@ -13,6 +13,8 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# define WIN_EXIT 17
+
 # ifdef __linux__
 #  include "../minilibx-linux/mlx.h"
 #  define ESC 65307
