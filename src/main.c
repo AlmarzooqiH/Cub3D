@@ -18,8 +18,7 @@ int	main(int ac, char const *av[])
 	(void)av;
 	t_d	*p;
 
-	p = NULL;
-	init(p);
+	p = init();
 	mlx_loop(p->mlx);
 	return (0);
 }
