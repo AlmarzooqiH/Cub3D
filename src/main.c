@@ -14,19 +14,30 @@
 
 int	main(int ac, char const *av[])
 {
-	t_d	*p;
-
-	p = ft_calloc(sizeof(t_d), 1);
-	if (!p)
-		return (1);
 	(void)ac;
 	(void)av;
-	printf("Hello, World!\n");
-	p->mlx = mlx_init();
-	p->win = mlx_new_window(p->mlx, WIDTH, HEIGHT, CUBE);
-	sleep(10);
-	mlx_destroy_window(p->mlx, p->win);
-	free(p->mlx);
-	free(p);
+	int fd = open("src/main.c", O_RDONLY);
+	if (fd < 0)
+		return (fd);
+	
+	char *s = get_next_line(fd);
+	while (s != NULL)
+	{
+		printf("%s\n", s);
+		free(s);
+		s = get_next_line(fd);
+	}
+	// t_d	*p;
+
+	// p = ft_calloc(sizeof(t_d), 1);
+	// if (!p)
+	// 	return (1);
+	// printf("Hello, World!\n");
+	// p->mlx = mlx_init();
+	// p->win = mlx_new_window(p->mlx, WIDTH, HEIGHT, CUBE);
+	// sleep(10);
+	// mlx_destroy_window(p->mlx, p->win);
+	// free(p->mlx);
+	// free(p);
 	return (0);
 }

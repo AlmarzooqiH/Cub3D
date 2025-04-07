@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 08:27:04 by hamalmar          #+#    #+#             */
-/*   Updated: 2024/09/21 10:08:12 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/04/07 04:46:20 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,15 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
+# include <string.h>
+# include <fcntl.h>
 
 # define UPPER "0123456789ABCDEF"
 # define LOWER "0123456789abcdef"
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 typedef struct s_list
 {
@@ -85,4 +91,10 @@ int					ft_print_unsigned_num(unsigned int n);
 int					ft_print_address(void *arg);
 long				ft_atol(const char *str);
 double				ft_atod(const char *s);
+char				*read_buffer(int fd, ssize_t *read_bytes, char *remainder,
+						char *buffer);
+char				*read_line(int fd, char *remainder);
+char				*new_line(char *remainder);
+char				*get_rest(char *remainder);
+char				*get_next_line(int fd);
 #endif
