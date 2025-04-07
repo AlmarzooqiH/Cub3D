@@ -23,8 +23,9 @@
 
 # define WIDTH 800
 # define HEIGHT 800
+
 void	free_p(t_d *p);
-t_d     *init(void);
+t_d		*init(void);
 void	disp_err(const char *error);
-int     key_hook(int key_num, void *p);
+int		key_hook(int key_num, void *p);
 #endif

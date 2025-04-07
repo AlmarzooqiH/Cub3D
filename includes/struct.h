@@ -14,17 +14,17 @@
 # define STRUCT_H
 
 # ifdef __linux__
-# include "../minilibx-linux/mlx.h"
-# define ESC 65307
-# define W 119
-# define A 97
-# define S 115
-# define D 100
-# define LK 65361
-# define RK 65363
+#  include "../minilibx-linux/mlx.h"
+#  define ESC 65307
+#  define W 119
+#  define A 97
+#  define S 115
+#  define D 100
+#  define LK 65361
+#  define RK 65363
 # endif
 # ifdef __APPLE__
-#include "../minilibx/mlx.h"
+#  include "../minilibx/mlx.h"
 # endif
 
 /**
@@ -40,7 +40,7 @@
  * @var	sl Size line is  the number  of  bytes  used to store one line of the
  * image in memory.
  */
-typedef	struct s_2d
+typedef struct s_2d
 {
 	void	*mlx;
 	void	*win;
@@ -49,6 +49,6 @@ typedef	struct s_2d
 	char	*imgd;
 	int		bpp;
 	int		sl;
-} t_d;
+}	t_d;
 
 #endif

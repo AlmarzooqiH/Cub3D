@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/07 06:48:02 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/07 06:59:22 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	free_p(t_d *p)
 		free(p);
 	exit(EXIT_SUCCESS);
 }
+
 /**
  * @brief This function will initalize the program data.
  * @param	p the t_d struct. (Can be found in includes/struct.h)
