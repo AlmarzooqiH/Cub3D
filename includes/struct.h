@@ -27,6 +27,13 @@
 # endif
 # ifdef __APPLE__
 #  include "../minilibx/mlx.h"
+#  define ESC 53
+#  define W 13
+#  define A 0
+#  define S 1
+#  define D 2
+#  define LK 123
+#  define RK 124
 # endif
 
 /**
