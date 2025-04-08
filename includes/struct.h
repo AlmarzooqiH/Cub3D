@@ -43,12 +43,12 @@
  * @var	b blue color, ranges from 0 - 255.
  * @note We will get those values from the map input file.
  */
-typedef struct s_rgb
+typedef struct s_color
 {
 	int	r;
 	int	g;
 	int	b;
-}	t_rgb;
+}	t_color;
 
 /**
  * @brief This struct will hold the texture information.
@@ -57,12 +57,12 @@ typedef struct s_rgb
  * @var	img	This will hold the pointer of the image data.
  * @note We will get those data from mlx mlx_xpm_file_to_image().
  */
-typedef struct s_wall
+typedef struct s_texture
 {
 	int		width;
 	int		height;
 	void	*img;
-}	t_wall;
+}	t_texture;
 /**
  * @brief This is where the window data will be stored at.abort
  * @var	mlx The mlx connection to the mlx libarary.
@@ -75,22 +75,28 @@ typedef struct s_wall
  * -represent a pixel color (also called the depth of the  image).
  * @var	sl Size line is  the number  of  bytes  used to store one line of the
  * image in memory.
+ * @var	e Will hold the texture of the east wall.
+ * @var	w Will hold the texture of the west wall.
+ * @var	s Will hold the texture of the south wall.
+ * @var	n Will hold the texture of the north wall.
+ * @var	floor Will hold the color of the floors.
+ * @var	ceiling Will hold the color of the ceiling.
  */
 typedef struct s_2d
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		edn;
-	char	*imgd;
-	int		bpp;
-	int		sl;
-	t_wall	*east;
-	t_wall	*west;
-	t_wall	*south;
-	t_wall	*north;
-	t_rgb	*floor;
-	t_rgb	*ceiling;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*imgd;
+	int			edn;
+	int			bpp;
+	int			sl;
+	t_texture	*e;
+	t_texture	*w;
+	t_texture	*s;
+	t_texture	*n;
+	t_color		*floor;
+	t_color		*ceiling;
 }	t_d;
 
 #endif
