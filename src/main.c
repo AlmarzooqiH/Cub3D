@@ -16,6 +16,8 @@ int	main(int ac, char const **av)
 {
 	t_d	*p;
 
+	if (ac != 2)
+		return (disp_err(WRONG_INPUT), 1);
 	(void)ac;
 	(void)av;
 	p = init();
