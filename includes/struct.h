@@ -37,6 +37,33 @@
 # endif
 
 /**
+ * @brief This struct will hold color values.
+ * @var	r red color, ranges from 0 - 255.
+ * @var	g green color, ranges from 0 - 255.
+ * @var	b blue color, ranges from 0 - 255.
+ * @note We will get those values from the map input file.
+ */
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
+
+/**
+ * @brief This struct will hold the texture information.
+ * @var	width This will store the width of the image.
+ * @var	height This will store the width of the image.
+ * @var	img	This will hold the pointer of the image data.
+ * @note We will get those data from mlx mlx_xpm_file_to_image().
+ */
+typedef struct s_wall
+{
+	int		width;
+	int		height;
+	void	*img;
+}	t_wall;
+/**
  * @brief This is where the window data will be stored at.abort
  * @var	mlx The mlx connection to the mlx libarary.
  * @var win The window data.
@@ -58,6 +85,12 @@ typedef struct s_2d
 	char	*imgd;
 	int		bpp;
 	int		sl;
+	t_wall	*east;
+	t_wall	*west;
+	t_wall	*south;
+	t_wall	*north;
+	t_rgb	*floor;
+	t_rgb	*ceiling;
 }	t_d;
 
 #endif
