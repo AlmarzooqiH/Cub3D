@@ -37,4 +37,7 @@ int			key_hook(int key_num, void *p);
 
 /*			Error functions					*/
 void		disp_err(const char *error);
+
+/*			Parsing functions				*/
+int			is_valid_parsing(char *fname);
 #endif

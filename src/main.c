@@ -18,8 +18,9 @@ int	main(int ac, char const **av)
 
 	if (ac != 2)
 		return (disp_err(WRONG_INPUT), 1);
-	(void)ac;
-	(void)av;
+	//av[1] is the file name and is passed to the parsing function.
+	if (ac != 2 || !is_valid_parsing((char *)av[1]))
+		return (disp_err(FTF), 1);
 	p = init();
 	mlx_loop(p->mlx);
 	return (0);
