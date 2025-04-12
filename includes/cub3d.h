@@ -20,7 +20,7 @@
 # include "../libft/libft.h"
 
 # define CUBE "Cub3D"
-
+# define DOT_CUB ".cub\0"
 # define WIDTH 800
 # define HEIGHT 800
 
@@ -39,5 +39,6 @@ int			key_hook(int key_num, void *p);
 void		disp_err(const char *error);
 
 /*			Parsing functions				*/
-int			is_valid_parsing(char *fname);
+int			is_valid_parsing(int ac, const char **fname);
+int			is_suffix(const char *s, const char *suffix);
 #endif
