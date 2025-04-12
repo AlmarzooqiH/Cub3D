@@ -18,7 +18,8 @@
 # define WRONG_INPUT "Input must be ./cub3D *.cub file.\n\0"
 # define INVALID_FILE "File must be *.cub file\n\0"
 # define FILE_DOESNT_EXSIST "File does not exists\n\0"
-
+# define MAP_FORMAT "Wrong Format\n\0"
+# define EMPTY_MAP "MAP"
 /*  Memorey allocation failure messages.  */
 # define FTCM "Failed to calloc memorey\n\0"
 # define FTIT "Failed to init texture\n\0"
