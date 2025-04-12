@@ -19,7 +19,7 @@
 # define INVALID_FILE "File must be *.cub file\n\0"
 # define FILE_DOESNT_EXSIST "File does not exists\n\0"
 # define MAP_FORMAT "Wrong Format\n\0"
-# define EMPTY_MAP "MAP"
+# define EMPTY_MAP "The Map is empty\n\0"
 /*  Memorey allocation failure messages.  */
 # define FTCM "Failed to calloc memorey\n\0"
 # define FTIT "Failed to init texture\n\0"

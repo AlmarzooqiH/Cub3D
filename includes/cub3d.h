@@ -39,6 +39,6 @@ int			key_hook(int key_num, void *p);
 void		disp_err(const char *error);
 
 /*			Parsing functions				*/
-int			is_valid_parsing(int ac, const char **fname);
+int			is_valid_parsing(int ac,char **av);
 int			is_suffix(const char *s, const char *suffix);
 #endif

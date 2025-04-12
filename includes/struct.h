@@ -71,6 +71,7 @@ typedef struct s_texture
  * @var	edn This will store if the system uses Small/Big endian.
  * @var	imgd This will hold the image data. This variable will be used to mani-
  * -pulate what is displayed.
+ * @var	map This is where the map will be stored in.
  * @var	bpp bits per pixel will be  filled  with  the  number of bits needed t-
  * -represent a pixel color (also called the depth of the  image).
  * @var	sl Size line is  the number  of  bytes  used to store one line of the
@@ -88,6 +89,7 @@ typedef struct s_2d
 	void		*win;
 	void		*img;
 	char		*imgd;
+	char		**map;
 	int			edn;
 	int			bpp;
 	int			sl;

@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:18:32 by mthodi            #+#    #+#             */
-/*   Updated: 2025/04/12 11:19:04 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/04/12 13:20:20 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,17 @@ int	is_suffix(const char *s, const char *suffix)
 	return (s[i] == '\0' && suffix[j] == '\0');
 }
 
+int	check_textures(int fd, char *line)
+{
+	int	e;
+	int	w;
+	int	s;
+	int	n;
+
+	
+	return ((e == 1) && (w == 1) && (s == 1) && (n == 1));
+}
+
 /**
  * @brief This function checks if the map file is valid.
  * @param fname The file name to check.
@@ -54,24 +65,27 @@ int	is_valid_map(char *fname)
 		return (disp_err(FILE_DOESNT_EXSIST), 0);
 	line = get_next_line(fd);
 	if (!line)
-		return (0);
-	free(line);
-	close(fd);
-	return (1);
+		return (close(fd), disp_err(EMPTY_MAP), 0);
+	if (check_textures(fd, line))
+		return (close(fd), 0);
+	if (line)
+		free(line);
+	return (close(fd), 1);
 }
 
 /**
  * @brief This function checks for valid parsing.
- * @param fname The file name to check.
+ * @param	ac The argument counter from the main function.
+ * @param	av The arguments from the main function.
  * @return 1 if the parsing is valid, 0 otherwise.
  */
-int	is_valid_parsing(int ac, char const **fname)
+int	is_valid_parsing(int ac, char **av)
 {
 	if (ac != 2)
 		return (disp_err(WRONG_INPUT), 0);
-	if (!is_suffix(fname[1], DOT_CUB))
+	if (!is_suffix(av[1], DOT_CUB))
 		return (disp_err(INVALID_FILE), 0);
-	if (!is_valid_map((char *)fname[1]))
+	if (!is_valid_map((char *)av[1]))
 		return (0);
 	return (1);
 }
