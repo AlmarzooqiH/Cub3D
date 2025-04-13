@@ -16,9 +16,9 @@ int	main(int ac, char **av)
 {
 	t_d	*p;
 
-	if (!is_valid_parsing(ac, av))
-		return (1);
 	p = init();
+	if (!is_valid_parsing(ac, av, p))
+		return (free_p(p), 1);
 	mlx_loop(p->mlx);
 	return (0);
 }

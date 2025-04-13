@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/09 01:14:18 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/14 00:50:19 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @brief This function will initalize the texture.
  * @return t_texture pointer.
  */
-t_texture	*init_texture(void)
+t_texture	*init_texture(void *mlx, char *img_path)
 {
 	t_texture	*t;
 
@@ -25,6 +25,14 @@ t_texture	*init_texture(void)
 		return (NULL);
 	t->width = 0;
 	t->height = 0;
+	t->img = mlx_xpm_file_to_image(mlx, img_path, &t->width, &t->height);
+	if (!t->img)
+	{
+		t->width = 0;
+		t->height = 0;
+		free(t);
+		return (NULL);
+	}
 	return (t);
 }
 
@@ -50,19 +58,9 @@ t_color	*init_color(void)
  * @var	p	The *t_d pointer.
  * @return (void).
  */
-void	init2(t_d *p)
-{
-	p->floor = init_color();
-	p->ceiling = init_color();
-	if (!p->floor || !p->ceiling)
-	{
-		disp_err(FTIC);
-		free_p(p);
-		return ;
-	}
-	mlx_key_hook(p->win, key_hook, p);
-	mlx_hook(p->win, WIN_EXIT, 0, free_p, (void *)p);
-}
+// void	init2(t_d *p)
+// {
+// }
 
 /**
  * @brief This function will initalize the program data.
@@ -88,12 +86,7 @@ t_d	*init(void)
 	p->imgd = mlx_get_data_addr(p->img, &p->bpp, &p->sl, &p->edn);
 	if (!p->imgd)
 		return (disp_err(FTGID), free_p(p), NULL);
-	p->e = init_texture();
-	p->w = init_texture();
-	p->s = init_texture();
-	p->n = init_texture();
-	if (!p->e || !p->w || !p->s || !p->n)
-		return (disp_err(FTIT), free_p(p), NULL);
-	init2(p);
+	mlx_key_hook(p->win, key_hook, p);
+	mlx_hook(p->win, WIN_EXIT, 0, free_p, (void *)p);
 	return (p);
 }
