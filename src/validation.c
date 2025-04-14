@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:18:32 by mthodi            #+#    #+#             */
-/*   Updated: 2025/04/14 12:49:57 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/14 15:12:21 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	check_colors(int fd, char *line, t_d *p)
 		tokenized_line = ft_split(line, ' ');
 		if (!tokenized_line || !tokenized_line[0] || !tokenized_line[1])
 			return (0);
-		if (!p->floor && !ft_strcmp(tokenized_line[0], F))
+		if (!p->floor && ft_strcmp(tokenized_line[0], F))
 			p->floor = init_color(ft_strtrim(tokenized_line[1], "\n"));
-		else if (!p->ceiling && !ft_strcmp(tokenized_line[0], C))
+		else if (!p->ceiling && ft_strcmp(tokenized_line[0], C))
 			p->ceiling = init_color(ft_strtrim(tokenized_line[1], "\n"));
 		else
 			return (free_split(tokenized_line), free(line), 0);
@@ -71,13 +71,13 @@ int	check_textures(int fd, char *line, t_d *p)
 		tokenized_line = ft_split(line, ' ');
 		if (!tokenized_line || !tokenized_line[0] || !tokenized_line[1])
 			return (0);
-		if (!p->n && !ft_strcmp(tokenized_line[0], NO))
+		if (!p->n && ft_strcmp(tokenized_line[0], NO))
 			p->n = init_texture(p->mlx, ft_strtrim(tokenized_line[1], "\n"));
-		else if (!p->s && !ft_strcmp(tokenized_line[0], SO))
+		else if (!p->s && ft_strcmp(tokenized_line[0], SO))
 			p->s = init_texture(p->mlx, ft_strtrim(tokenized_line[1], "\n"));
-		else if (!p->w && !ft_strcmp(tokenized_line[0], WE))
+		else if (!p->w && ft_strcmp(tokenized_line[0], WE))
 			p->w = init_texture(p->mlx, ft_strtrim(tokenized_line[1], "\n"));
-		else if (!p->e && !ft_strcmp(tokenized_line[0], EA))
+		else if (!p->e && ft_strcmp(tokenized_line[0], EA))
 			p->e = init_texture(p->mlx, ft_strtrim(tokenized_line[1], "\n"));
 		else
 			return (free_split(tokenized_line), free(line), 0);
