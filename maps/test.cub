@@ -1,7 +1,7 @@
-NO ../textures/Hamad/Hamad_Back_Side.jpg
-SO ../textures/Hamad/Hamad_Front_Side.jpg
-WE ../textures/Hamad/Hamad_Right_Side.jpg
-EA ../textures/Hamad/Hamad_Left_Side.jpg
+NO ./textures/Hamad/xpm/Hamad_Back_Side.xpm
+SO ./textures/Hamad/xpm/Hamad_Front_Side.xpm
+WE ./textures/Hamad/xpm/Hamad_Right_Side.xpm
+EA ./textures/Hamad/xpm/Hamad_Left_Side.xpm
 
 F 220,100,0
 C 225,30,0
