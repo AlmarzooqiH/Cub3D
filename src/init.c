@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/14 00:50:19 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/14 12:12:20 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,69 @@
 
 /**
  * @brief This function will initalize the texture.
+ * @param	mlx The mlx connection.
+ * @param	texture_path The path to the texture.
  * @return t_texture pointer.
+ * @note The texture_path will be freed here.
  */
-t_texture	*init_texture(void *mlx, char *img_path)
+t_texture	*init_texture(void *mlx, char *texture_path)
 {
 	t_texture	*t;
 
+	if (!texture_path)
+		return (NULL);
 	t = (t_texture *)ft_calloc(1, sizeof(t_texture));
 	if (!t)
-		return (NULL);
+		return (free(texture_path), NULL);
 	t->width = 0;
 	t->height = 0;
-	t->img = mlx_xpm_file_to_image(mlx, img_path, &t->width, &t->height);
+	t->img = mlx_xpm_file_to_image(mlx, texture_path, &t->width, &t->height);
 	if (!t->img)
 	{
 		t->width = 0;
 		t->height = 0;
 		free(t);
+		free(texture_path);
 		return (NULL);
 	}
+	free(texture_path);
 	return (t);
 }
 
 /**
  * @brief This function will initalize the color.
+ * @param	color The color string.
  * @return	t_color pointer.
+ * @note The color will look like this: val1,val2,val3
+ * so i would split it at ',' and will initalize the values acordingly.
+ * @note We will free the @param color here, due to norminette restrictions.
  */
-t_color	*init_color(void)
+t_color	*init_color(char *color)
 {
 	t_color	*c;
+	char	**rgb;
 
+	if (!color)
+		return (NULL);
+	// printf("init: %s\n", color);
 	c = ft_calloc(1, sizeof(t_color));
 	if (!c)
-		return (NULL);
-	c->r = 0;
-	c->g = 0;
-	c->b = 0;
+		return (free(color), NULL);
+	rgb = ft_split(color, ',');
+	if (!rgb)
+		return (free(c), free(color), NULL);
+	else if (count_split(rgb) < 3 || !rgb[0] || !rgb[1] || !rgb[2])
+		return (free(c), free_split(rgb), free(color), NULL);
+	if (ft_atol(rgb[0]) < 0 || ft_atol(rgb[0]) > 255 ||
+		ft_atol(rgb[1]) < 0 || ft_atol(rgb[1]) > 255 ||
+		ft_atol(rgb[2]) < 0 ||ft_atol(rgb[2]) > 255)
+		return (free_split(rgb), free(c), free(color), NULL);
+	printf("RGB values: %s, %s, %s\n", rgb[0], rgb[1], rgb[2]);
+	c->r = ft_atoi(rgb[0]);
+	c->g = ft_atoi(rgb[1]);
+	c->b = ft_atoi(rgb[2]);
+	free_split(rgb);
+	free(color);
 	return (c);
 }
 
