@@ -64,7 +64,7 @@ typedef struct s_texture
 	void	*img;
 }	t_texture;
 /**
- * @brief This is where the window data will be stored at.abort
+ * @brief This is where the window data will be stored at.
  * @var	mlx The mlx connection to the mlx libarary.
  * @var win The window data.
  * @var	img This will hold the image pointer.
