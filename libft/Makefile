@@ -6,7 +6,7 @@
 #    By: hamad <hamad@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/11 17:00:34 by hamalmar          #+#    #+#              #
-#    Updated: 2025/04/14 01:20:27 by hamad            ###   ########.fr        #
+#    Updated: 2025/04/14 11:32:07 by hamad            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ PART_ONE_AND_TWO = ft_isdigit.c ft_memset.c ft_isprint.c \
 				   ft_print_address.c ft_print_str.c ft_print_number.c \
 				   ft_print_num_n_hex.c ft_print_unsigned_num.c ft_isspace.c \
 				   free_split.c ft_strcmp.c ft_atol.c ft_atod.c ft_skipspace.c \
-				   ft_isonlyspace.c get_next_line.c
+				   ft_isonlyspace.c get_next_line.c count_split.c
 
 OBJECTS = $(PART_ONE_AND_TWO:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 08:27:04 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/04/14 01:20:09 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/14 11:32:00 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,5 @@ char				*read_line(int fd, char *remainder);
 char				*new_line(char *remainder);
 char				*get_rest(char *remainder);
 char				*get_next_line(int fd);
+int					count_split(char **argv);
 #endif
