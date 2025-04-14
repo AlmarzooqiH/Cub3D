@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:53:59 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/14 01:35:12 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/14 11:30:49 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_isprefix(const char *s, const char *prefix)
 	size_t	i;
 
 	if (!s || !prefix || (ft_strlen(s) < ft_strlen(prefix)))
-	return (0);
+		return (0);
 	i = 0;
 	while ((s[i] != '\0' && prefix[i] != '\0') && prefix[i] == s[i])
 		i++;
