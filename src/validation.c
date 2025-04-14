@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:18:32 by mthodi            #+#    #+#             */
-/*   Updated: 2025/04/14 12:13:38 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/14 12:49:57 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * floor or the ceiling, color}. The color will also have a \n at the
  * end so make sure to trim it.
  */
-int check_colors(int fd, char *line, t_d *p)
+int	check_colors(int fd, char *line, t_d *p)
 {
 	char	**tokenized_line;
 	int		i;
@@ -35,13 +35,10 @@ int check_colors(int fd, char *line, t_d *p)
 		tokenized_line = ft_split(line, ' ');
 		if (!tokenized_line || !tokenized_line[0] || !tokenized_line[1])
 			return (0);
-		if (!p->floor && !ft_strcmp(tokenized_line[0], F)) {
-			printf("Assigning to floor\n");
+		if (!p->floor && !ft_strcmp(tokenized_line[0], F))
 			p->floor = init_color(ft_strtrim(tokenized_line[1], "\n"));
-		} else if (!p->ceiling && !ft_strcmp(tokenized_line[0], C)) {
-			printf("Assigning to ceiling\n");
+		else if (!p->ceiling && !ft_strcmp(tokenized_line[0], C))
 			p->ceiling = init_color(ft_strtrim(tokenized_line[1], "\n"));
-		}
 		else
 			return (free_split(tokenized_line), free(line), 0);
 		free_split(tokenized_line);

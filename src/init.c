@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/14 12:12:20 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/14 12:50:57 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_color	*init_color(char *color)
 
 	if (!color)
 		return (NULL);
-	// printf("init: %s\n", color);
 	c = ft_calloc(1, sizeof(t_color));
 	if (!c)
 		return (free(color), NULL);
@@ -67,11 +66,10 @@ t_color	*init_color(char *color)
 		return (free(c), free(color), NULL);
 	else if (count_split(rgb) < 3 || !rgb[0] || !rgb[1] || !rgb[2])
 		return (free(c), free_split(rgb), free(color), NULL);
-	if (ft_atol(rgb[0]) < 0 || ft_atol(rgb[0]) > 255 ||
-		ft_atol(rgb[1]) < 0 || ft_atol(rgb[1]) > 255 ||
-		ft_atol(rgb[2]) < 0 ||ft_atol(rgb[2]) > 255)
+	if (ft_atol(rgb[0]) < 0 || ft_atol(rgb[0]) > 255
+		|| ft_atol(rgb[1]) < 0 || ft_atol(rgb[1]) > 255
+		|| ft_atol(rgb[2]) < 0 || ft_atol(rgb[2]) > 255)
 		return (free_split(rgb), free(c), free(color), NULL);
-	printf("RGB values: %s, %s, %s\n", rgb[0], rgb[1], rgb[2]);
 	c->r = ft_atoi(rgb[0]);
 	c->g = ft_atoi(rgb[1]);
 	c->b = ft_atoi(rgb[2]);
