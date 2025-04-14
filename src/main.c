@@ -19,10 +19,7 @@ int	main(int ac, char **av)
 	p = init();
 	if (!is_valid_parsing(ac, av, p))
 		return (free_p(p), 1);
-	printf("floor: r: %d\tg: %d\tb: %d\n", p->floor->r,
-		p->floor->g, p->floor->b);
-	printf("ceiling: r: %d\tg: %d\tb: %d\n", p->ceiling->r,
-		p->ceiling->g, p->ceiling->b);
+	mlx_put_image_to_window(p->mlx, p->win, p->s->img, 0, 0);
 	mlx_loop(p->mlx);
 	return (0);
 }
