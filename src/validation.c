@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:18:32 by mthodi            #+#    #+#             */
-/*   Updated: 2025/04/14 15:12:21 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/24 21:48:01 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,13 @@ int	is_valid_map(char *fname, t_d *p)
 	if (!check_textures(fd, line, p))
 		return (close(fd), 0);
 	if (!p->e || !p->w || !p->s || !p->n)
-		return (close(fd), 0);
+		return (close(fd), disp_err(TEXTURE_MISSING), 0);
 	line = NULL;
 	if (!check_colors(fd, line, p))
 		return (close(fd), 0);
 	if (!p->floor || !p->ceiling)
+		return (close(fd), disp_err(COLOR_MISSING), 0);
+	if (!validate_map(fd, p))
 		return (close(fd), 0);
 	return (close(fd), 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:53:59 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/14 11:30:49 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/26 17:45:57 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,69 @@ int	is_suffix(const char *s, const char *suffix)
 		j++;
 	}
 	return (s[i] == '\0' && suffix[j] == '\0');
+}
+
+/**
+ * @brief Counts the number of lines in the map.
+ * @param fd The map file descriptor.
+ * @param first_line The first line of the map (already read).
+ * @return Number of lines in the map.
+ * @note This function seeks back to the position after the first line.
+ */
+int	count_map_lines(int fd, char *first_line)
+{
+	int		current_pos;
+	int		count;
+	char	*line;
+
+	(void)first_line;
+	count = 1;
+	current_pos = lseek(fd, 0, SEEK_CUR);
+	line = get_next_line(fd);
+	while (line)
+	{
+		count++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	lseek(fd, current_pos, SEEK_SET);
+	return (count);
+}
+
+/**
+ * @brief Reads the map from the file descriptor and stores it in a 2D array.
+ * @param fd The map file descriptor.
+ * @param p The program struct.
+ * @return 2D array containing the map. NULL if an error occurred.
+ * @note This function skips empty lines before the map and reads until EOF.
+ */
+char	**read_map(int fd, t_d *p)
+{
+	char	*line;
+	char	**map;
+	int		i;
+	int		map_size;
+
+	map_size = 0;
+	line = get_next_line(fd);
+	while (line && (line[0] == '\n' || line[0] == '\0'))
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (!line)
+		return (NULL);
+	map_size = count_map_lines(fd, line);
+	if (map_size <= 0)
+		return (free(line), NULL);
+	map = malloc(sizeof(char *) * (map_size + 1));
+	if (!map)
+		return (free(line), NULL);
+	i = 0;
+	map[i++] = line;
+	while (i < map_size)
+		map[i++] = get_next_line(fd);
+	map[i] = NULL;
+	p->map_size = map_size;
+	return (map);
 }

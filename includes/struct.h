@@ -63,6 +63,17 @@ typedef struct s_texture
 	int		height;
 	void	*img;
 }	t_texture;
+
+typedef struct s_player
+{
+	double	x;       // Player X position
+	double	y;       // Player Y position
+	double	dir_x;   // Direction X
+	double	dir_y;   // Direction Y
+	double	plane_x; // Camera plane X
+	double	plane_y; // Camera plane Y
+}	t_player;
+
 /**
  * @brief This is where the window data will be stored at.
  * @var	mlx The mlx connection to the mlx libarary.
@@ -90,6 +101,7 @@ typedef struct s_2d
 	void		*img;
 	char		*imgd;
 	char		**map;
+	int			map_size;
 	int			edn;
 	int			bpp;
 	int			sl;
@@ -99,6 +111,7 @@ typedef struct s_2d
 	t_texture	*n;
 	t_color		*floor;
 	t_color		*ceiling;
+	t_player	player;
 }	t_d;
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/14 12:50:57 by hamad            ###   ########.fr       */
+/*   Updated: 2025/04/16 22:19:33 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,14 @@ t_d	*init(void)
 	mlx_key_hook(p->win, key_hook, p);
 	mlx_hook(p->win, WIN_EXIT, 0, free_p, (void *)p);
 	return (p);
+}
+
+void	init_player(t_d *game)
+{
+	game->player.x = 3.5;
+	game->player.y = 3.5;
+	game->player.dir_x = -1;
+	game->player.dir_y = 0;
+	game->player.plane_x = 0;
+	game->player.plane_y = 0.66;
 }

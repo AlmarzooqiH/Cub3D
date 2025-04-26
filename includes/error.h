@@ -30,4 +30,12 @@
 # define FTCI "Failed to create an image\n\0"
 # define FTGID "Failed to get the image data\n\0"
 # define FTF "Failed to open the file\n\0"
+
+#define MAP_EMPTY "Error: Map is empty"
+#define INVALID_CHARS "Error: Map contains invalid characters"
+#define INVALID_PLAYER "Error: Map must contain exactly one player (N, S, E, W)"
+#define MAP_NOT_CLOSED "Error: Map must be surrounded by walls"
+#define TEXTURE_MISSING "Error: One or more textures are missing"
+#define COLOR_MISSING "Error: Floor or ceiling color is missing"
+
 #endif

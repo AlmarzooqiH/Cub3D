@@ -29,6 +29,8 @@
 # define C "C\0"
 # define WIDTH 800
 # define HEIGHT 800
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 
 /*			Clean up functions				*/
 int			free_p(t_d *p);
@@ -48,4 +50,9 @@ void		disp_err(const char *error);
 int			is_valid_parsing(int ac, char **av, t_d *p);
 int			is_suffix(const char *s, const char *suffix);
 int			ft_isprefix(const char *s, const char *prefix);
+int			validate_map(int fd, t_d *p);
+char 		**read_map(int fd, t_d *p);
+
+void		init_player(t_d *game);
+void		render_frame(t_d *p);
 #endif
