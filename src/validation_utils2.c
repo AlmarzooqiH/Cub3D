@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 21:44:05 by mthodi            #+#    #+#             */
-/*   Updated: 2025/04/26 17:50:56 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/05/17 22:49:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,31 @@ void	init_player_direction(t_d *p, char dir)
 {
 	if (dir == 'N')
 	{
-		p->player.dir_x = 0;
-		p->player.dir_y = -1;
-		p->player.plane_x = 0.66;
-		p->player.plane_y = 0;
+		p->player->pdx = 0;
+		p->player->pdy = -1;
+		p->player->camera_x = 0.66;
+		p->player->camera_y = 0;
 	}
 	else if (dir == 'S')
 	{
-		p->player.dir_x = 0;
-		p->player.dir_y = 1;
-		p->player.plane_x = -0.66;
-		p->player.plane_y = 0;
+		p->player->pdx = 0;
+		p->player->pdy = 1;
+		p->player->camera_x = -0.66;
+		p->player->camera_y = 0;
 	}
 	else if (dir == 'E')
 	{
-		p->player.dir_x = 1;
-		p->player.dir_y = 0;
-		p->player.plane_x = 0;
-		p->player.plane_y = 0.66;
+		p->player->pdx = 1;
+		p->player->pdy = 0;
+		p->player->camera_x = 0;
+		p->player->camera_y = 0.66;
 	}
 	else if (dir == 'W')
 	{
-		p->player.dir_x = -1;
-		p->player.dir_y = 0;
-		p->player.plane_x = 0;
-		p->player.plane_y = -0.66;
+		p->player->pdx = -1;
+		p->player->pdy = 0;
+		p->player->camera_x = 0;
+		p->player->camera_y = -0.66;
 	}
 }
 
@@ -100,8 +100,8 @@ int	check_player(char **map, t_d *p)
 				|| map[i][j] == 'E' || map[i][j] == 'W')
 			{
 				player_count++;
-				p->player.x = j;
-				p->player.y = i;
+				p->player->ppx = j + 1;
+				p->player->ppy = i + 1;
 				init_player_direction(p, map[i][j]);
 			}
 			j++;
@@ -150,7 +150,7 @@ int	is_player(char c)
  * @brief Checks if a position is valid (not exposed to outside).
  * // Check if position is surrounded by walls or other valid tiles
  * @param map The 2D array containing the map. (checking Left, Right, Up, Down ) in that order.
- * @param i The y-coordinate.
+ * @param i The ppy-coordinate.
  * @param j The x-coordinate.
  * @param max_len The maximum line length in the map.
  * @return 1 if the position is valid, 0 otherwise.

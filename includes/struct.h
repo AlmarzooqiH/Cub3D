@@ -64,14 +64,23 @@ typedef struct s_texture
 	void	*img;
 }	t_texture;
 
+/**
+ * @brief This struct holds the player information.
+ * @var	ppx is the player X position.
+ * @var	ppy is the player Y position.
+ * @var	pdx is the player X direction.
+ * @var	pdy is the player Y direction.
+ * @var	camera_x is the camera X plane.
+ * @var	camera_y is the camera Y plane.
+ */
 typedef struct s_player
 {
-	double	x;       // Player X position
-	double	y;       // Player Y position
-	double	dir_x;   // Direction X
-	double	dir_y;   // Direction Y
-	double	plane_x; // Camera plane X
-	double	plane_y; // Camera plane Y
+	double	ppx;       // Player X position
+	double	ppy;       // Player Y position
+	double	pdx;   // Direction X
+	double	pdy;   // Direction Y
+	double	camera_x; // Camera plane X
+	double	camera_y; // Camera plane Y
 }	t_player;
 
 /**
@@ -111,7 +120,7 @@ typedef struct s_2d
 	t_texture	*n;
 	t_color		*floor;
 	t_color		*ceiling;
-	t_player	player;
+	t_player	*player;
 }	t_d;
 
 #endif

@@ -42,6 +42,7 @@ t_d			*init(void);
 t_texture	*init_texture(void *mlx, char *img_path);
 t_color		*init_color(char *color);
 int			key_hook(int key_num, void *p);
+void		init_player(t_d *game);
 
 /*			Error functions					*/
 void		disp_err(const char *error);
@@ -53,6 +54,5 @@ int			ft_isprefix(const char *s, const char *prefix);
 int			validate_map(int fd, t_d *p);
 char 		**read_map(int fd, t_d *p);
 
-void		init_player(t_d *game);
 void		render_frame(t_d *p);
 #endif

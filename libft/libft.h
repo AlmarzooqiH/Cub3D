@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 08:27:04 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/04/14 11:32:00 by hamad            ###   ########.fr       */
+/*   Updated: 2025/05/17 22:14:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ char				*read_line(int fd, char *remainder);
 char				*new_line(char *remainder);
 char				*get_rest(char *remainder);
 char				*get_next_line(int fd);
+void				print_split(char **s);
 int					count_split(char **argv);
 #endif

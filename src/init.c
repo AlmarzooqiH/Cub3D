@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/04/16 22:19:33 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/05/17 22:49:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,15 @@ t_d	*init(void)
 
 void	init_player(t_d *game)
 {
-	game->player.x = 3.5;
-	game->player.y = 3.5;
-	game->player.dir_x = -1;
-	game->player.dir_y = 0;
-	game->player.plane_x = 0;
-	game->player.plane_y = 0.66;
+	game->player = (t_player *)ft_calloc(1, sizeof(t_player));
+	if (!game->player)
+	{
+		disp_err(FTIP);
+		free_p(game);
+		return ;
+	}
+	game->player->pdx = -1;
+	game->player->pdy = 0;
+	game->player->camera_x = 0;
+	game->player->camera_y = 0.66;
 }

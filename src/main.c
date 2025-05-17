@@ -26,8 +26,9 @@ int	main(int ac, char **av)
 	init_player(p);
 	if (!is_valid_parsing(ac, av, p))
 		return (free_p(p), 1);
+	printf("player position:\nx: %f\ny: %f\n", p->player->ppx, p->player->ppy);
 	game_loop(p);
-	mlx_put_image_to_window(p->mlx, p->win, p->s->img, 0, 0);
+	// mlx_put_image_to_window(p->mlx, p->win, p->s->img, 0, 0);
 	mlx_loop(p->mlx);
 	return (0);
 }
