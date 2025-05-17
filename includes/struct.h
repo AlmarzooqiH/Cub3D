@@ -75,12 +75,12 @@ typedef struct s_texture
  */
 typedef struct s_player
 {
-	double	ppx;       // Player X position
-	double	ppy;       // Player Y position
-	double	pdx;   // Direction X
-	double	pdy;   // Direction Y
-	double	camera_x; // Camera plane X
-	double	camera_y; // Camera plane Y
+	double	ppx;
+	double	ppy;
+	double	pdx;
+	double	pdy;
+	double	camera_x;
+	double	camera_y;
 }	t_player;
 
 /**

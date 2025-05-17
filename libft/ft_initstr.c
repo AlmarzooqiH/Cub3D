@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_split.c                                      :+:      :+:    :+:   */
+/*   ft_initstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 11:31:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/18 03:03:00 by hamad            ###   ########.fr       */
+/*   Created: 2025/05/18 02:50:12 by hamad             #+#    #+#             */
+/*   Updated: 2025/05/18 02:57:18 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_split(char **argv)
+t_str	*ft_initstr(const char *str)
 {
-	int	count;
+	t_str	*new_s;
 
-	if (!argv || !argv[0])
-		return (0);
-	count = 0;
-	while (argv[count])
-		count++;
-	return (count);
+	if (!str)
+		return (NULL);
+	new_s = (t_str *)ft_calloc(1, sizeof(t_str));
+	if (!new_s)
+		return (NULL);
+	new_s->s = ft_strdup(str);
+	if (!new_s->s)
+		return (free(new_s), NULL);
+	new_s->length = ft_strlen(str);
+	return (new_s);
 }
