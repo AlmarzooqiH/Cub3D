@@ -35,6 +35,7 @@
 #  define LK 123
 #  define RK 124
 # endif
+# include <stdio.h>
 
 /**
  * @brief This struct will hold color values.
@@ -110,6 +111,8 @@ typedef struct s_2d
 	void		*img;
 	char		*imgd;
 	char		**map;
+	size_t		map_width;
+	size_t		map_height;
 	int			map_size;
 	int			edn;
 	int			bpp;
