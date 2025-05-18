@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/05/18 16:20:46 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:27:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,20 @@ void	ceiling_render(t_d *p)
  */
 void	render_frame(t_d *p)
 {
-	// ceiling_render(p);
-	// floor_render(p);
-	// raycasting(p);
-	int i = 0, j = 0;
+	int	i;
+	int	j;
+
+
+	i = 0;
 	while (p->map[i])
 	{
 		j = 0;
 		while (p->map[i][j] != '\0')
 		{
-			if (p->map[i][j] == '1'){
-				put_pixel(p, j, i, rgb_to_int(p->ceiling));
-				put_pixel(p, j+1, i+1, rgb_to_int(p->ceiling));
-				put_pixel(p, j+1, i+2, rgb_to_int(p->ceiling));
-				put_pixel(p, j+1, i+3, rgb_to_int(p->ceiling));
-				put_pixel(p, j+1, i+4, rgb_to_int(p->ceiling));
-			}
+			if (p->map[i][j] == '1')
+				draw_grid(p, j, i, p->ceiling);
+			else
+				draw_grid(p, j, i, p->floor);
 			j++;
 		}
 		i++;
