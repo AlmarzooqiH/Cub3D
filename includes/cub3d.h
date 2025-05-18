@@ -15,6 +15,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 # include "struct.h"
 # include "error.h"
 # include "../libft/libft.h"
@@ -53,7 +54,12 @@ int			is_suffix(const char *s, const char *suffix);
 int			ft_isprefix(const char *s, const char *prefix);
 int			validate_map(int fd, t_d *p);
 
+/*			Rendering related functions				*/
+void        put_pixel(t_d *p, int x, int y, int color);
+int         rgb_to_int(t_color *c);
 void		render_frame(t_d *p);
+void        draw_grid(t_d *p, int x, int y, t_color *c);
+
 /*			Map related functions				*/
 char 		**read_map(int fd, t_d *p);
 size_t      get_max_width(char **map);
