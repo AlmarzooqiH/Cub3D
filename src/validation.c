@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:18:32 by mthodi            #+#    #+#             */
-/*   Updated: 2025/04/24 21:48:01 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/05/18 18:08:35 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,8 @@ int	is_valid_parsing(int ac, char **av, t_d *p)
 		return (disp_err(INVALID_FILE), 0);
 	if (!is_valid_map(av[1], p))
 		return (disp_err(MAP_FORMAT), 0);
+	p->map = normalize_map_1(p->map);
+	if (!p->map)
+		return (disp_err(FTNM), 0);
 	return (1);
 }

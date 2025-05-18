@@ -32,11 +32,12 @@
 # define FTGID "Failed to get the image data\n\0"
 # define FTF "Failed to open the file\n\0"
 
-#define MAP_EMPTY "Error: Map is empty"
-#define INVALID_CHARS "Error: Map contains invalid characters"
-#define INVALID_PLAYER "Error: Map must contain exactly one player (N, S, E, W)"
-#define MAP_NOT_CLOSED "Error: Map must be surrounded by walls"
-#define TEXTURE_MISSING "Error: One or more textures are missing"
-#define COLOR_MISSING "Error: Floor or ceiling color is missing"
+# define MAP_EMPTY "Error: Map is empty\n\0"
+# define INVALID_CHARS "Error: Map contains invalid characters\n\0"
+# define INVALID_PLAYER "Error: Map must contain exactly one player (N, S, E, W)\n\0"
+# define MAP_NOT_CLOSED "Error: Map must be surrounded by walls\n\0"
+# define TEXTURE_MISSING "Error: One or more textures are missing\n\0"
+# define COLOR_MISSING "Error: Floor or ceiling color is missing\n\0"
+# define FTNM "Failed to normalize the Map\n\0"
 
 #endif

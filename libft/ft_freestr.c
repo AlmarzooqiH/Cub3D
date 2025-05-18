@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_split.c                                      :+:      :+:    :+:   */
+/*   ft_freestr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 17:30:55 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/18 18:07:08 by hamalmar         ###   ########.fr       */
+/*   Created: 2025/05/18 15:46:02 by hamalmar          #+#    #+#             */
+/*   Updated: 2025/05/18 15:50:48 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	print_split(char **s)
+void	ft_freestr(t_str str)
 {
-	size_t	i;
-
-	if (!s || s[0] == NULL || !s[0][0])
-	{
-		printf("s = {NULL}\n");
-		return ;
-	}
-	i = 0;
-	printf("s = {\n");
-	while (s[i] != NULL)
-	{
-		ft_printf("{%s},\n", s[i]);
-		i++;
-	}
-	printf("}\n");
+	if (str.s)
+		free(str.s);
+	str.length = 0;
 }

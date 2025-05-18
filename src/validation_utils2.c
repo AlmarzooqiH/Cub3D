@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 21:44:05 by mthodi            #+#    #+#             */
-/*   Updated: 2025/05/17 22:49:18 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/18 16:40:25 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,7 @@ int	get_max_line_length(char **map)
 	i = 0;
 	while (map[i])
 	{
-		len = 0;
-		while (map[i][len] && map[i][len] != '\n')
-			len++;
+		len = ft_strlen(map[i]);
 		if (len > max_len)
 			max_len = len;
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/04/26 17:47:03 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/05/18 16:20:46 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,25 @@ void	ceiling_render(t_d *p)
  */
 void	render_frame(t_d *p)
 {
-	ceiling_render(p);
-	floor_render(p);
+	// ceiling_render(p);
+	// floor_render(p);
 	// raycasting(p);
+	int i = 0, j = 0;
+	while (p->map[i])
+	{
+		j = 0;
+		while (p->map[i][j] != '\0')
+		{
+			if (p->map[i][j] == '1'){
+				put_pixel(p, j, i, rgb_to_int(p->ceiling));
+				put_pixel(p, j+1, i+1, rgb_to_int(p->ceiling));
+				put_pixel(p, j+1, i+2, rgb_to_int(p->ceiling));
+				put_pixel(p, j+1, i+3, rgb_to_int(p->ceiling));
+				put_pixel(p, j+1, i+4, rgb_to_int(p->ceiling));
+			}
+			j++;
+		}
+		i++;
+	}
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
 }

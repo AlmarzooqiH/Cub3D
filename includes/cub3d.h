@@ -52,7 +52,12 @@ int			is_valid_parsing(int ac, char **av, t_d *p);
 int			is_suffix(const char *s, const char *suffix);
 int			ft_isprefix(const char *s, const char *prefix);
 int			validate_map(int fd, t_d *p);
-char 		**read_map(int fd, t_d *p);
 
 void		render_frame(t_d *p);
+/*			Map related functions				*/
+char 		**read_map(int fd, t_d *p);
+size_t      get_max_width(char **map);
+char        set_direction(char c);
+void        normalize_map_2(char **om, char **nm, size_t mw, size_t mh);
+char        **normalize_map_1(char **om);
 #endif
