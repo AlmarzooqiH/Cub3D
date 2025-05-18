@@ -26,7 +26,6 @@ int	main(int ac, char **av)
 	init_player(p);
 	if (!is_valid_parsing(ac, av, p))
 		return (free_p(p), 1);
-	print_split(p->map);
 	game_loop(p);
 	mlx_loop(p->mlx);
 	return (0);
