@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:18:32 by mthodi            #+#    #+#             */
-/*   Updated: 2025/05/18 18:08:35 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/05/18 22:50:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,7 @@ int	is_valid_parsing(int ac, char **av, t_d *p)
 	p->map = normalize_map_1(p->map);
 	if (!p->map)
 		return (disp_err(FTNM), 0);
+	p->map_width = ft_strlen(p->map[0]);
+	p->map_height = count_split(p->map);
 	return (1);
 }

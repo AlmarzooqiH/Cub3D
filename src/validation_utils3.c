@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation_utils3.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 17:29:23 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/05/18 18:04:32 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/05/18 21:12:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ size_t	get_max_width(char **map)
 	{
 		curr = ft_strlen(map[i]);
 		if (curr > max)
-			max = curr;		
+			max = curr;
 		i++;
 	}
 	return (max);
 }
+
 /**
  * @brief This function will set the direction.
  * @param c Is the direction that is in the old map.
@@ -50,6 +51,7 @@ char	set_direction(char c)
 		return ('S');
 	return ('N');
 }
+
 /**
  * @brief This function will set the data of the new map from the old map.
  * @param om The Old Map.
@@ -81,9 +83,10 @@ void	normalize_map_2(char **om, char **nm, size_t mw, size_t mh)
 			j++;
 		}
 		i++;
-	}	
+	}
 	free_split(om);
 }
+
 /**
  * @brief This function will normalize the map size from nxm to nxn.
  * @param om Is the Old Map.
@@ -97,6 +100,7 @@ char	**normalize_map_1(char **om)
 	size_t	i;
 	size_t	map_height;
 	size_t	map_width;
+
 	if (!om)
 		return (NULL);
 	map_height = count_split(om);
