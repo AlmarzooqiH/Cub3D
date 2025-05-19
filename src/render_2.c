@@ -57,10 +57,11 @@ void	draw_player(t_d *p, t_color *player_color)
 	size_t	square_width;
 
 	square_width = (size_t)(ceil((double)WIDTH / p->map_width));
-	i = p->player->ppx;
+	i = p->player->ppy;
+	printf("posx: %f\nposy: %f\n", p->player->ppx, p->player->ppy);
 	while (i < square_width)
 	{
-		j = p->player->ppy;
+		j = p->player->ppx;
 		while (j < square_width)
 		{
 			put_pixel(p, j + square_width, i + square_width, rgb_to_int(player_color));
