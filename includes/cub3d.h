@@ -32,6 +32,7 @@
 # define HEIGHT 800
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+# define PLAYER_COLOR "203,10,8"
 
 /*			Clean up functions				*/
 int			free_p(t_d *p);
@@ -59,7 +60,9 @@ void        put_pixel(t_d *p, int x, int y, int color);
 int         rgb_to_int(t_color *c);
 void		render_frame(t_d *p);
 void        draw_grid(t_d *p, int x, int y, t_color *c);
-
+void        clear_image_buffer(t_d *p);
+void        render_player(t_d *p);
+int         game_loop(t_d *p);
 /*			Map related functions				*/
 char 		**read_map(int fd, t_d *p);
 size_t      get_max_width(char **map);

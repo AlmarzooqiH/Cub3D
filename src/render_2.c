@@ -42,3 +42,45 @@ void	draw_grid(t_d *p, int x, int y, t_color *c)
 		i++;
 	}
 }
+
+void	clear_image_buffer(t_d *p)
+{
+	(void) p;
+	// ft_memset(p->imgd, 0, ft_strlen(p->imgd));
+	// mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
+}
+
+void	draw_player(t_d *p, t_color *player_color)
+{
+	size_t	i;
+	size_t	j;
+	size_t	square_width;
+
+	square_width = (size_t)(ceil((double)WIDTH / p->map_width));
+	i = p->player->ppx;
+	while (i < square_width)
+	{
+		j = p->player->ppy;
+		while (j < square_width)
+		{
+			put_pixel(p, j + square_width, i + square_width, rgb_to_int(player_color));
+			j++;
+		}
+		i++;
+	}
+}
+
+void	render_player(t_d *p)
+{
+	t_color	*player;
+	char	*color;
+
+	color = ft_strdup(PLAYER_COLOR);
+	if (!color)
+		return ;	
+	player = init_color(color);
+	if (!player)
+		return (free(color));
+	draw_player(p, player);
+	free(player);
+}
