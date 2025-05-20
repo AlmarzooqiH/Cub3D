@@ -37,14 +37,16 @@
 /*			Clean up functions				*/
 int			free_p(t_d *p);
 void		free_texture(t_texture *t, void *mlx);
+void        free_color(t_color *c);
+void        free_player(t_player *p);
 
 /*			Initalization functions			*/
 t_d			*init(void);
-// void		init2(t_d *p);
 t_texture	*init_texture(void *mlx, char *img_path);
 t_color		*init_color(char *color);
 int			key_hook(int key_num, void *p);
 void		init_player(t_d *game);
+t_color     *init_player_color(void);
 
 /*			Error functions					*/
 void		disp_err(const char *error);
@@ -60,9 +62,10 @@ void        put_pixel(t_d *p, int x, int y, int color);
 int         rgb_to_int(t_color *c);
 void		render_frame(t_d *p);
 void        draw_grid(t_d *p, int x, int y, t_color *c);
+void        draw_player(t_d *p);
 void        clear_image_buffer(t_d *p);
-void        render_player(t_d *p);
 int         game_loop(t_d *p);
+
 /*			Map related functions				*/
 char 		**read_map(int fd, t_d *p);
 size_t      get_max_width(char **map);

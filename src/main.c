@@ -16,7 +16,7 @@ int	game_loop(t_d *p)
 {
 	clear_image_buffer(p);
 	render_frame(p);
-	render_player(p);
+	draw_player(p);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/19 18:35:16 by hamad            ###   ########.fr       */
+/*   Updated: 2025/05/21 02:47:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,6 @@ t_color	*init_color(char *color)
 }
 
 /**
- * @brief This function will continue with the intialization of *t_d.
- * @var	p	The *t_d pointer.
- * @return (void).
- */
-// void	init2(t_d *p)
-// {
-// }
-
-/**
  * @brief This function will initalize the program data.
  * @param	p the t_d struct. (Can be found in includes/struct.h)
  * @return (void)
@@ -116,6 +107,20 @@ t_d	*init(void)
 	return (p);
 }
 
+t_color	*init_player_color(void)
+{
+	t_color	*new_c;
+	char	*color;
+
+	color = ft_strdup(PLAYER_COLOR);
+	if (!color)
+		return (NULL);	
+	new_c = init_color(color);
+	if (!new_c)
+		return (free(color), NULL);
+	return (new_c);
+}
+
 void	init_player(t_d *game)
 {
 	game->player = (t_player *)ft_calloc(1, sizeof(t_player));
@@ -125,6 +130,7 @@ void	init_player(t_d *game)
 		free_p(game);
 		return ;
 	}
+	game->player->color = init_player_color();
 	game->player->pdx = -1;
 	game->player->pdy = 0;
 	game->player->camera_x = 0;

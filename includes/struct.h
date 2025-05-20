@@ -82,6 +82,7 @@ typedef struct s_player
 	double	pdy;
 	double	camera_x;
 	double	camera_y;
+	t_color	*color;
 }	t_player;
 
 /**

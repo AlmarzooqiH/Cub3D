@@ -50,38 +50,27 @@ void	clear_image_buffer(t_d *p)
 	// mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
 }
 
-void	draw_player(t_d *p, t_color *player_color)
+void	draw_player(t_d *p)
 {
 	size_t	i;
 	size_t	j;
 	size_t	square_width;
+	size_t	map_relative_width;
+	size_t	map_relative_height;
 
+
+	map_relative_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));
+	map_relative_height = (int)ceil(((double)HEIGHT) / ((double)p->map_height));
 	square_width = (size_t)(ceil((double)WIDTH / p->map_width));
 	i = p->player->ppy;
-	printf("posx: %f\nposy: %f\n", p->player->ppx, p->player->ppy);
 	while (i < square_width)
 	{
 		j = p->player->ppx;
 		while (j < square_width)
 		{
-			put_pixel(p, j + square_width, i + square_width, rgb_to_int(player_color));
+			put_pixel(p, j + (p->player->ppx * map_relative_width), i + (p->player->ppy * map_relative_height), rgb_to_int(p->player->color));
 			j++;
 		}
 		i++;
 	}
-}
-
-void	render_player(t_d *p)
-{
-	t_color	*player;
-	char	*color;
-
-	color = ft_strdup(PLAYER_COLOR);
-	if (!color)
-		return ;	
-	player = init_color(color);
-	if (!player)
-		return (free(color));
-	draw_player(p, player);
-	free(player);
 }
