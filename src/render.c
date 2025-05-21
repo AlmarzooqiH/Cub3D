@@ -6,69 +6,65 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/05/21 02:39:54 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/21 22:49:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 /**
- * @brief Set a pixel in the image buffer.
+ * @brief This function will draw a grid on the screen.
+ * @param p This holds the program data.
+ * @param x Current X position on the screen.
+ * @param y Current Y position on the screen.
+ * @param c The color that we want the grid to be.
+ * @return Void
  */
-void	put_pixel(t_d *p, int x, int y, int color)
+void	draw_grid(t_d *p, int x, int y, t_color *c)
 {
-	char	*dst;
+	size_t	i;
+	size_t	j;
+	size_t	grid_width;
+	size_t	grid_height;
 
-	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-		return ;
-	dst = p->imgd + (y * p->sl + x * (p->bpp / 8));
-	*(unsigned int *) dst = color;
-}
-
-/**
- * @brief Convert RGB components to a single integer color.
- */
-int	rgb_to_int(t_color *c)
-{
-	return ((c->r << 16) | (c->g << 8) | c->b);
-}
-
-void	floor_render(t_d *p)
-{
-	int	x;
-	int	y;
-
-	y = HEIGHT / 2;
-	while (y < HEIGHT)
+	grid_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));
+	grid_height = (int)ceil(((double)HEIGHT) / ((double)p->map_height));
+	i = 0;
+	while (i < grid_height)
 	{
-		x = 0;
-		while (x < WIDTH)
+		j = 0;
+		while (j < grid_width)
 		{
-			put_pixel(p, x, y, rgb_to_int(p->floor));
-			x++;
+			put_pixel(p, j + (x * grid_width), i + (y * grid_height),
+				rgb_to_int(c));
+			j++;
 		}
-		y++;
+		i++;
 	}
 }
 
-/**
- * @brief Render the ceiling.
- */
-void	ceiling_render(t_d *p)
+void	draw_player(t_d *p)
 {
-	int	x;
-	int	y;
+	int	i;
+	int	j;
+	int	map_width;
+	int	map_height;
 
-	y = 0;
-	while (y < HEIGHT / 2)
+	map_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));
+	map_height = (int)ceil(((double)HEIGHT) / ((double)p->map_height));
+	printf("map_width: %d\n", map_width);
+	printf("map_height: %d\n", map_height);
+	i = 0;
+	while (i < map_width)
 	{
-		x = 0;
-		while (x < WIDTH)
+		j = 0;
+		while (j < map_width)
 		{
-			put_pixel(p, x, y, rgb_to_int(p->ceiling));
-			x++;
+			put_pixel(p, (j - p->player->ppx) + (p->player->ppx * map_width), (i - p->player->ppy) + (p->player->ppy
+					* map_height), rgb_to_int(p->player->color));
+			j++;
 		}
-		y++;
+		i++;
 	}
 }
 
@@ -79,7 +75,6 @@ void	render_frame(t_d *p)
 {
 	int	i;
 	int	j;
-
 
 	i = 0;
 	while (p->map[i])
@@ -95,5 +90,4 @@ void	render_frame(t_d *p)
 		}
 		i++;
 	}
-	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
 }
