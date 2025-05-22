@@ -46,5 +46,18 @@ int	rgb_to_int(t_color *c)
  */
 void	clear_image_buffer(t_d *p)
 {
-	(void) p;
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x  < WIDTH)
+		{
+			put_pixel(p, x, y, 0);
+			x++;
+		}
+		y++;
+	}
 }

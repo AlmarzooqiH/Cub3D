@@ -58,13 +58,14 @@ int			ft_isprefix(const char *s, const char *prefix);
 int			validate_map(int fd, t_d *p);
 
 /*			Rendering related functions				*/
+int         game_loop(t_d *p);
 void        put_pixel(t_d *p, int x, int y, int color);
 int         rgb_to_int(t_color *c);
-void		render_frame(t_d *p);
+void		render_map(t_d *p);
 void        draw_grid(t_d *p, int x, int y, t_color *c);
-void        draw_player(t_d *p);
+void        render_player(t_d *p);
 void        clear_image_buffer(t_d *p);
-int         game_loop(t_d *p);
+void        render_fov(t_d *p);
 
 /*			Map related functions				*/
 char 		**read_map(int fd, t_d *p);

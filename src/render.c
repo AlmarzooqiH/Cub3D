@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/05/21 22:49:50 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/22 15:34:41 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,24 @@ void	draw_grid(t_d *p, int x, int y, t_color *c)
 	}
 }
 
-void	draw_player(t_d *p)
+/**
+ * @brief This function will draw the Feild Of View of the player.
+ * @param p The program struct.
+ * @return void.
+ */
+void	render_fov(t_d *p)
+{
+	(void)p;
+}
+
+/**
+ * @brief This function will render the player in his proper position.
+ * @param p The program struct.
+ * @return void.
+ * @note If you see here we subtract - 1 from the ppx and ppy because the NULL
+ * termination.
+ */
+void	render_player(t_d *p)
 {
 	int	i;
 	int	j;
@@ -52,26 +69,28 @@ void	draw_player(t_d *p)
 
 	map_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));
 	map_height = (int)ceil(((double)HEIGHT) / ((double)p->map_height));
-	printf("map_width: %d\n", map_width);
-	printf("map_height: %d\n", map_height);
 	i = 0;
 	while (i < map_width)
 	{
 		j = 0;
 		while (j < map_width)
 		{
-			put_pixel(p, (j - p->player->ppx) + (p->player->ppx * map_width), (i - p->player->ppy) + (p->player->ppy
-					* map_height), rgb_to_int(p->player->color));
+			put_pixel(p, j + ((p->player->ppx - 1) * map_width), i
+				+ ((p->player->ppy - 1) * map_height),
+				rgb_to_int(p->player->color));
 			j++;
 		}
 		i++;
 	}
+	render_fov(p);
 }
 
 /**
- * @brief Render a single frame: call ceiling, call floor, and call raycasting.
+ * @brief This function will render the map.
+ * @param p The program struct.
+ * @return void.
  */
-void	render_frame(t_d *p)
+void	render_map(t_d *p)
 {
 	int	i;
 	int	j;

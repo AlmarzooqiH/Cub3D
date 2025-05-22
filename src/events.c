@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:37:34 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/19 18:26:34 by hamad            ###   ########.fr       */
+/*   Updated: 2025/05/22 15:34:05 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,23 @@ int	key_hook(int key_num, void *p)
 	if (key_num == ESC)
 		free_p(pr);
 	else if (key_num == W)
-		printf("W was pressed\n");
+		pr->player->ppy--;
 	else if (key_num == A)
-		printf("A was pressed\n");
+		pr->player->ppx--;
 	else if (key_num == S)
-		printf("S was pressed\n");
+		pr->player->ppy++;
 	else if (key_num == D)
-		printf("D was pressed\n");
+		pr->player->ppx++;
 	else if (key_num == LK)
-		printf("Left key was pressed\n");
+	{
+		pr->player->ppx -= sin(pr->player->ppx);
+		pr->player->ppy -= cos(pr->player->ppy);
+	}
 	else if (key_num == RK)
-		printf("Right key was pressed\n");
+	{
+		pr->player->ppx += sin(pr->player->ppx);
+		pr->player->ppy += cos(pr->player->ppy);
+	}
+	game_loop(pr);
 	return (key_num);
 }
