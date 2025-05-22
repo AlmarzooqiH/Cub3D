@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/21 02:47:53 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/22 17:34:25 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void	init_player(t_d *game)
 	game->player->color = init_player_color();
 	game->player->pdx = -1;
 	game->player->pdy = 0;
+	game->player->angle = 1;
 	game->player->camera_x = 0;
 	game->player->camera_y = 0.66;
 }

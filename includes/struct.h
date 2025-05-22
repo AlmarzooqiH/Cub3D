@@ -71,6 +71,7 @@ typedef struct s_texture
  * @var	ppy is the player Y position.
  * @var	pdx is the player X direction.
  * @var	pdy is the player Y direction.
+ * @var	angle is the player angle.
  * @var	camera_x is the camera X plane.
  * @var	camera_y is the camera Y plane.
  */
@@ -80,6 +81,7 @@ typedef struct s_player
 	double	ppy;
 	double	pdx;
 	double	pdy;
+	double	angle;
 	double	camera_x;
 	double	camera_y;
 	t_color	*color;

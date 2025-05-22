@@ -33,6 +33,8 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define PLAYER_COLOR "203,10,8"
+# define ROATION_SPEED 0.05f
+# define MOVEMENT_SPEED 0.05f
 
 /*			Clean up functions				*/
 int			free_p(t_d *p);
