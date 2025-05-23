@@ -61,3 +61,32 @@ void	clear_image_buffer(t_d *p)
 		y++;
 	}
 }
+
+/**
+ * @brief This function will rotate the player.
+ * @param p The player struct.
+ * @param norp Positive or Negative direction of the rotation.
+ * @return void.
+ * @note Angles must be in radians.
+ */
+void plot_player(t_d *p, int oldx, int oldy)
+{
+	double	ra;
+	double	sinval;
+	double	cosval;
+	int		new_x;
+	int		new_y;
+
+	new_x = oldx;
+	new_y = oldy;
+	ra = p->player->angle * (M_PI / 180);
+	sinval = sin(ra);
+	cosval = cos(ra);
+	if (p->player->rotate)
+	{
+		new_x = (oldx * cosval) - (oldy * sinval);
+		new_y = (oldx * sinval) + (oldy * cosval); 
+	}
+	printf("\nra: %f\noldx: %d\toldy: %d\nnew_x: %d\tnew_y: %d\n\n", ra, oldx, oldy, new_x, new_y);
+	put_pixel(p, new_x, new_y, rgb_to_int(p->player->color));
+}

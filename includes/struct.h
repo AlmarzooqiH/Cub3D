@@ -74,6 +74,9 @@ typedef struct s_texture
  * @var	angle is the player angle.
  * @var	camera_x is the camera X plane.
  * @var	camera_y is the camera Y plane.
+ * @var rotate This will be set to 1 if the left key was pressed then will be
+ * checked when we will draw the player to do rotation.
+ * @var	color is the player color.
  */
 typedef struct s_player
 {
@@ -84,6 +87,7 @@ typedef struct s_player
 	double	angle;
 	double	camera_x;
 	double	camera_y;
+	int		rotate;
 	t_color	*color;
 }	t_player;
 

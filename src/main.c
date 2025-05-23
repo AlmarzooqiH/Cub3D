@@ -18,6 +18,7 @@ int	game_loop(t_d *p)
 	render_map(p);
 	render_player(p);
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
+	p->player->rotate = 0;
 	return (0);
 }
 

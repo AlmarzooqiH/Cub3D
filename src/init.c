@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/22 17:34:25 by hamad            ###   ########.fr       */
+/*   Updated: 2025/05/23 16:15:12 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,4 +136,5 @@ void	init_player(t_d *game)
 	game->player->angle = 1;
 	game->player->camera_x = 0;
 	game->player->camera_y = 0.66;
+	game->player->rotate = 0;
 }
