@@ -39,8 +39,8 @@
 /*			Clean up functions				*/
 int			free_p(t_d *p);
 void		free_texture(t_texture *t, void *mlx);
-void        free_color(t_color *c);
-void        free_player(t_player *p);
+void		free_color(t_color *c);
+void		free_player(t_player *p);
 
 /*			Initalization functions			*/
 t_d			*init(void);
@@ -48,7 +48,7 @@ t_texture	*init_texture(void *mlx, char *img_path);
 t_color		*init_color(char *color);
 int			key_hook(int key_num, void *p);
 void		init_player(t_d *p);
-t_color     *init_player_color(void);
+t_color		*init_player_color(void);
 
 /*			Error functions					*/
 void		disp_err(const char *error);
@@ -56,24 +56,26 @@ void		disp_err(const char *error);
 /*			Parsing functions				*/
 int			is_valid_parsing(int ac, char **av, t_d *p);
 int			is_suffix(const char *s, const char *suffix);
+int			is_valid_key(int key_num);
 int			ft_isprefix(const char *s, const char *prefix);
 int			validate_map(int fd, t_d *p);
 
 /*			Rendering related functions				*/
-int         game_loop(t_d *p);
-void        put_pixel(t_d *p, int x, int y, int color);
-int         rgb_to_int(t_color *c);
+int			game_loop(t_d *p);
+void		put_pixel(t_d *p, int x, int y, int color);
+int			rgb_to_int(t_color *c);
 void		render_map(t_d *p);
-void        draw_grid(t_d *p, int x, int y, t_color *c);
-void        render_player(t_d *p);
-void        clear_image_buffer(t_d *p);
-void        render_fov(t_d *p);
+void		draw_grid(t_d *p, int x, int y, t_color *c);
+void		render_player(t_d *p);
+void		clear_image_buffer(t_d *p);
+void		render_fov(t_d *p);
 // void        rotate_player(t_player *p, int norp);
-void        plot_player(t_d *p, int oldx, int oldy);
+
+void		plot_player(t_d *p, int oldx, int oldy);
 /*			Map related functions				*/
-char 		**read_map(int fd, t_d *p);
-size_t      get_max_width(char **map);
-char        set_direction(char c);
-void        normalize_map_2(char **om, char **nm, size_t mw, size_t mh);
-char        **normalize_map_1(char **om);
+char		**read_map(int fd, t_d *p);
+size_t		get_max_width(char **map);
+char		set_direction(char c);
+void		normalize_map_2(char **om, char **nm, size_t mw, size_t mh);
+char		**normalize_map_1(char **om);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/23 17:51:12 by hamad            ###   ########.fr       */
+/*   Updated: 2025/05/24 00:04:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ t_color	*init_player_color(void)
 
 	color = ft_strdup(PLAYER_COLOR);
 	if (!color)
-		return (NULL);	
+		return (NULL);
 	new_c = init_color(color);
 	if (!new_c)
 		return (free(color), NULL);
