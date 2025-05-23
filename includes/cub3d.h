@@ -47,7 +47,7 @@ t_d			*init(void);
 t_texture	*init_texture(void *mlx, char *img_path);
 t_color		*init_color(char *color);
 int			key_hook(int key_num, void *p);
-void		init_player(t_d *game);
+void		init_player(t_d *p);
 t_color     *init_player_color(void);
 
 /*			Error functions					*/

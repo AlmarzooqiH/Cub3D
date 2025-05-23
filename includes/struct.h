@@ -76,6 +76,18 @@ typedef struct s_texture
  * @var	camera_y is the camera Y plane.
  * @var rotate This will be set to 1 if the left key was pressed then will be
  * checked when we will draw the player to do rotation.
+ * @var w_pressed This will hold if the W button was pressed to simulate conti
+ * nues movement.
+ * @var a_pressed This will hold if the A button was pressed to simulate conti
+ * nues movement.
+ * @var s_pressed This will hold if the S button was pressed to simulate conti
+ * nues movement.
+ * @var d_pressed This will hold if the D button was pressed to simulate conti
+ * nues movement.
+ * @var lk_pressed This will hold if the LK button was pressed to simulate con
+ * tinues rotation.
+ * @var rk_pressed This will hold if the RK button was pressed to simulate con
+ * tinues rotation.
  * @var	color is the player color.
  */
 typedef struct s_player
@@ -88,6 +100,12 @@ typedef struct s_player
 	double	camera_x;
 	double	camera_y;
 	int		rotate;
+	int		w_pressed;
+	int		a_pressed;
+	int		s_pressed;
+	int		d_pressed;
+	int		lk_pressed;
+	int		rk_pressed;
 	t_color	*color;
 }	t_player;
 

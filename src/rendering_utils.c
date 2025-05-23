@@ -84,8 +84,8 @@ void plot_player(t_d *p, int oldx, int oldy)
 	cosval = cos(ra);
 	if (p->player->rotate)
 	{
-		new_x = (oldx * cosval) - (oldy * sinval);
-		new_y = (oldx * sinval) + (oldy * cosval); 
+		new_x = round(((oldx - p->player->ppx) * cosval) - ((oldy - p->player->ppy) * sinval));
+		new_y = round(((oldx - p->player->ppx) * sinval) + ((oldy - p->player->ppy) * cosval)); 
 	}
 	printf("\nra: %f\noldx: %d\toldy: %d\nnew_x: %d\tnew_y: %d\n\n", ra, oldx, oldy, new_x, new_y);
 	put_pixel(p, new_x, new_y, rgb_to_int(p->player->color));

@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/23 16:15:12 by hamad            ###   ########.fr       */
+/*   Updated: 2025/05/23 17:51:12 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,20 +121,26 @@ t_color	*init_player_color(void)
 	return (new_c);
 }
 
-void	init_player(t_d *game)
+void	init_player(t_d *p)
 {
-	game->player = (t_player *)ft_calloc(1, sizeof(t_player));
-	if (!game->player)
+	p->player = (t_player *)ft_calloc(1, sizeof(t_player));
+	if (!p->player)
 	{
 		disp_err(FTIP);
-		free_p(game);
+		free_p(p);
 		return ;
 	}
-	game->player->color = init_player_color();
-	game->player->pdx = -1;
-	game->player->pdy = 0;
-	game->player->angle = 1;
-	game->player->camera_x = 0;
-	game->player->camera_y = 0.66;
-	game->player->rotate = 0;
+	p->player->color = init_player_color();
+	p->player->pdx = -1;
+	p->player->pdy = 0;
+	p->player->angle = 1;
+	p->player->camera_x = 0;
+	p->player->camera_y = 0.66;
+	p->player->rotate = 0;
+	p->player->w_pressed = 0;
+	p->player->a_pressed = 0;
+	p->player->s_pressed = 0;
+	p->player->d_pressed = 0;
+	p->player->lk_pressed = 0;
+	p->player->rk_pressed = 0;
 }
