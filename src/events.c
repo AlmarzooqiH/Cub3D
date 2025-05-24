@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:37:34 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/23 23:58:13 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/24 15:44:39 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,77 @@
 
 /**
  * @brief This function will check if the pressed key is a valid key.
- * @param key_num The key code of the key that was pressed.
+ * @param keycode The key code of the key that was pressed.
  * @return 1 If the pressed key was valid, else it will return 0.
  */
-int	is_valid_key(int key_num)
+int	is_valid_key(int keycode)
 {
-	return (key_num == ESC || key_num == W || key_num == A || key_num == S
-		|| key_num == D || key_num == LK || key_num == RK);
+	return (keycode == ESC || keycode == W || keycode == A || keycode == S
+		|| keycode == D || keycode == LK || keycode == RK);
 }
 
-int	key_hook(int key_num, void *p)
+int	update_player(int keycode, t_d *p)
+{
+	if (keycode == W)
+		p->player->ppy -= MOVEMENT_SPEED;
+	else if (keycode == A)
+		p->player->ppx -= MOVEMENT_SPEED;
+	else if (keycode == S)
+		p->player->ppy += MOVEMENT_SPEED;
+	else if (keycode == D)
+		p->player->ppx += MOVEMENT_SPEED;
+	else if (keycode == LK)
+		p->player->angle -= ROTATION_SPEED;
+	else if (keycode == RK)
+		p->player->angle += ROTATION_SPEED;
+	if (keycode == LK || keycode == RK)
+		p->player->rotate = 1;
+	return (keycode);
+}
+
+int	key_press(int keycode, void *p)
 {
 	t_d	*pr;
 
-	if (!is_valid_key(key_num))
-		return (key_num);
 	pr = (t_d *)p;
-	if (key_num == ESC)
+	if (!is_valid_key(keycode))
+		return (keycode);
+	if (keycode == ESC)
 		free_p(pr);
-	else if (key_num == W)
-		pr->player->ppy -= MOVEMENT_SPEED;
-	else if (key_num == A)
-		pr->player->ppx -= MOVEMENT_SPEED;
-	else if (key_num == S)
-		pr->player->ppy += MOVEMENT_SPEED;
-	else if (key_num == D)
-		pr->player->ppx += MOVEMENT_SPEED;
-	else if (key_num == LK)
-		pr->player->angle -= ROTATION_SPEED;
-	else if (key_num == RK)
-		pr->player->angle += ROTATION_SPEED;
-	game_loop(pr);
-	return (key_num);
+	if (keycode == W)
+		pr->player->w_pressed = 1;
+	if (keycode == A)
+		pr->player->a_pressed = 1;
+	if (keycode == S)
+		pr->player->s_pressed = 1;
+	if (keycode == D)
+		pr->player->d_pressed = 1;
+	if (keycode == LK)
+		pr->player->lk_pressed = 1;
+	if (keycode == RK)
+		pr->player->rk_pressed = 1;
+	update_player(keycode, pr);
+	return (keycode);
+}
+
+int	key_release(int keycode, void *p)
+{
+	t_d	*pr;
+
+	if (!is_valid_key(keycode))
+		return (keycode);
+	pr = (t_d *)p;
+	if (keycode == W)
+		pr->player->w_pressed = 0;
+	if (keycode == A)
+		pr->player->a_pressed = 0;
+	if (keycode == S)
+		pr->player->s_pressed = 0;
+	if (keycode == D)
+		pr->player->d_pressed = 0;
+	if (keycode == LK)
+		pr->player->lk_pressed = 0;
+	if (keycode == RK)
+		pr->player->rk_pressed = 0;
+	return (keycode);
 }

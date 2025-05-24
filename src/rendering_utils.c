@@ -70,25 +70,25 @@ void	clear_image_buffer(t_d *p)
  * @return void.
  * @note Angles must be in radians.
  */
-void	plot_player(t_d *p, int oldx, int oldy)
-{
-	double	ra;
-	double	sinval;
-	double	cosval;
-	int		new_x;
-	int		new_y;
+// void	plot_player(t_d *p, int oldx, int oldy)
+// {
+// 	double	ra;
+// 	double	sinval;
+// 	double	cosval;
+// 	int		new_x;
+// 	int		new_y;
 
-	new_x = oldx;
-	new_y = oldy;
-	ra = p->player->angle * (M_PI / 180);
-	sinval = sin(ra);
-	cosval = cos(ra);
-	if (p->player->rotate)
-	{
-		new_x = round(((oldx - p->player->ppx) * cosval)
-				- ((oldy - p->player->ppy) * sinval));
-		new_y = round(((oldx - p->player->ppx) * sinval)
-				+ ((oldy - p->player->ppy) * cosval));
-	}
-	put_pixel(p, new_x, new_y, rgb_to_int(p->player->color));
-}
+// 	new_x = oldx;
+// 	new_y = oldy;
+// 	ra = p->player->angle * (M_PI / 180);
+// 	sinval = sin(ra);
+// 	cosval = cos(ra);
+// 	if (p->player->rotate)
+// 	{
+// 		new_x = round(((oldx - p->player->ppx) * cosval)
+// 				- ((oldy - p->player->ppy) * sinval));
+// 		new_y = round(((oldx - p->player->ppx) * sinval)
+// 				+ ((oldy - p->player->ppy) * cosval));
+// 	}
+// 	put_pixel(p, new_x, new_y, rgb_to_int(p->player->color));
+// }

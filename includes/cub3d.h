@@ -46,9 +46,14 @@ void		free_player(t_player *p);
 t_d			*init(void);
 t_texture	*init_texture(void *mlx, char *img_path);
 t_color		*init_color(char *color);
-int			key_hook(int key_num, void *p);
 void		init_player(t_d *p);
 t_color		*init_player_color(void);
+
+/*			Event handlers					*/
+int         update_player(int keycode, t_d *p);
+int			key_press(int keycode, void *p);
+int			key_release(int keycode, void *p);
+
 
 /*			Error functions					*/
 void		disp_err(const char *error);
@@ -56,7 +61,7 @@ void		disp_err(const char *error);
 /*			Parsing functions				*/
 int			is_valid_parsing(int ac, char **av, t_d *p);
 int			is_suffix(const char *s, const char *suffix);
-int			is_valid_key(int key_num);
+int			is_valid_key(int keycode);
 int			ft_isprefix(const char *s, const char *prefix);
 int			validate_map(int fd, t_d *p);
 
@@ -69,9 +74,8 @@ void		draw_grid(t_d *p, int x, int y, t_color *c);
 void		render_player(t_d *p);
 void		clear_image_buffer(t_d *p);
 void		render_fov(t_d *p);
-// void        rotate_player(t_player *p, int norp);
-
 void		plot_player(t_d *p, int oldx, int oldy);
+
 /*			Map related functions				*/
 char		**read_map(int fd, t_d *p);
 size_t		get_max_width(char **map);

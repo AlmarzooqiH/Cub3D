@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/05/23 17:35:36 by hamad            ###   ########.fr       */
+/*   Updated: 2025/05/24 15:55:57 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	render_player(t_d *p)
 		j = 0;
 		while (j < map_width)
 		{
-			plot_player(p, j + ((p->player->ppx - 1) * map_width), i
-				+ ((p->player->ppy - 1) * map_height));
+			put_pixel(p, j + ((p->player->ppx - 1) * map_width), i
+			+ ((p->player->ppy - 1) * map_height), rgb_to_int(p->player->color));
 			j++;
 		}
 		i++;

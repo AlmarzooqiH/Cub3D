@@ -30,7 +30,9 @@ int	main(int ac, char **av)
 	init_player(p);
 	if (!is_valid_parsing(ac, av, p))
 		return (free_p(p), 1);
-	game_loop(p);
+	mlx_hook(p->win, 2, 1L << 0, key_press, p);
+	mlx_hook(p->win, 3, 1L << 1, key_release, p);
+	mlx_loop_hook(p->mlx, game_loop, p);
 	mlx_loop(p->mlx);
 	return (0);
 }
