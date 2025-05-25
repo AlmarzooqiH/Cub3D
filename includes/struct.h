@@ -67,8 +67,8 @@ typedef struct s_texture
 
 /**
  * @brief This struct holds the player information.
- * @var	ppx is the player X position.
- * @var	ppy is the player Y position.
+ * @var	ppx is the player X position in the map.
+ * @var	ppy is the player Y position in the map.
  * @var	pdx is the player X direction.
  * @var	pdy is the player Y direction.
  * @var	angle is the player angle.

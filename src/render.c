@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/05/24 15:55:57 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:33:08 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,28 @@ void	draw_grid(t_d *p, int x, int y, t_color *c)
  * @param p The program struct.
  * @return void.
  */
-void	render_fov(t_d *p)
+void	render_direction(t_d *p, int mw, int mh)
 {
-	(void)p;
+	int		i;
+	int		j;
+	double	pcx;
+	double	pcy;
+
+	i = 0;
+	j = 0;
+	pcx = ceil(mw / 2);
+	pcy = ceil(mw / 2);
+	(void)mh;
+	while (i < pcy)
+	{
+		j = 0;
+		while (j < pcx)
+		{
+			put_pixel(p, (pcx - j) + (p->player->ppx * mw), (pcy - i) + (p->player->ppy * mh), rgb_to_int(p->player->color));
+			j++;
+		}
+		i++;
+	}
 }
 
 /**
@@ -75,13 +94,15 @@ void	render_player(t_d *p)
 		j = 0;
 		while (j < map_width)
 		{
-			put_pixel(p, j + ((p->player->ppx - 1) * map_width), i
-			+ ((p->player->ppy - 1) * map_height), rgb_to_int(p->player->color));
+			plot_player(p, j + ((p->player->ppx - 1) * map_width), i
+			+ ((p->player->ppy - 1) * map_height));
+			// put_pixel(p, j + ((p->player->ppx - 1) * map_width), i
+			// + ((p->player->ppy - 1) * map_height), rgb_to_int(p->player->color));
 			j++;
 		}
 		i++;
 	}
-	render_fov(p);
+	render_direction(p, map_width, map_height);
 }
 
 /**

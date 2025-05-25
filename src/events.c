@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:37:34 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/24 15:44:39 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:02:01 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,62 @@ int	is_valid_key(int keycode)
 		|| keycode == D || keycode == LK || keycode == RK);
 }
 
-int	update_player(int keycode, t_d *p)
+/**
+ * @brief This function will rotate the player and make sure the rotation is
+ * bounded from 0 to 2PI.
+ * @param p The player.
+ * @return void.
+ */
+void	rotate_player(t_player *p)
 {
-	if (keycode == W)
-		p->player->ppy -= MOVEMENT_SPEED;
-	else if (keycode == A)
-		p->player->ppx -= MOVEMENT_SPEED;
-	else if (keycode == S)
-		p->player->ppy += MOVEMENT_SPEED;
-	else if (keycode == D)
-		p->player->ppx += MOVEMENT_SPEED;
-	else if (keycode == LK)
-		p->player->angle -= ROTATION_SPEED;
-	else if (keycode == RK)
-		p->player->angle += ROTATION_SPEED;
-	if (keycode == LK || keycode == RK)
-		p->player->rotate = 1;
-	return (keycode);
+	if (p->lk_pressed)
+		p->angle -= ROTATION_SPEED;
+	if (p->rk_pressed)
+		p->angle += ROTATION_SPEED;
+	if (p->angle > 2 * M_PI)
+		p->angle -= 2 * M_PI;
+	if (p->angle < 0)
+		p->angle += 2 * M_PI;
+	p->pdx = cos(p->angle);
+	p->pdy = sin(p->angle);
 }
 
+/**
+ * @brief This function will update the player position.
+ * @param p The player.
+ * @return void.
+ */
+void	update_player(t_player *p)
+{
+	rotate_player(p);
+	if (p->w_pressed)
+	{
+		p->ppx -= MOVEMENT_SPEED * cos(p->angle);
+		p->ppy -= MOVEMENT_SPEED * sin(p->angle);
+	}
+	if (p->s_pressed)
+	{
+		p->ppx += MOVEMENT_SPEED * cos(p->angle);
+		p->ppy += MOVEMENT_SPEED * sin(p->angle);
+	}
+	if (p->a_pressed)
+	{
+		p->ppx -= MOVEMENT_SPEED * sin(p->angle);
+		p->ppy += MOVEMENT_SPEED * cos(p->angle);
+	}
+	if (p->d_pressed)
+	{
+		p->ppx += MOVEMENT_SPEED * sin(p->angle);
+		p->ppy -= MOVEMENT_SPEED * cos(p->angle);
+	}
+}
+
+/**
+ * @brief This function will handle key press events and update the player state.
+ * @param keycode The key code of the key that was pressed.
+ * @param p Pointer to the main data structure.
+ * @return The keycode that was processed.
+ */
 int	key_press(int keycode, void *p)
 {
 	t_d	*pr;
@@ -63,10 +100,16 @@ int	key_press(int keycode, void *p)
 		pr->player->lk_pressed = 1;
 	if (keycode == RK)
 		pr->player->rk_pressed = 1;
-	update_player(keycode, pr);
+	update_player(pr->player);
 	return (keycode);
 }
 
+/**
+ * @brief This function will handle key press events and update the player state.
+ * @param keycode The key code of the key that was pressed.
+ * @param p Pointer to the main data structure.
+ * @return The keycode that was processed.
+ */
 int	key_release(int keycode, void *p)
 {
 	t_d	*pr;

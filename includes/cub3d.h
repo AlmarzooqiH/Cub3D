@@ -35,6 +35,8 @@
 # define PLAYER_COLOR "203,10,8"
 # define ROTATION_SPEED 0.03f
 # define MOVEMENT_SPEED 0.3f
+# define FOV 60
+# define LINE_LENGTH 30
 
 /*			Clean up functions				*/
 int			free_p(t_d *p);
@@ -50,7 +52,7 @@ void		init_player(t_d *p);
 t_color		*init_player_color(void);
 
 /*			Event handlers					*/
-int         update_player(int keycode, t_d *p);
+void        update_player(t_player *p);
 int			key_press(int keycode, void *p);
 int			key_release(int keycode, void *p);
 
@@ -73,7 +75,7 @@ void		render_map(t_d *p);
 void		draw_grid(t_d *p, int x, int y, t_color *c);
 void		render_player(t_d *p);
 void		clear_image_buffer(t_d *p);
-void		render_fov(t_d *p);
+void        render_direction(t_d *p, int mw, int mh);
 void		plot_player(t_d *p, int oldx, int oldy);
 
 /*			Map related functions				*/

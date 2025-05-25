@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/24 15:34:48 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/05/25 15:18:30 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	init_player(t_d *p)
 	p->player->color = init_player_color();
 	p->player->pdx = -1;
 	p->player->pdy = 0;
-	p->player->angle = 1;
+	p->player->angle = M_PI / 2;
 	p->player->camera_x = 0;
 	p->player->camera_y = 0.66;
 	p->player->rotate = 0;
