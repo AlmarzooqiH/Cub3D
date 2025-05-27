@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/05/25 16:33:08 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/05/27 16:03:46 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,33 @@ void	draw_grid(t_d *p, int x, int y, t_color *c)
 }
 
 /**
- * @brief This function will draw the Feild Of View of the player.
+ * @brief This function will draw a line starting from the center of the playe
+ * r indicating his direction of movement.
  * @param p The program struct.
+ * @param pw The player width.
+ * @param ph The player height.
  * @return void.
  */
-void	render_direction(t_d *p, int mw, int mh)
+void	render_direction(t_d *p, int pw, int ph)
 {
 	int		i;
-	int		j;
-	double	pcx;
-	double	pcy;
+	double	steps;
+	double	x;
+	double	y;
 
+	steps = fmax(fabs((((p->player->ppx * pw) + p->player->pdx * LINE_LENGTH)
+					- (p->player->ppx * pw))), fabs(((p->player->ppy * ph)
+					+ p->player->pdy * LINE_LENGTH) - (p->player->ppy * ph)));
 	i = 0;
-	j = 0;
-	pcx = ceil(mw / 2);
-	pcy = ceil(mw / 2);
-	(void)mh;
-	while (i < pcy)
+	x = p->player->ppx * pw;
+	y = p->player->ppy * ph;
+	while (i < steps)
 	{
-		j = 0;
-		while (j < pcx)
-		{
-			put_pixel(p, (pcx - j) + (p->player->ppx * mw), (pcy - i) + (p->player->ppy * mh), rgb_to_int(p->player->color));
-			j++;
-		}
+		put_pixel(p, (int)x, (int)y, rgb_to_int(p->player->color));
+		x += ((((p->player->ppx * pw) + p->player->pdx * LINE_LENGTH)
+					- (p->player->ppx * pw)) / steps);
+		y += (((p->player->ppy * ph) + p->player->pdy * LINE_LENGTH)
+				- (p->player->ppy * ph)) / steps;
 		i++;
 	}
 }
@@ -83,26 +86,24 @@ void	render_player(t_d *p)
 {
 	int	i;
 	int	j;
-	int	map_width;
-	int	map_height;
+	int	player_width;
+	int	player_height;
 
-	map_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));
-	map_height = (int)ceil(((double)HEIGHT) / ((double)p->map_height));
+	player_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));
+	player_height = (int)ceil(((double)HEIGHT) / ((double)p->map_height));
 	i = 0;
-	while (i < map_width)
+	while (i < player_height)
 	{
 		j = 0;
-		while (j < map_width)
+		while (j < player_width)
 		{
-			plot_player(p, j + ((p->player->ppx - 1) * map_width), i
-			+ ((p->player->ppy - 1) * map_height));
-			// put_pixel(p, j + ((p->player->ppx - 1) * map_width), i
-			// + ((p->player->ppy - 1) * map_height), rgb_to_int(p->player->color));
+			plot_player(p, j + ((p->player->ppx - 1) * player_width), i
+				+ ((p->player->ppy - 1) * player_height));
 			j++;
 		}
 		i++;
 	}
-	render_direction(p, map_width, map_height);
+	render_direction(p, player_width, player_height);
 }
 
 /**

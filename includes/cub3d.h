@@ -36,7 +36,7 @@
 # define ROTATION_SPEED 0.03f
 # define MOVEMENT_SPEED 0.3f
 # define FOV 60
-# define LINE_LENGTH 30
+# define LINE_LENGTH 60
 
 /*			Clean up functions				*/
 int			free_p(t_d *p);
@@ -75,7 +75,7 @@ void		render_map(t_d *p);
 void		draw_grid(t_d *p, int x, int y, t_color *c);
 void		render_player(t_d *p);
 void		clear_image_buffer(t_d *p);
-void        render_direction(t_d *p, int mw, int mh);
+void        render_direction(t_d *p, int pw, int ph);
 void		plot_player(t_d *p, int oldx, int oldy);
 
 /*			Map related functions				*/
