@@ -32,11 +32,7 @@
 # define HEIGHT 800
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
-# define PLAYER_COLOR "203,10,8"
-# define ROTATION_SPEED 0.03f
-# define MOVEMENT_SPEED 0.3f
-# define FOV 60
-# define LINE_LENGTH 60
+# define TILE_SIZE 64
 
 /*			Clean up functions				*/
 int			free_p(t_d *p);
@@ -76,7 +72,8 @@ void		draw_grid(t_d *p, int x, int y, t_color *c);
 void		render_player(t_d *p);
 void		clear_image_buffer(t_d *p);
 void        render_direction(t_d *p, int pw, int ph);
-void		plot_player(t_d *p, int oldx, int oldy);
+void        raycast_in_2d(t_d *p);
+void        get_inital_dist(float *stepx, float *stepy, float rdx, float rdy);
 
 /*			Map related functions				*/
 char		**read_map(int fd, t_d *p);

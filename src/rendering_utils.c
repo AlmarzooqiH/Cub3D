@@ -64,31 +64,25 @@ void	clear_image_buffer(t_d *p)
 }
 
 /**
- * @brief This function will rotate the player.
- * @param p The player struct.
- * @param norp Positive or Negative direction of the rotation.
- * @return void.
- * @note Angles must be in radians.
+ * @brief This function will calculate the inital distance that we need to
+ * travel.
+ * @param ddx The pointer to the variable that we want to assign the delta 
+ * distance X.
+ * @param ddy The pointer to the variable that we want to assign the delta
+ * distance Y.
+ * @param rdx The ray X direction.
+ * @param rdy The ray Y direction.
+ * @note If rdx or rdy are 0 we will asign a big number to stepx,y to avoid 
+ * dividing by 0.
  */
-void	plot_player(t_d *p, int oldx, int oldy)
+void	get_inital_dist(float *ddx, float *ddy, float rdx, float rdy)
 {
-	double	ra;
-	double	sinval;
-	double	cosval;
-	int		new_x;
-	int		new_y;
-
-	new_x = oldx;
-	new_y = oldy;
-	ra = p->player->angle * (M_PI / 180);
-	sinval = sin(ra);
-	cosval = cos(ra);
-	if (p->player->rotate)
-	{
-		new_x = round(((oldx - p->player->ppx) * cosval)
-				- ((oldy - p->player->ppy) * sinval));
-		new_y = round(((oldx - p->player->ppx) * sinval)
-				+ ((oldy - p->player->ppy) * cosval));
-	}
-	put_pixel(p, new_x, new_y, rgb_to_int(p->player->color));
+	if (rdx == 0.0f)
+		*ddx = 1e22f;
+	else
+		*ddx = fabsf(1.0f / rdx);
+	if (rdy == 0.0f)
+		*ddy = 1e22f;
+	else
+		*ddy = fabsf(1.0f / rdy);
 }

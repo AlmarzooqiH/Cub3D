@@ -37,6 +37,13 @@
 # endif
 # include <stdio.h>
 
+/*			Player Related Macros				*/
+# define PLAYER_COLOR "203,10,8"
+# define ROTATION_SPEED 0.03f
+# define MOVEMENT_SPEED 0.3f
+# define FOV 60
+# define LINE_LENGTH 60
+
 /**
  * @brief This struct will hold color values.
  * @var	r red color, ranges from 0 - 255.
