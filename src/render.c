@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/06/01 18:35:42 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:50:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ void	render_map(t_d *p)
 void	draw_line(t_d *p, int x2, int y2)
 {
 	int	i;
-	int	j;
 	int	player_width;
 	int	player_height;
 	float	dx;
@@ -165,11 +164,12 @@ void	draw_line(t_d *p, int x2, int y2)
 	i = 0;
 	while (i < step)
 	{
-		put_pixel(p, j + ((p->player->ppx - 1) * player_width), i
+		put_pixel(p, x1 + ((p->player->ppx - 1) * player_width), y1
 				+ ((p->player->ppy - 1) * player_height),
 				rgb_to_int(p->player->color));
 		x1 += stepx;
 		y1 += stepy;
+		i++;
 	}
 }
 
