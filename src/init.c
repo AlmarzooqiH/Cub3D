@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/25 15:18:30 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:39:20 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,4 +143,10 @@ void	init_player(t_d *p)
 	p->player->d_pressed = 0;
 	p->player->lk_pressed = 0;
 	p->player->rk_pressed = 0;
+	p->player->ray = init_ray(p);
+	if (!p->player->color || !p->player->ray)
+	{
+		free_p(p);
+		return ;
+	}
 }

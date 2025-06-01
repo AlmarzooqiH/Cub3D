@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 00:31:03 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/21 02:43:57 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/01 22:40:14 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ void	free_player(t_player *p)
 	{
 		free_color(p->color);
 		p->color = NULL;
+	}
+	if (p->ray)
+	{
+		free(p->ray);
+		p->ray = NULL;
 	}
 	p->ppx = 0;
 	p->ppy = 0;

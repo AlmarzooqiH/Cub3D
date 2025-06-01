@@ -35,7 +35,7 @@ void	put_pixel(t_d *p, int x, int y, int color)
  * @param c The color struct that contains the rgb values.
  * @return The color acording to minilibx standards. (See man mlx_pixel_put.3)
  */
-int	rgb_to_int(t_color *c)
+int	ctoi(t_color *c)
 {
 	return ((c->r << 16) | (c->g << 8) | c->b);
 }
@@ -75,14 +75,38 @@ void	clear_image_buffer(t_d *p)
  * @note If rdx or rdy are 0 we will asign a big number to stepx,y to avoid 
  * dividing by 0.
  */
-void	get_inital_dist(float *ddx, float *ddy, float rdx, float rdy)
+void	get_inital_dist(t_ray *r)
 {
-	if (rdx == 0.0f)
-		*ddx = 1e22f;
+	if (r->rdx == 0.0f)
+		r->ddx = 1e5f;
 	else
-		*ddx = fabsf(1.0f / rdx);
-	if (rdy == 0.0f)
-		*ddy = 1e22f;
+		r->ddx = fabsf(1.0f / r->rdx);
+	if (r->rdy == 0.0f)
+		r->ddy = 1e5f;
 	else
-		*ddy = fabsf(1.0f / rdy);
+		r->ddy = fabsf(1.0f / r->rdy);
+}
+
+void	get_steps(t_ray *r)
+{
+	if (r->rdx < 0)
+	{
+		r->step_x = -1;
+		r->sdx = (r->rpx - r->mapx) * r->ddx;
+	}
+	else
+	{
+		r->step_x = 1;
+		r->sdx = (r->mapx + 1.0f - r->rpx) * r->ddx;
+	}
+	if (r->rdy < 0)
+	{
+		r->step_y = -1;
+		r->sdy = (r->rpy - r->mapy) * r->ddy;
+	}
+	else
+	{
+		r->step_y = 1;
+		r->sdy = (r->mapy + 1.0f - r->rpy) * r->ddy;
+	}
 }

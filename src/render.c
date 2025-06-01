@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/06/01 20:50:40 by marvin           ###   ########.fr       */
+/*   Updated: 2025/06/02 00:08:52 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	draw_grid(t_d *p, int x, int y, t_color *c)
 		while (j < grid_width)
 		{
 			put_pixel(p, j + (x * grid_width), i + (y * grid_height),
-				rgb_to_int(c));
+				ctoi(c));
 			j++;
 		}
 		i++;
@@ -69,7 +69,7 @@ void	render_direction(t_d *p, int pw, int ph)
 	y = p->player->ppy * ph;
 	while (i < steps)
 	{
-		put_pixel(p, (int)x, (int)y, rgb_to_int(p->player->color));
+		put_pixel(p, (int)x, (int)y, ctoi(p->player->color));
 		x += ((((p->player->ppx * pw) + p->player->pdx * LINE_LENGTH)
 					- (p->player->ppx * pw)) / steps);
 		y += (((p->player->ppy * ph) + p->player->pdy * LINE_LENGTH)
@@ -89,25 +89,21 @@ void	render_player(t_d *p)
 {
 	int	i;
 	int	j;
-	int	player_width;
-	int	player_height;
 
-	player_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));
-	player_height = (int)ceil(((double)HEIGHT) / ((double)p->map_height));
 	i = 0;
-	while (i < player_height)
+	while (i < p->player_height)
 	{
 		j = 0;
-		while (j < player_width)
+		while (j < p->player_width)
 		{
-			put_pixel(p, j + ((p->player->ppx - 1) * player_width), i
-				+ ((p->player->ppy - 1) * player_height),
-				rgb_to_int(p->player->color));
+			put_pixel(p, j + ((p->player->ppx - 1) * p->player_width), i
+				+ ((p->player->ppy - 1) *p-> player_height),
+				ctoi(p->player->color));
 			j++;
 		}
 		i++;
 	}
-	render_direction(p, player_width, player_height);
+	render_direction(p, p->player_width, p->player_height);
 }
 
 /**
@@ -136,39 +132,35 @@ void	render_map(t_d *p)
 	}
 }
 
-void	draw_line(t_d *p, int x2, int y2)
+/**
+ * @brief This function should draw a ray from the player position to the wall
+ * after performing the dda algorthim.
+ * @param p The program struct.
+ * @return void.
+ */
+void	draw_line(t_d *p)
 {
-	int	i;
-	int	player_width;
-	int	player_height;
-	float	dx;
-	float	dy;
-	int		step;
-	float	stepx;
-	float	stepy;
-	int	x1;
-	int	y1;
+	int		i;
+	int		incx;
+	int		incy;
+	int		steps;
+	float	startx;
+	float	starty;
 
-	player_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));
-	player_height = (int)ceil(((double)HEIGHT) / ((double)p->map_height));
-	x1 = p->player->ppx;
-	y1 = p->player->ppy;
-	dx = x2 - x1;
-	dy = y2 = y1;
-	if (fabsf(dx) > fabsf(dy))
-		step = (int)fabsf(dx);
+	if (fabs(p->player->ray->mapx - p->player->ppx) > fabs(p->player->ray->mapy - p->player->ppy))
+		steps = fabs(p->player->ray->mapx - p->player->ppx);
 	else
-		step = (int)fabsf(dy);
-	stepx = dx / step;
-	stepy = dy / step;
+		steps = fabs(p->player->ray->mapy - p->player->ppy);
+	incx = fabs(p->player->ray->mapx - p->player->ppx) / (float)steps;
+	incy = fabs(p->player->ray->mapy - p->player->ppy) / (float)steps;
+	startx = p->player->ppx * p->player_width;
+	starty = p->player->ppy * p->player_height;
 	i = 0;
-	while (i < step)
+	while (i < steps)
 	{
-		put_pixel(p, x1 + ((p->player->ppx - 1) * player_width), y1
-				+ ((p->player->ppy - 1) * player_height),
-				rgb_to_int(p->player->color));
-		x1 += stepx;
-		y1 += stepy;
+		put_pixel(p, (int)(startx + p->player_width), (int)(starty + p->player_width), ctoi(p->player->color));
+		startx += incx;
+		starty += incy;
 		i++;
 	}
 }
@@ -181,56 +173,25 @@ void	draw_line(t_d *p, int x2, int y2)
  */
 void	raycast_in_2d(t_d *p)
 {
-	float	rdx = p->player->pdx;
-	float	rdy = p->player->pdy;
-	float	rpx = p->player->ppx;
-	float	rpy = p->player->ppy;
-	float	ddx, ddy;
-	float	sdx, sdy;
-	int		step_x, step_y;
-	int		map_x = (int)rpx;
-	int		map_y = (int)rpy;
-	int		hit = 0;
+	t_ray	*r;
 
-	get_inital_dist(&ddx, &ddy, rdx, rdy);
-
-	if (rdx < 0)
+	r = p->player->ray;
+	while (!r->hit)
 	{
-		step_x = -1;
-		sdx = (rpx - map_x) * ddx;
-	}
-	else
-	{
-		step_x = 1;
-		sdx = (map_x + 1.0f - rpx) * ddx;
-	}
-	if (rdy < 0)
-	{
-		step_y = -1;
-		sdy = (rpy - map_y) * ddy;
-	}
-	else
-	{
-		step_y = 1;
-		sdy = (map_y + 1.0f - rpy) * ddy;
-	}
-
-	while (!hit)
-	{
-		if (sdx < sdy)
+		if (r->sdx < r->sdy)
 		{
-			sdx += ddx;
-			map_x += step_x;
+			r->sdx += r->ddx;
+			r->mapx += r->step_x;
 		}
 		else
 		{
-			sdy += ddy;
-			map_y += step_y;
+			r->sdy += r->ddy;
+			r->mapy += r->step_y;
 		}
-		if (p->map[map_y][map_x] == '1')
+		if (p->map[r->mapy][r->mapx] == '1')
 		{
-			hit = 1;
-			draw_line(p, map_x, map_y);
+			r->hit = 1;
+			draw_line(p);
 		}
 	}
 }

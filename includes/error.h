@@ -20,11 +20,14 @@
 # define FILE_DOESNT_EXSIST "File does not exists\n\0"
 # define MAP_FORMAT "Wrong Format\n\0"
 # define EMPTY_MAP "The Map is empty\n\0"
+
 /*  Memorey allocation failure messages.  */
 # define FTCM "Failed To Calloc Memorey\n\0"
 # define FTIP "Failed To Init Player\n\0"
 # define FTIT "Failed To Init Texture\n\0"
 # define FTIC "Failed To Init Color\n\0"
+# define FTIR "Failed To Init ray\n\0"
+
 /*      Mlx failure messages        */
 # define FTIM "Failed to init mlx\n\0"
 # define FTIW "Failed to init the window\n\0"

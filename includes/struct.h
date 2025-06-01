@@ -73,6 +73,52 @@ typedef struct s_texture
 }	t_texture;
 
 /**
+ * @brief This struct holds the data of the ray that we will be sending.
+ * @var	hit We will use this to know when to end the loop of the digital diff-
+ * -rential analysis for the ray casting.
+ * @var mapx This will hold the X position of the wall that we hit. Inital val
+ * ue will be ppx of the s_player struct.
+ * @var mapy This will hold the Y position of the wall that we hit. Inital val
+ * ue will be ppy of the s_player struct.
+ * @var rdx This hold the ray direction in the X position. It is also the pdx
+ * of the s_player struct.
+ * @var rdy This hold the ray direction in the Y position. It is also the pdy
+ * of the s_player struct.
+ * @var rpx This holds the ray inital position.  It is also the ppx
+ * of the s_player struct.
+ * @var rpy This holds the ray inital position.  It is also the ppy
+ * of the s_player struct.
+ * @var ddx This is holds the inital distance that we want to travel in the X
+ * axis.
+ * @var ddy This is holds the inital distance that we want to travel in the Y
+ * axis.
+ * @var sdx This is holds the side distance that we want to travel in the X
+ * axis.
+ * @var sdy This is holds the side distance that we want to travel in the Y
+ * axis.
+ * @var step_x This will holds the steps that we need to travel in the X axis,
+ * this will be used to increment mapx.
+ * @var step_y This will holds the steps that we need to travel in the X axis,
+ * this will be used to increment mapy.
+*/
+typedef struct s_ray
+{
+	int		hit;
+	int		mapx;
+	int		mapy;
+	float	rdx;
+	float	rdy;
+	float	rpx;
+	float	rpy;
+	float	ddx;
+	float	ddy;
+	float	sdx;
+	float	sdy;
+	int		step_x;
+	int		step_y;
+}	t_ray;
+
+/**
  * @brief This struct holds the player information.
  * @var	ppx is the player X position in the map.
  * @var	ppy is the player Y position in the map.
@@ -96,6 +142,7 @@ typedef struct s_texture
  * @var rk_pressed This will hold if the RK button was pressed to simulate con
  * tinues rotation.
  * @var	color is the player color.
+ * @var ray This will store the ray that we will send to raycast.
  */
 typedef struct s_player
 {
@@ -114,6 +161,7 @@ typedef struct s_player
 	int		lk_pressed;
 	int		rk_pressed;
 	t_color	*color;
+	t_ray	*ray;
 }	t_player;
 
 /**
@@ -135,6 +183,8 @@ typedef struct s_player
  * @var	n Will hold the texture of the north wall.
  * @var	floor Will hold the color of the floors.
  * @var	ceiling Will hold the color of the ceiling.
+ * @var	player_width This holds the player width relative to the map.
+ * @var	player_height This holds the player height relative to the map.
  */
 typedef struct s_2d
 {
@@ -156,6 +206,8 @@ typedef struct s_2d
 	t_color		*floor;
 	t_color		*ceiling;
 	t_player	*player;
+	int			player_width;
+	int			player_height;
 }	t_d;
 
 #endif

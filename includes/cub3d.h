@@ -46,12 +46,13 @@ t_texture	*init_texture(void *mlx, char *img_path);
 t_color		*init_color(char *color);
 void		init_player(t_d *p);
 t_color		*init_player_color(void);
+t_ray       *init_ray(t_d *p);
 
 /*			Event handlers					*/
 void        update_player(t_player *p);
 int			key_press(int keycode, void *p);
 int			key_release(int keycode, void *p);
-
+void        update_ray(t_player *p);
 
 /*			Error functions					*/
 void		disp_err(const char *error);
@@ -66,14 +67,16 @@ int			validate_map(int fd, t_d *p);
 /*			Rendering related functions				*/
 int			game_loop(t_d *p);
 void		put_pixel(t_d *p, int x, int y, int color);
-int			rgb_to_int(t_color *c);
+int			ctoi(t_color *c);
 void		render_map(t_d *p);
 void		draw_grid(t_d *p, int x, int y, t_color *c);
 void		render_player(t_d *p);
 void		clear_image_buffer(t_d *p);
 void        render_direction(t_d *p, int pw, int ph);
 void        raycast_in_2d(t_d *p);
-void        get_inital_dist(float *stepx, float *stepy, float rdx, float rdy);
+void        get_inital_dist(t_ray *r);
+void        get_steps(t_ray *r);
+
 
 /*			Map related functions				*/
 char		**read_map(int fd, t_d *p);

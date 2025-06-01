@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:37:34 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/27 15:31:47 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/01 22:47:53 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int	key_press(int keycode, void *p)
 	if (keycode == RK)
 		pr->player->rk_pressed = 1;
 	update_player(pr->player);
+	update_ray(pr->player);
 	return (keycode);
 }
 
