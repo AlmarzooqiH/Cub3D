@@ -15,7 +15,9 @@ else ifeq ($(OS), Darwin)
 	MINIMLX_A +=$(MACOS_MINIMLX_A)
 endif
 
-SRCS = $(SRCLOC)/main.c $(SRCLOC)/init.c $(SRCLOC)/error.c $(SRCLOC)/events.c $(SRCLOC)/clean.c $(SRCLOC)/validation.c $(SRCLOC)/validation_utils.c $(SRCLOC)/validation_utils2.c $(SRCLOC)/render.c $(SRCLOC)/validation_utils3.c $(SRCLOC)/rendering_utils.c
+SRCS = $(SRCLOC)/main.c $(SRCLOC)/init.c $(SRCLOC)/error.c $(SRCLOC)/events.c $(SRCLOC)/clean.c $(SRCLOC)/validation.c \
+	   $(SRCLOC)/validation_utils.c $(SRCLOC)/validation_utils2.c $(SRCLOC)/render.c $(SRCLOC)/validation_utils3.c \
+	   $(SRCLOC)/rendering_utils.c $(SRCLOC)/init2.c $(SRCLOC)/events2.c
 
 OBJS       = $(SRCS:.c=.o)
 
