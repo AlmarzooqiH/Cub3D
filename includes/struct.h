@@ -38,7 +38,8 @@
 # include <stdio.h>
 
 /*			Player Related Macros				*/
-# define PLAYER_COLOR "203,10,8"
+# define PLAYER_COLOR "203,10,8\0"
+# define RAY_COLOR "46,90,192\0"
 # define ROTATION_SPEED 0.03f
 # define MOVEMENT_SPEED 0.3f
 # define FOV 60
@@ -100,6 +101,8 @@ typedef struct s_texture
  * this will be used to increment mapx.
  * @var step_y This will holds the steps that we need to travel in the X axis,
  * this will be used to increment mapy.
+ * @var dist The will hold the distance between point 1 to point 2.
+ * @var color The ray color.
 */
 typedef struct s_ray
 {
@@ -116,6 +119,8 @@ typedef struct s_ray
 	float	sdy;
 	int		step_x;
 	int		step_y;
+	float	dist;
+	t_color	*color;
 }	t_ray;
 
 /**

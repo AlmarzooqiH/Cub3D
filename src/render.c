@@ -6,42 +6,11 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/06/02 00:08:52 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:41:43 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-/**
- * @brief This function will draw a grid on the screen.
- * @param p This holds the program data.
- * @param x Current X position on the screen.
- * @param y Current Y position on the screen.
- * @param c The color that we want the grid to be.
- * @return Void
- */
-void	draw_grid(t_d *p, int x, int y, t_color *c)
-{
-	size_t	i;
-	size_t	j;
-	size_t	grid_width;
-	size_t	grid_height;
-
-	grid_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));
-	grid_height = (int)ceil(((double)HEIGHT) / ((double)p->map_height));
-	i = 0;
-	while (i < grid_height)
-	{
-		j = 0;
-		while (j < grid_width)
-		{
-			put_pixel(p, j + (x * grid_width), i + (y * grid_height),
-				ctoi(c));
-			j++;
-		}
-		i++;
-	}
-}
 
 /**
  * @brief This function will draw a line starting from the center of the playe
@@ -107,6 +76,37 @@ void	render_player(t_d *p)
 }
 
 /**
+ * @brief This function will draw a grid on the screen.
+ * @param p This holds the program data.
+ * @param x Current X position on the screen.
+ * @param y Current Y position on the screen.
+ * @param c The color that we want the grid to be.
+ * @return Void
+ */
+void	draw_grid(t_d *p, int x, int y, t_color *c)
+{
+	size_t	i;
+	size_t	j;
+	size_t	grid_width;
+	size_t	grid_height;
+
+	grid_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));
+	grid_height = (int)ceil(((double)HEIGHT) / ((double)p->map_height));
+	i = 0;
+	while (i < grid_height - 1)
+	{
+		j = 0;
+		while (j < grid_width - 1)
+		{
+			put_pixel(p, j + (x * grid_width), i + (y * grid_height),
+				ctoi(c));
+			j++;
+		}
+		i++;
+	}
+}
+
+/**
  * @brief This function will render the map.
  * @param p The program struct.
  * @return void.
@@ -158,7 +158,7 @@ void	draw_line(t_d *p)
 	i = 0;
 	while (i < steps)
 	{
-		put_pixel(p, (int)(startx + p->player_width), (int)(starty + p->player_width), ctoi(p->player->color));
+		put_pixel(p, (int)(startx + p->player_width), (int)(starty + p->player_width), ctoi(p->player->ray->color));
 		startx += incx;
 		starty += incy;
 		i++;
@@ -175,6 +175,7 @@ void	raycast_in_2d(t_d *p)
 {
 	t_ray	*r;
 
+	update_ray(p->player);
 	r = p->player->ray;
 	while (!r->hit)
 	{
@@ -191,6 +192,7 @@ void	raycast_in_2d(t_d *p)
 		if (p->map[r->mapy][r->mapx] == '1')
 		{
 			r->hit = 1;
+			r->dist = get_distance(p->player);
 			draw_line(p);
 		}
 	}

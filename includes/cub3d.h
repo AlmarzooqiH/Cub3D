@@ -47,6 +47,7 @@ t_color		*init_color(char *color);
 void		init_player(t_d *p);
 t_color		*init_player_color(void);
 t_ray       *init_ray(t_d *p);
+t_color     *init_ray_color(void);
 
 /*			Event handlers					*/
 void        update_player(t_player *p);
@@ -76,7 +77,7 @@ void        render_direction(t_d *p, int pw, int ph);
 void        raycast_in_2d(t_d *p);
 void        get_inital_dist(t_ray *r);
 void        get_steps(t_ray *r);
-
+float       get_distance(t_player *p);
 
 /*			Map related functions				*/
 char		**read_map(int fd, t_d *p);

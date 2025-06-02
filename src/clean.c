@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 00:31:03 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/01 22:40:14 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:25:35 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	free_player(t_player *p)
 	}
 	if (p->ray)
 	{
+		free_color(p->ray->color);
+		p->ray->color = NULL;
 		free(p->ray);
 		p->ray = NULL;
 	}
