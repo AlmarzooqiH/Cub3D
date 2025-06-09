@@ -188,8 +188,8 @@ typedef struct s_player
  * @var	n Will hold the texture of the north wall.
  * @var	floor Will hold the color of the floors.
  * @var	ceiling Will hold the color of the ceiling.
- * @var	player_width This holds the player width relative to the map.
- * @var	player_height This holds the player height relative to the map.
+ * @var	grid_width This holds the grid width relative to the map.
+ * @var	grid_height This holds the grid height relative to the map.
  */
 typedef struct s_2d
 {
@@ -211,8 +211,8 @@ typedef struct s_2d
 	t_color		*floor;
 	t_color		*ceiling;
 	t_player	*player;
-	int			player_width;
-	int			player_height;
+	int			grid_width;
+	int			grid_height;
 }	t_d;
 
 #endif

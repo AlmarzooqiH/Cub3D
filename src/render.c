@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/06/02 17:41:43 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/09 18:15:23 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,29 @@
  * behind it. Lmao.
  * -Hamad
  */
-void	render_direction(t_d *p, int pw, int ph)
-{
-	int		i;
-	double	steps;
-	double	x;
-	double	y;
+// void	render_direction(t_d *p, int pw, int ph)
+// {
+// 	int		i;
+// 	double	steps;
+// 	double	x;
+// 	double	y;
 
-	steps = fmax(fabs((((p->player->ppx * pw) + p->player->pdx * LINE_LENGTH)
-					- (p->player->ppx * pw))), fabs(((p->player->ppy * ph)
-					+ p->player->pdy * LINE_LENGTH) - (p->player->ppy * ph)));
-	i = 0;
-	x = p->player->ppx * pw;
-	y = p->player->ppy * ph;
-	while (i < steps)
-	{
-		put_pixel(p, (int)x, (int)y, ctoi(p->player->color));
-		x += ((((p->player->ppx * pw) + p->player->pdx * LINE_LENGTH)
-					- (p->player->ppx * pw)) / steps);
-		y += (((p->player->ppy * ph) + p->player->pdy * LINE_LENGTH)
-				- (p->player->ppy * ph)) / steps;
-		i++;
-	}
-}
+// 	steps = fmax(fabs((((p->player->ppx * pw) + p->player->pdx * LINE_LENGTH)
+// 					- (p->player->ppx * pw))), fabs(((p->player->ppy * ph)
+// 					+ p->player->pdy * LINE_LENGTH) - (p->player->ppy * ph)));
+// 	i = 0;
+// 	x = p->player->ppx * pw;
+// 	y = p->player->ppy * ph;
+// 	while (i < steps)
+// 	{
+// 		put_pixel(p, (int)x, (int)y, ctoi(p->player->color));
+// 		x += ((((p->player->ppx * pw) + p->player->pdx * LINE_LENGTH)
+// 					- (p->player->ppx * pw)) / steps);
+// 		y += (((p->player->ppy * ph) + p->player->pdy * LINE_LENGTH)
+// 				- (p->player->ppy * ph)) / steps;
+// 		i++;
+// 	}
+// }
 
 /**
  * @brief This function will render the player in his proper position.
@@ -60,19 +60,19 @@ void	render_player(t_d *p)
 	int	j;
 
 	i = 0;
-	while (i < p->player_height)
+	while (i < p->grid_height)
 	{
 		j = 0;
-		while (j < p->player_width)
+		while (j < p->grid_width)
 		{
-			put_pixel(p, j + ((p->player->ppx - 1) * p->player_width), i
-				+ ((p->player->ppy - 1) *p-> player_height),
+			put_pixel(p, j + ((p->player->ppx - 1) * p->grid_width), i
+				+ ((p->player->ppy - 1) * p-> grid_height),
 				ctoi(p->player->color));
 			j++;
 		}
 		i++;
 	}
-	render_direction(p, p->player_width, p->player_height);
+	// render_direction(p, p->player_width, p->player_height);
 }
 
 /**
@@ -85,20 +85,16 @@ void	render_player(t_d *p)
  */
 void	draw_grid(t_d *p, int x, int y, t_color *c)
 {
-	size_t	i;
-	size_t	j;
-	size_t	grid_width;
-	size_t	grid_height;
+	int	i;
+	int	j;
 
-	grid_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));
-	grid_height = (int)ceil(((double)HEIGHT) / ((double)p->map_height));
 	i = 0;
-	while (i < grid_height - 1)
+	while (i < p->grid_height - 1)
 	{
 		j = 0;
-		while (j < grid_width - 1)
+		while (j < p->grid_width - 1)
 		{
-			put_pixel(p, j + (x * grid_width), i + (y * grid_height),
+			put_pixel(p, j + (x * p->grid_width), i + (y * p->grid_height),
 				ctoi(c));
 			j++;
 		}
@@ -140,28 +136,35 @@ void	render_map(t_d *p)
  */
 void	draw_line(t_d *p)
 {
-	int		i;
-	int		incx;
-	int		incy;
-	int		steps;
-	float	startx;
-	float	starty;
+	int	pxs;
+	int	pys;
+	int	pxe;
+	int	pye;
+	int	iodx;
+	int	iody;
 
-	if (fabs(p->player->ray->mapx - p->player->ppx) > fabs(p->player->ray->mapy - p->player->ppy))
-		steps = fabs(p->player->ray->mapx - p->player->ppx);
+	pxs = p->player->ppx * p->grid_width;
+	pys = p->player->ppy * p->grid_height;
+	pxe = p->player->ray->mapx * p->grid_width;
+	pye = p->player->ray->mapy * p->grid_height;
+	if (pxs > pxe)
+		iodx = -1;
 	else
-		steps = fabs(p->player->ray->mapy - p->player->ppy);
-	incx = fabs(p->player->ray->mapx - p->player->ppx) / (float)steps;
-	incy = fabs(p->player->ray->mapy - p->player->ppy) / (float)steps;
-	startx = p->player->ppx * p->player_width;
-	starty = p->player->ppy * p->player_height;
-	i = 0;
-	while (i < steps)
+		iodx = 1;
+	if (pys > pye)
+		iody = -1;
+	else
+		iody = 1;
+	printf("pxs: %d, pys: %d, pxe: %d, pye: %d\n", pxs, pys, pxe, pye);
+	while (pys != pye)
 	{
-		put_pixel(p, (int)(startx + p->player_width), (int)(starty + p->player_width), ctoi(p->player->ray->color));
-		startx += incx;
-		starty += incy;
-		i++;
+		put_pixel(p, pxs, pys, ctoi(p->player->ray->color));
+		pys += iody;
+	}
+	while (pxs != pxe)
+	{
+		put_pixel(p, pxs, pys, ctoi(p->player->ray->color));
+		pxs += iodx;
 	}
 }
 
@@ -193,6 +196,15 @@ void	raycast_in_2d(t_d *p)
 		{
 			r->hit = 1;
 			r->dist = get_distance(p->player);
+			/*
+				Checked and the ray hits at a proper position.
+				All i need to understand now is just how can i draw
+				a line from the player to the wall that it hit, showing
+				the direction of the ray also and lastly casting multiple
+				rays in the FOV of the player. Then i shall move on to 3d
+				since i would be having a proper understanding.
+			*/
+			printf("ray hit at: (%d, %d) with a distance of: %f\n", r->mapx, r->mapy, r->dist);
 			draw_line(p);
 		}
 	}
