@@ -6,46 +6,11 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/06/09 18:15:23 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/09 23:10:37 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-/**
- * @brief This function will draw a line starting from the center of the playe
- * r indicating his direction of movement.
- * @param p The program struct.
- * @param pw The player width.
- * @param ph The player height.
- * @return void.
- * @note Coming back to this functionm, it looks cursed and i forgot the math
- * behind it. Lmao.
- * -Hamad
- */
-// void	render_direction(t_d *p, int pw, int ph)
-// {
-// 	int		i;
-// 	double	steps;
-// 	double	x;
-// 	double	y;
-
-// 	steps = fmax(fabs((((p->player->ppx * pw) + p->player->pdx * LINE_LENGTH)
-// 					- (p->player->ppx * pw))), fabs(((p->player->ppy * ph)
-// 					+ p->player->pdy * LINE_LENGTH) - (p->player->ppy * ph)));
-// 	i = 0;
-// 	x = p->player->ppx * pw;
-// 	y = p->player->ppy * ph;
-// 	while (i < steps)
-// 	{
-// 		put_pixel(p, (int)x, (int)y, ctoi(p->player->color));
-// 		x += ((((p->player->ppx * pw) + p->player->pdx * LINE_LENGTH)
-// 					- (p->player->ppx * pw)) / steps);
-// 		y += (((p->player->ppy * ph) + p->player->pdy * LINE_LENGTH)
-// 				- (p->player->ppy * ph)) / steps;
-// 		i++;
-// 	}
-// }
 
 /**
  * @brief This function will render the player in his proper position.
@@ -72,7 +37,6 @@ void	render_player(t_d *p)
 		}
 		i++;
 	}
-	// render_direction(p, p->player_width, p->player_height);
 }
 
 /**
@@ -134,79 +98,56 @@ void	render_map(t_d *p)
  * @param p The program struct.
  * @return void.
  */
-void	draw_line(t_d *p)
+void	draw_ray(t_d *p)
 {
-	int	pxs;
-	int	pys;
-	int	pxe;
-	int	pye;
-	int	iodx;
-	int	iody;
+	float	x;
+	float	y;
+	float	dx;
+	float	dy;
+	int		steps;
 
-	pxs = p->player->ppx * p->grid_width;
-	pys = p->player->ppy * p->grid_height;
-	pxe = p->player->ray->mapx * p->grid_width;
-	pye = p->player->ray->mapy * p->grid_height;
-	if (pxs > pxe)
-		iodx = -1;
-	else
-		iodx = 1;
-	if (pys > pye)
-		iody = -1;
-	else
-		iody = 1;
-	printf("pxs: %d, pys: %d, pxe: %d, pye: %d\n", pxs, pys, pxe, pye);
-	while (pys != pye)
+	x = p->player->ppx * p->grid_width;
+	y = p->player->ppy * p->grid_height;
+	dx = p->player->ray->mapx * p->grid_width - x;
+	dy = p->player->ray->mapy * p->grid_height - y;
+	steps = (int)fmaxf(fabsf(dx), fabsf(dy));
+	if (steps == 0)
+		return ;
+	dx /= (float)steps;
+	dy /= (float)steps;
+	while (steps--)
 	{
-		put_pixel(p, pxs, pys, ctoi(p->player->ray->color));
-		pys += iody;
-	}
-	while (pxs != pxe)
-	{
-		put_pixel(p, pxs, pys, ctoi(p->player->ray->color));
-		pxs += iodx;
+		put_pixel(p, (int)x, (int)y, ctoi(p->player->ray->color));
+		x += dx;
+		y += dy;
 	}
 }
 
 /**
- * @brief This function will draw rays from the player position.
- * @param The program structure.
+ * @brief This function will raycast to the player FOV.
+ * @param p The program struct.
  * @return void.
- * @note For now i will implement it then i will worry about norminette lmao.
  */
 void	raycast_in_2d(t_d *p)
 {
-	t_ray	*r;
+	float	start_angle;
+	float	end_angle;
+	float	step;
+	float	angle;
+	int		i;
 
-	update_ray(p->player);
-	r = p->player->ray;
-	while (!r->hit)
+	start_angle = atan2(p->player->pdy, p->player->pdx)
+		- (30.0f * (M_PI / 180.0f));
+	end_angle = atan2(p->player->pdy, p->player->pdx)
+		+ (30.0f * (M_PI / 180.0f));
+	step = (end_angle - start_angle) / (N_RAYS - 1);
+	angle = start_angle;
+	i = 0;
+	while (i < N_RAYS)
 	{
-		if (r->sdx < r->sdy)
-		{
-			r->sdx += r->ddx;
-			r->mapx += r->step_x;
-		}
-		else
-		{
-			r->sdy += r->ddy;
-			r->mapy += r->step_y;
-		}
-		if (p->map[r->mapy][r->mapx] == '1')
-		{
-			r->hit = 1;
-			r->dist = get_distance(p->player);
-			/*
-				Checked and the ray hits at a proper position.
-				All i need to understand now is just how can i draw
-				a line from the player to the wall that it hit, showing
-				the direction of the ray also and lastly casting multiple
-				rays in the FOV of the player. Then i shall move on to 3d
-				since i would be having a proper understanding.
-			*/
-			printf("ray hit at: (%d, %d) with a distance of: %f\n", r->mapx, r->mapy, r->dist);
-			draw_line(p);
-		}
+		update_ray(p->player, angle);
+		dda(p);
+		angle += step;
+		i++;
 	}
 }
-
