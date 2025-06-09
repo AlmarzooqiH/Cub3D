@@ -42,9 +42,7 @@
 # define RAY_COLOR "46,90,192\0"
 # define ROTATION_SPEED 0.03f
 # define MOVEMENT_SPEED 0.3f
-# define FOV 60
-# define LINE_LENGTH 60
-
+# define N_RAYS 120
 /**
  * @brief This struct will hold color values.
  * @var	r red color, ranges from 0 - 255.
@@ -102,6 +100,7 @@ typedef struct s_texture
  * @var step_y This will holds the steps that we need to travel in the X axis,
  * this will be used to increment mapy.
  * @var dist The will hold the distance between point 1 to point 2.
+ * @var angle this will be used to send the rays in multiple directions.
  * @var color The ray color.
 */
 typedef struct s_ray
@@ -120,6 +119,7 @@ typedef struct s_ray
 	int		step_x;
 	int		step_y;
 	float	dist;
+	float	angle;
 	t_color	*color;
 }	t_ray;
 
