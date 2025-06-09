@@ -12,13 +12,13 @@
 
 #include "../includes/cub3d.h"
 
-void	update_ray(t_player *p)
+void	update_ray(t_player *p, float angle)
 {
 	p->ray->hit = 0;
 	p->ray->mapx = (int)p->ppx;
 	p->ray->mapy = (int)p->ppy;
-	p->ray->rdx = p->pdx;
-	p->ray->rdy = p->pdy;
+	p->ray->rdx = cos(angle);
+	p->ray->rdy = sin(angle);
 	p->ray->rpx = p->ppx;
 	p->ray->rpy = p->ppy;
 	get_inital_dist(p->ray);
