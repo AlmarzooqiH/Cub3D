@@ -46,14 +46,14 @@ t_texture	*init_texture(void *mlx, char *img_path);
 t_color		*init_color(char *color);
 void		init_player(t_d *p);
 t_color		*init_player_color(void);
-t_ray       *init_ray(t_d *p);
-t_color     *init_ray_color(void);
+t_ray		*init_ray(t_d *p);
+t_color		*init_ray_color(void);
 
 /*			Event handlers					*/
-void        update_player(t_player *p);
+void		update_player(t_player *p);
 int			key_press(int keycode, void *p);
 int			key_release(int keycode, void *p);
-void        update_ray(t_player *p);
+void		update_ray(t_player *p, float angle);
 
 /*			Error functions					*/
 void		disp_err(const char *error);
@@ -73,11 +73,12 @@ void		render_map(t_d *p);
 void		draw_grid(t_d *p, int x, int y, t_color *c);
 void		render_player(t_d *p);
 void		clear_image_buffer(t_d *p);
-void        render_direction(t_d *p, int pw, int ph);
-void        raycast_in_2d(t_d *p);
-void        get_inital_dist(t_ray *r);
-void        get_steps(t_ray *r);
-float       get_distance(t_player *p);
+void		raycast_in_2d(t_d *p);
+void		draw_ray(t_d *p);
+void		dda(t_d *p);
+void		get_inital_dist(t_ray *r);
+void		get_steps(t_ray *r);
+float		get_distance(t_player *p);
 
 /*			Map related functions				*/
 char		**read_map(int fd, t_d *p);
