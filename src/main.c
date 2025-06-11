@@ -15,9 +15,7 @@
 int	game_loop(t_d *p)
 {
 	clear_image_buffer(p);
-	render_map(p);
-	render_player(p);
-	raycast_in_2d(p);
+	render_minimap(p);
 	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
 	p->player->rotate = 0;
 	return (0);

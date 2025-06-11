@@ -43,6 +43,15 @@
 # define ROTATION_SPEED 0.03f
 # define MOVEMENT_SPEED 0.3f
 # define N_RAYS 120
+
+typedef enum e_side
+{
+	EAST,
+	WEST,
+	SOUTH,
+	NORTH
+}	t_side;
+
 /**
  * @brief This struct will hold color values.
  * @var	r red color, ranges from 0 - 255.
@@ -101,6 +110,8 @@ typedef struct s_texture
  * this will be used to increment mapy.
  * @var dist The will hold the distance between point 1 to point 2.
  * @var angle this will be used to send the rays in multiple directions.
+ * @var side This will store which direction that ray hits. Checkout the
+ * side enum.
  * @var color The ray color.
 */
 typedef struct s_ray
@@ -120,6 +131,7 @@ typedef struct s_ray
 	int		step_y;
 	float	dist;
 	float	angle;
+	int		side;
 	t_color	*color;
 }	t_ray;
 

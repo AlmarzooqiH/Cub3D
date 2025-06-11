@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 00:31:03 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/02 17:25:35 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/11 22:08:24 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	free_player(t_player *p)
  * @brief This function will be responsible for the cleanup of the program.
  * @param	p the t_d struct. (Can be found in includes/struct.h)
  * @return (void)
+ * @note After freeing the allocated memorey this function will terminate the
+ * cub3d program.
  */
 int	free_p(t_d *p)
 {

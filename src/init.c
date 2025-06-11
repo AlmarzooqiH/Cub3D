@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/01 22:39:20 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/11 22:03:53 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ t_d	*init(void)
 	p->imgd = mlx_get_data_addr(p->img, &p->bpp, &p->sl, &p->edn);
 	if (!p->imgd)
 		return (disp_err(FTGID), free_p(p), NULL);
-	// mlx_key_hook(p->win, key_hook, p);
 	mlx_hook(p->win, WIN_EXIT, 0, free_p, (void *)p);
 	return (p);
 }

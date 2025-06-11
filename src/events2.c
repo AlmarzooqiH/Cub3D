@@ -21,6 +21,7 @@ void	update_ray(t_player *p, float angle)
 	p->ray->rdy = sin(angle);
 	p->ray->rpx = p->ppx;
 	p->ray->rpy = p->ppy;
+	p->ray->side = -1;
 	get_inital_dist(p->ray);
 	get_steps(p->ray);
 }

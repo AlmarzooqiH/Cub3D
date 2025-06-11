@@ -6,11 +6,23 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/06/09 23:10:37 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/11 22:02:03 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+/**
+ * @brief This function will render the minimap.
+ * @param p The program struct.
+ * @return void.
+ */
+void	render_minimap(t_d *p)
+{
+	render_map(p);
+	render_player(p);
+	raycast_in_2d(p);
+}
 
 /**
  * @brief This function will render the player in his proper position.
@@ -30,9 +42,9 @@ void	render_player(t_d *p)
 		j = 0;
 		while (j < p->grid_width)
 		{
-			put_pixel(p, j + ((p->player->ppx - 1) * p->grid_width), i
-				+ ((p->player->ppy - 1) * p-> grid_height),
-				ctoi(p->player->color));
+			put_pixel(p, (j + ((p->player->ppx - 1) * p->grid_width))
+				* MINIMAP_SCALE, (i + ((p->player->ppy - 1) * p->grid_height))
+				* MINIMAP_SCALE, ctoi(p->player->color));
 			j++;
 		}
 		i++;
@@ -58,8 +70,8 @@ void	draw_grid(t_d *p, int x, int y, t_color *c)
 		j = 0;
 		while (j < p->grid_width - 1)
 		{
-			put_pixel(p, j + (x * p->grid_width), i + (y * p->grid_height),
-				ctoi(c));
+			put_pixel(p, (j + (x * p->grid_width)) * MINIMAP_SCALE,
+				(i + (y * p->grid_height)) * MINIMAP_SCALE, ctoi(c));
 			j++;
 		}
 		i++;
@@ -106,10 +118,10 @@ void	draw_ray(t_d *p)
 	float	dy;
 	int		steps;
 
-	x = p->player->ppx * p->grid_width;
-	y = p->player->ppy * p->grid_height;
-	dx = p->player->ray->mapx * p->grid_width - x;
-	dy = p->player->ray->mapy * p->grid_height - y;
+	x = p->player->ppx * p->grid_width * MINIMAP_SCALE;
+	y = p->player->ppy * p->grid_height * MINIMAP_SCALE;
+	dx = (p->player->ray->mapx * p->grid_width * MINIMAP_SCALE) - x;
+	dy = (p->player->ray->mapy * p->grid_height * MINIMAP_SCALE) - y;
 	steps = (int)fmaxf(fabsf(dx), fabsf(dy));
 	if (steps == 0)
 		return ;
@@ -120,34 +132,5 @@ void	draw_ray(t_d *p)
 		put_pixel(p, (int)x, (int)y, ctoi(p->player->ray->color));
 		x += dx;
 		y += dy;
-	}
-}
-
-/**
- * @brief This function will raycast to the player FOV.
- * @param p The program struct.
- * @return void.
- */
-void	raycast_in_2d(t_d *p)
-{
-	float	start_angle;
-	float	end_angle;
-	float	step;
-	float	angle;
-	int		i;
-
-	start_angle = atan2(p->player->pdy, p->player->pdx)
-		- (30.0f * (M_PI / 180.0f));
-	end_angle = atan2(p->player->pdy, p->player->pdx)
-		+ (30.0f * (M_PI / 180.0f));
-	step = (end_angle - start_angle) / (N_RAYS - 1);
-	angle = start_angle;
-	i = 0;
-	while (i < N_RAYS)
-	{
-		update_ray(p->player, angle);
-		dda(p);
-		angle += step;
-		i++;
 	}
 }

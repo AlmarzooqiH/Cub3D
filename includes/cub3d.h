@@ -33,6 +33,7 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define TILE_SIZE 64
+# define MINIMAP_SCALE 0.2
 
 /*			Clean up functions				*/
 int			free_p(t_d *p);
@@ -69,6 +70,7 @@ int			validate_map(int fd, t_d *p);
 int			game_loop(t_d *p);
 void		put_pixel(t_d *p, int x, int y, int color);
 int			ctoi(t_color *c);
+void		render_minimap(t_d *p);
 void		render_map(t_d *p);
 void		draw_grid(t_d *p, int x, int y, t_color *c);
 void		render_player(t_d *p);

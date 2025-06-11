@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 14:38:57 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/06/09 23:09:20 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/11 22:03:23 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ float	get_distance(t_player *p)
 }
 
 /**
- * @brief This function will perform the DDA algorthim then it will draw the
- * ray acordingly.
+ * @brief This function will perform the Digital Differential Analysis
+ * algorthim then it will draw the ray acordingly.
  * @param The program structure.
  * @return void.
  */
@@ -51,5 +51,34 @@ void	dda(t_d *p)
 			r->dist = get_distance(p->player);
 			draw_ray(p);
 		}
+	}
+}
+
+/**
+ * @brief This function will raycast to the player FOV.
+ * @param p The program struct.
+ * @return void.
+ */
+void	raycast_in_2d(t_d *p)
+{
+	float	start_angle;
+	float	end_angle;
+	float	step;
+	float	angle;
+	int		i;
+
+	start_angle = atan2(p->player->pdy, p->player->pdx)
+		- (30.0f * (M_PI / 180.0f));
+	end_angle = atan2(p->player->pdy, p->player->pdx)
+		+ (30.0f * (M_PI / 180.0f));
+	step = (end_angle - start_angle) / (N_RAYS - 1);
+	angle = start_angle;
+	i = 0;
+	while (i < N_RAYS)
+	{
+		update_ray(p->player, angle);
+		dda(p);
+		angle += step;
+		i++;
 	}
 }
