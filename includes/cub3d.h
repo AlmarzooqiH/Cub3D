@@ -35,6 +35,9 @@
 # define TILE_SIZE 64
 # define MINIMAP_SCALE 0.2
 
+/*			Utility functions				*/
+float		dtor(float degrees);
+
 /*			Clean up functions				*/
 int			free_p(t_d *p);
 void		free_texture(t_texture *t, void *mlx);
@@ -77,7 +80,7 @@ void		render_player(t_d *p);
 void		clear_image_buffer(t_d *p);
 void		raycast_in_2d(t_d *p);
 void		draw_ray(t_d *p);
-void		dda(t_d *p);
+void		dda(t_d *p, int x);
 void		get_inital_dist(t_ray *r);
 void		get_steps(t_ray *r);
 float		get_distance(t_player *p);
