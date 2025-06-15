@@ -40,8 +40,8 @@
 /*			Player Related Macros				*/
 # define PLAYER_COLOR "203,10,8\0"
 # define RAY_COLOR "46,90,192\0"
-# define ROTATION_SPEED 0.03f
-# define MOVEMENT_SPEED 0.3f
+# define ROTATION_SPEED 0.05f
+# define MOVEMENT_SPEED 0.2f
 # define N_RAYS 120
 
 typedef enum e_side
