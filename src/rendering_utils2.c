@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 14:38:57 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/06/15 01:13:18 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/16 00:23:00 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	dda(t_d *p, int ray_index)
 			r->sdy += r->ddy;
 			r->mapy += r->step_y;
 		}
+		if (!bound_check(p))
+			break ;
 		if (p->map[r->mapy][r->mapx] == '1')
 		{
 			r->hit = 1;
