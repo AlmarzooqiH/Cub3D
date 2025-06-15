@@ -50,3 +50,18 @@ t_ray	*init_ray(t_d *p)
 	get_steps(r);
 	return (r);
 }
+
+/**
+ * @brief This function will initalize the keys.
+ * @param p The player.
+ * @note I created this function due to norminette, i was exceeding 25 lines 😓
+ */
+void	init_keys(t_player *p)
+{
+	p->w_pressed = 0;
+	p->a_pressed = 0;
+	p->s_pressed = 0;
+	p->d_pressed = 0;
+	p->lk_pressed = 0;
+	p->rk_pressed = 0;
+}

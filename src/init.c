@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/11 22:03:53 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/16 00:25:46 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,7 @@ void	init_player(t_d *p)
 	p->player->camera_x = 0;
 	p->player->camera_y = 0.66;
 	p->player->rotate = 0;
-	p->player->w_pressed = 0;
-	p->player->a_pressed = 0;
-	p->player->s_pressed = 0;
-	p->player->d_pressed = 0;
-	p->player->lk_pressed = 0;
-	p->player->rk_pressed = 0;
+	init_keys(p->player);
 	p->player->ray = init_ray(p);
 	if (!p->player->color || !p->player->ray)
 	{
