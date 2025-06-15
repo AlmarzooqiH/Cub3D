@@ -12,6 +12,30 @@
 
 #include "../includes/cub3d.h"
 
+/**
+ * @brief This function will check for wall collisions, if there was a wall co
+ * llision it won't update the player position else it will.
+ * @param p The program struct.
+ * @param new_x The player new X position.
+ * @param new_y The player new Y position.
+ * @return void
+ */
+void	update_pos(t_d *p, float new_x, float new_y)
+{
+	if (p->map[(int)new_y][(int)new_x] != '1')
+	{
+		p->player->ppx = new_x;
+		p->player->ppy = new_y;
+	}
+}
+
+/**
+ * @brief This function will update the ray data.
+ * @param p The player.
+ * @param angle The angle in radians that will be used to detemine the ray dir
+ * ection.
+ * @return void
+ */
 void	update_ray(t_player *p, float angle)
 {
 	p->ray->hit = 0;

@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:37:34 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/09 23:10:53 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/16 00:24:09 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,28 @@ void	rotate_player(t_player *p)
  * @param p The player.
  * @return void.
  */
-void	update_player(t_player *p)
+void	update_player(t_d *p)
 {
-	rotate_player(p);
-	if (p->w_pressed)
+	rotate_player(p->player);
+	if (p->player->w_pressed)
 	{
-		p->ppx -= MOVEMENT_SPEED * cos(p->angle);
-		p->ppy -= MOVEMENT_SPEED * sin(p->angle);
+		update_pos(p, p->player->ppx + MOVEMENT_SPEED * cos(p->player->angle),
+			p->player->ppy + MOVEMENT_SPEED * sin(p->player->angle));
 	}
-	if (p->s_pressed)
+	if (p->player->s_pressed)
 	{
-		p->ppx += MOVEMENT_SPEED * cos(p->angle);
-		p->ppy += MOVEMENT_SPEED * sin(p->angle);
+		update_pos(p, p->player->ppx - MOVEMENT_SPEED * cos(p->player->angle),
+			p->player->ppy - MOVEMENT_SPEED * sin(p->player->angle));
 	}
-	if (p->a_pressed)
+	if (p->player->a_pressed)
 	{
-		p->ppx -= MOVEMENT_SPEED * sin(p->angle);
-		p->ppy += MOVEMENT_SPEED * cos(p->angle);
+		update_pos(p, p->player->ppx + MOVEMENT_SPEED * sin(p->player->angle),
+			p->player->ppy - MOVEMENT_SPEED * cos(p->player->angle));
 	}
-	if (p->d_pressed)
+	if (p->player->d_pressed)
 	{
-		p->ppx += MOVEMENT_SPEED * sin(p->angle);
-		p->ppy -= MOVEMENT_SPEED * cos(p->angle);
+		update_pos(p, p->player->ppx - MOVEMENT_SPEED * sin(p->player->angle),
+			p->player->ppy + MOVEMENT_SPEED * cos(p->player->angle));
 	}
 }
 
@@ -100,7 +100,7 @@ int	key_press(int keycode, void *p)
 		pr->player->lk_pressed = 1;
 	if (keycode == RK)
 		pr->player->rk_pressed = 1;
-	update_player(pr->player);
+	update_player(pr);
 	return (keycode);
 }
 
