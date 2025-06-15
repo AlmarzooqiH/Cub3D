@@ -52,11 +52,12 @@ void		init_player(t_d *p);
 t_color		*init_player_color(void);
 t_ray		*init_ray(t_d *p);
 t_color		*init_ray_color(void);
-
+void		init_keys(t_player *p);
 /*			Event handlers					*/
-void		update_player(t_player *p);
+void		update_player(t_d *p);
 int			key_press(int keycode, void *p);
 int			key_release(int keycode, void *p);
+void		update_pos(t_d *p, float new_x, float new_y);
 void		update_ray(t_player *p, float angle);
 
 /*			Error functions					*/
@@ -84,6 +85,7 @@ void		dda(t_d *p, int x);
 void		get_inital_dist(t_ray *r);
 void		get_steps(t_ray *r);
 float		get_distance(t_player *p);
+int			bound_check(t_d *p);
 
 /*			Map related functions				*/
 char		**read_map(int fd, t_d *p);
