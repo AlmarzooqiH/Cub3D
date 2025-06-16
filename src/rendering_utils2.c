@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 14:38:57 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/06/16 15:49:14 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/17 00:17:30 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	draw_wall(t_d *p, int ray_index)
 		x = ray_index * (WIDTH / N_RAYS);
 		while (x < (ray_index * (WIDTH / N_RAYS)) + (WIDTH / N_RAYS))
 		{
-			put_pixel(p, x, y, ctoi(p->ceiling));
+			draw_texture(p, x, y);
 			x++;
 		}
 		y++;
