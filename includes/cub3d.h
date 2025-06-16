@@ -87,7 +87,8 @@ void		get_steps(t_ray *r);
 float		get_distance(t_player *p);
 int			bound_check(t_d *p);
 int			get_side(t_player *p);
-
+t_texture	*get_texture(t_d *p, int side);
+void		draw_texture(t_d *p, int x, int y);
 /*			Map related functions				*/
 char		**read_map(int fd, t_d *p);
 size_t		get_max_width(char **map);
