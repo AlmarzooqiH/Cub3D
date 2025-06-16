@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 14:38:57 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/06/16 00:23:00 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:49:14 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,22 +80,21 @@ void	dda(t_d *p, int ray_index)
 		{
 			r->sdx += r->ddx;
 			r->mapx += r->step_x;
+			r->axis = VERTICAL;
 		}
 		else
 		{
 			r->sdy += r->ddy;
 			r->mapy += r->step_y;
+			r->axis = HORIZONTAL;
 		}
-		if (!bound_check(p))
-			break ;
-		if (p->map[r->mapy][r->mapx] == '1')
-		{
+		if (!bound_check(p) || p->map[r->mapy][r->mapx] == '1')
 			r->hit = 1;
-			r->dist = get_distance(p->player);
-			draw_wall(p, ray_index);
-			draw_ray(p);
-		}
 	}
+	r->dist = get_distance(p->player);
+	r->side = get_side(p->player);
+	draw_wall(p, ray_index);
+	draw_ray(p);
 }
 
 /**

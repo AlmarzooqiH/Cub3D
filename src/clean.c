@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 00:31:03 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/11 22:08:24 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:24:46 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	free_texture(t_texture *t, void *mlx)
 		mlx_destroy_image(mlx, t->img);
 	t->height = 0;
 	t->width = 0;
+	t->edn = 0;
+	t->bpp = 0;
+	t->sl = 0;
+	t->imgd = NULL;
 	free(t);
 }
 

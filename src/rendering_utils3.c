@@ -22,3 +22,23 @@ int	bound_check(t_d *p)
 		&& (size_t)p->player->ray->mapx < p->map_width
 		&& (size_t)p->player->ray->mapy < p->map_height);
 }
+
+
+/**
+ * @brief This function will determine which side has the ray has hit.
+ * @param p The player.
+ * @return The direction that was hit (EAST, WEST, SOUTH, NORTH) Checkout the
+ * side enum.
+ */
+int	get_side(t_player *p)
+{
+	if (p->ray->axis == VERTICAL)
+	{
+		if (p->ray->rdx > 0)
+			return (WEST);
+		return (EAST);
+	}
+	if (p->ray->rdy > 0)
+		return (NORTH);
+	return (SOUTH);
+}

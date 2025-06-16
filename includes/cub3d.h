@@ -86,6 +86,7 @@ void		get_inital_dist(t_ray *r);
 void		get_steps(t_ray *r);
 float		get_distance(t_player *p);
 int			bound_check(t_d *p);
+int			get_side(t_player *p);
 
 /*			Map related functions				*/
 char		**read_map(int fd, t_d *p);

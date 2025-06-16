@@ -52,6 +52,12 @@ typedef enum e_side
 	NORTH
 }	t_side;
 
+typedef enum e_axis
+{
+	HORIZONTAL,
+	VERTICAL
+}	t_axis;
+
 /**
  * @brief This struct will hold color values.
  * @var	r red color, ranges from 0 - 255.
@@ -70,14 +76,22 @@ typedef struct s_color
  * @brief This struct will hold the texture information.
  * @var	width This will store the width of the image.
  * @var	height This will store the width of the image.
+ * @var edn This will tell us which endian the machine uses.
+ * @var bpp This will hold the bits per pixel.
+ * @var sl This will hold the size line.
  * @var	img	This will hold the pointer of the image data.
+ * @var imgd This will store the xpm image pixel data.
  * @note We will get those data from mlx mlx_xpm_file_to_image().
  */
 typedef struct s_texture
 {
 	int		width;
 	int		height;
+	int		edn;
+	int		bpp;
+	int		sl;
 	void	*img;
+	char	*imgd;
 }	t_texture;
 
 /**
@@ -131,6 +145,7 @@ typedef struct s_ray
 	int		step_y;
 	float	dist;
 	float	angle;
+	int		axis;
 	int		side;
 	t_color	*color;
 }	t_ray;

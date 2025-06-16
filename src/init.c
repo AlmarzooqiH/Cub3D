@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/16 00:25:46 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:24:49 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,10 @@ t_texture	*init_texture(void *mlx, char *texture_path)
 	t->height = 0;
 	t->img = mlx_xpm_file_to_image(mlx, texture_path, &t->width, &t->height);
 	if (!t->img)
-	{
-		t->width = 0;
-		t->height = 0;
-		free(t);
-		free(texture_path);
-		return (NULL);
-	}
+		return (free_texture(t, mlx), free(texture_path), NULL);
+	t->imgd = mlx_get_data_addr(t->img, &t->bpp, &t->sl, &t->edn);
+	if (!t->imgd)
+		return (free_texture(t, mlx), free(texture_path), NULL);
 	free(texture_path);
 	return (t);
 }

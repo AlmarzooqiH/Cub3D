@@ -1,0 +1,13 @@
+NO ./textures/Hamad/xpm/Hamad_Back_Side.xpm
+SO ./textures/Hamad/xpm/Hamad_Front_Side.xpm
+WE ./textures/Hamad/xpm/Hamad_Right_Side.xpm
+EA ./textures/Hamad/xpm/Hamad_Left_Side.xpm
+
+C 92,179,65
+F 255,255,255
+
+1111111111
+1E00110001
+1000110001
+1000110001
+1111111111
