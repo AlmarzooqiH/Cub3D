@@ -46,6 +46,7 @@ t_ray	*init_ray(t_d *p)
 	r->dist = 0;
 	r->angle = p->player->angle;
 	r->side = -1;
+	r->ray_index = 0;
 	get_inital_dist(r);
 	get_steps(r);
 	return (r);

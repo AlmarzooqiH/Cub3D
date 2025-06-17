@@ -79,6 +79,11 @@ typedef struct s_color
  * @var edn This will tell us which endian the machine uses.
  * @var bpp This will hold the bits per pixel.
  * @var sl This will hold the size line.
+ * @var proj The projection of the wall.
+ * @var line_height The wall height that will be drawn. (Is also y_end)
+ * @var y_start The starting position of the wall the will be drawn.
+ * @var x_start The x_starting position of the wall the will be drawn.
+ * @var x_end Will be the x_ending position of the wall the will be drawn.
  * @var	img	This will hold the pointer of the image data.
  * @var imgd This will store the xpm image pixel data.
  * @note We will get those data from mlx mlx_xpm_file_to_image().
@@ -90,6 +95,11 @@ typedef struct s_texture
 	int		edn;
 	int		bpp;
 	int		sl;
+	float	proj;
+	int		line_height;
+	int		y_start;
+	int		x_start;
+	int		x_end;
 	void	*img;
 	char	*imgd;
 }	t_texture;
@@ -126,6 +136,7 @@ typedef struct s_texture
  * @var angle this will be used to send the rays in multiple directions.
  * @var side This will store which direction that ray hits. Checkout the
  * side enum.
+ * @var ray_index The ray index.
  * @var color The ray color.
 */
 typedef struct s_ray
@@ -147,6 +158,7 @@ typedef struct s_ray
 	float	angle;
 	int		axis;
 	int		side;
+	int		ray_index;
 	t_color	*color;
 }	t_ray;
 

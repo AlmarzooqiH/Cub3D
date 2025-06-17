@@ -81,7 +81,7 @@ void		render_player(t_d *p);
 void		clear_image_buffer(t_d *p);
 void		raycast_in_2d(t_d *p);
 void		draw_ray(t_d *p);
-void		dda(t_d *p, int x);
+void		dda(t_d *p);
 void		get_inital_dist(t_ray *r);
 void		get_steps(t_ray *r);
 float		get_distance(t_player *p);
@@ -89,6 +89,7 @@ int			bound_check(t_d *p);
 int			get_side(t_player *p);
 t_texture	*get_texture(t_d *p, int side);
 void		draw_texture(t_d *p, int x, int y);
+
 /*			Map related functions				*/
 char		**read_map(int fd, t_d *p);
 size_t		get_max_width(char **map);

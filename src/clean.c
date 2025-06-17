@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 00:31:03 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/16 21:55:06 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/17 18:29:35 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ void	free_texture(t_texture *t, void *mlx)
 	t->edn = 0;
 	t->bpp = 0;
 	t->sl = 0;
+	t->proj = 0.0f;
+	t->line_height = 0;
+	t->y_start = 0;
+	t->x_start = 0;
+	t->x_end = 0;
 	t->imgd = NULL;
 	free(t);
 }

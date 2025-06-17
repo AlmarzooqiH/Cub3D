@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 14:38:57 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/06/17 00:17:30 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/17 19:05:41 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,78 @@ float	get_distance(t_player *player)
 	return (sqrtf(dx * dx + dy * dy));
 }
 
+void	calc_texture(t_d *p, t_texture *t)
+{
+	t->proj = (WIDTH / 2.0f) / tanf(dtor(60.0f) / 2.0f);
+	t->line_height = ((int)ceilf(t->proj / p->player->ray->dist)) / 2 + HEIGHT / 2;
+	t->y_start = -((int)ceilf(t->proj / p->player->ray->dist)) / 2 + HEIGHT / 2;
+	if (t->y_start < 0)
+		t->y_start = 0;
+	if (t->line_height >= HEIGHT)
+		t->line_height = HEIGHT - 1;
+	t->x_start = p->player->ray->ray_index * (WIDTH / N_RAYS);
+	t->x_end = (p->player->ray->ray_index * (WIDTH / N_RAYS)) + (WIDTH / N_RAYS);
+}
+
+char	get_texture_pixel(t_texture *t, double tex_pos)
+{
+	int	tex_y;
+
+	tex_y = (int)tex_pos & (t->height - 1);
+	return (t->imgd[(t->height * tex_y) + t->x_start]);
+}
+
 /**
  * @brief This function will draw the walls in 3d.
  * @param p The program struct.
- * @param ray_index The ray index that was sent.(Check raycast_in_2d())
  * @return void
  */
-void	draw_wall(t_d *p, int ray_index)
+void	draw_wall(t_d *p)
 {
-	float	corr;
-	float	proj;
-	int		end;
-	int		x;
-	int		y;
+	t_texture	*t;
+	int			x;
+	int			y;
+	double		step;
+	double		tex_pos;
 
-	corr = p->player->ray->dist * cosf(p->player->ray->angle
-			- p->player->angle);
+	t = get_texture(p, p->player->ray->side);
+	if (!t)
+		return ;
+	calc_texture(p, t);
+	step = (1.0 * t->height) / t->line_height;
+	tex_pos = (t->y_start - (HEIGHT / 2) + (t->line_height / 2)) * step;
+	y = t->y_start;
+	while (y < t->line_height)
+	{
+		x = t->x_start;
+		while (x < t->x_end)
+		{
+			p->imgd[(y * p->sl) + (x * (p->bpp / 8))] = get_texture_pixel(t, tex_pos);
+			tex_pos += step;
+			x++;
+		}
+		y++;
+	}
+}
+
+/** Function body
+	t_texture	*t;
+	float	proj;
+	int		line_height; // y line_height aka line_height
+	int		x;
+	int		y; // y start
+
+	t = get_texture(p, p->player->ray->side);
+	if (!t)
+		return ;
 	proj = (WIDTH / 2.0f) / tanf(dtor(60.0f) / 2.0f);
-	end = ((int)ceilf(proj / corr)) / 2 + HEIGHT / 2;
-	y = -((int)ceilf(proj / corr)) / 2 + HEIGHT / 2;
+	line_height = ((int)ceilf(proj / p->player->ray->dist)) / 2 + HEIGHT / 2;
+	y = -((int)ceilf(proj / p->player->ray->dist)) / 2 + HEIGHT / 2;
 	if (y < 0)
 		y = 0;
-	if (end >= HEIGHT)
-		end = HEIGHT - 1;
-	while (y <= end)
+	if (line_height >= HEIGHT)
+		line_height = HEIGHT - 1;
+	while (y <= line_height)
 	{
 		x = ray_index * (WIDTH / N_RAYS);
 		while (x < (ray_index * (WIDTH / N_RAYS)) + (WIDTH / N_RAYS))
@@ -61,15 +109,14 @@ void	draw_wall(t_d *p, int ray_index)
 		}
 		y++;
 	}
-}
-
+ */
 /**
  * @brief This function will perform the Digital Differential Analysis
  * algorthim then it will draw the ray acordingly.
  * @param The program structure.
  * @return void.
  */
-void	dda(t_d *p, int ray_index)
+void	dda(t_d *p)
 {
 	t_ray	*r;
 
@@ -93,7 +140,7 @@ void	dda(t_d *p, int ray_index)
 	}
 	r->dist = get_distance(p->player);
 	r->side = get_side(p->player);
-	draw_wall(p, ray_index);
+	draw_wall(p);
 	draw_ray(p);
 }
 
@@ -129,7 +176,8 @@ void	raycast_in_2d(t_d *p)
 	{
 		update_ray(p->player, ang);
 		p->player->ray->angle = ang;
-		dda(p, i);
+		p->player->ray->ray_index = i;
+		dda(p);
 		ang += stp;
 		i++;
 	}
