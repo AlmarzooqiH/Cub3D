@@ -19,7 +19,8 @@ endif
 
 SRCS = $(SRCLOC)/main.c $(SRCLOC)/init.c $(SRCLOC)/error.c $(SRCLOC)/events.c $(SRCLOC)/clean.c $(SRCLOC)/validation.c \
 	   $(SRCLOC)/validation_utils.c $(SRCLOC)/validation_utils2.c $(SRCLOC)/render.c $(SRCLOC)/validation_utils3.c \
-	   $(SRCLOC)/rendering_utils.c $(SRCLOC)/init2.c $(SRCLOC)/events2.c $(SRCLOC)/rendering_utils2.c $(SRCLOC)/rendering_utils3.c
+	   $(SRCLOC)/rendering_utils.c $(SRCLOC)/init2.c $(SRCLOC)/events2.c $(SRCLOC)/rendering_utils2.c $(SRCLOC)/rendering_utils3.c \
+	   $(SRCLOC)/rendering_utils4.c
 
 OBJS       = $(SRCS:.c=.o)
 
