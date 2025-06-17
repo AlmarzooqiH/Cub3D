@@ -100,6 +100,9 @@ typedef struct s_texture
 	int		y_start;
 	int		x_start;
 	int		x_end;
+	double	tex_x;
+	double	wall_x;
+	double	tex_pos;
 	void	*img;
 	char	*imgd;
 }	t_texture;
