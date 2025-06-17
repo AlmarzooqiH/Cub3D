@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/17 18:32:00 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/18 02:28:44 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ t_texture	*init_texture(void *mlx, char *texture_path)
 	t->y_start = 0;
 	t->x_start = 0;
 	t->x_end = 0;
+	t->tex_x = 0.0;
+	t->wall_x = 0.0;
+	t->tex_pos = 0.0;
 	return (t);
 }
 
