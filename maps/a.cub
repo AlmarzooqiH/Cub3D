@@ -1,7 +1,7 @@
-NO ./textures/Hamad/xpm/Hamad_Back_Side.xpm
-SO ./textures/Hamad/xpm/Hamad_Front_Side.xpm
-WE ./textures/Hamad/xpm/Hamad_Right_Side.xpm
-EA ./textures/Hamad/xpm/Hamad_Left_Side.xpm
+NO ./textures/ThankYouIsmail/xpm/blackhexagon.xpm
+SO ./textures/ThankYouIsmail/xpm/hexagonwall.xpm
+WE ./textures/ThankYouIsmail/xpm/spaceship.xpm
+EA ./textures/ThankYouIsmail/xpm/spaceshipdark.xpm
 
 F 250,249,246
 C 52,52,52
