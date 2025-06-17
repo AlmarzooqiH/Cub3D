@@ -88,7 +88,10 @@ float		get_distance(t_player *p);
 int			bound_check(t_d *p);
 int			get_side(t_player *p);
 t_texture	*get_texture(t_d *p, int side);
-void		draw_texture(t_d *p, int x, int y);
+void		calc_texture(t_d *p, t_texture *t);
+void		copy_pixels(t_d *p, t_texture *t, int x, int y);
+void		render_ceiling(t_d *p);
+void		render_floor(t_d *p);
 
 /*			Map related functions				*/
 char		**read_map(int fd, t_d *p);
