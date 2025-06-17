@@ -63,25 +63,49 @@ t_texture	*get_texture(t_d *p, int side)
 	return (NULL);
 }
 
-/**
- * @brief This function will be responsible onto drawing the texture on the wa
- * ll.
- * @param p The program struct.
- * @param x The X pixel position.
- * @param y The Y pixel position.
- * @return void
- * @note This function is very primitive and will be changed later on.
- */
-void	draw_texture(t_d *p, int x, int y)
+void	calc_texture(t_d *p, t_texture *t)
 {
-	t_texture	*t;
-	int			i_offset;
-	int			t_offset;
+	t->proj = (WIDTH / 2.0f) / tanf(dtor(60.0f) / 2.0f);
+	t->line_height = ((int)ceilf(t->proj / p->player->ray->dist))
+		/ 2 + HEIGHT / 2;
+	t->y_start = -((int)ceilf(t->proj / p->player->ray->dist))
+		/ 2 + HEIGHT / 2;
+	if (t->y_start < 0)
+		t->y_start = 0;
+	if (t->line_height >= HEIGHT)
+		t->line_height = HEIGHT - 1;
+	t->x_start = p->player->ray->ray_index * (WIDTH / N_RAYS);
+	t->x_end = (p->player->ray->ray_index
+			* (WIDTH / N_RAYS)) + (WIDTH / N_RAYS);
+	if (p->player->ray->axis == HORIZONTAL)
+		t->wall_x = p->player->ppy
+			+ (p->player->ray->dist * p->player->ray->rdy);
+	else if (p->player->ray->axis == VERTICAL)
+		t->wall_x = p->player->ppx
+			+ (p->player->ray->dist * p->player->ray->rdx);
+	t->wall_x -= floor(t->wall_x);
+	t->tex_x = (int)(t->wall_x * t->width);
+}
 
-	t = get_texture(p, p->player->ray->side);
-	if (!t)
-		return ;
-	i_offset = (p->sl * y) + ((p->bpp / 8) * x);
-	t_offset = (t->sl * y) + ((t->bpp / 8) * x);
-	p->imgd[i_offset] = t->imgd[t_offset];
+void	copy_pixels(t_d *p, t_texture *t, int x, int y)
+{
+	int				i;
+	int				tex_y;
+	unsigned char	*tex_pixel;
+	unsigned char	*screen_pixel;
+
+	tex_y = (int)t->tex_pos;
+	if (tex_y < 0)
+		tex_y = 0;
+	if (tex_y >= t->height)
+		tex_y = t->height - 1;
+	tex_pixel = (unsigned char *)&t->imgd[(tex_y * t->sl)
+		+ ((int)t->tex_x * (t->bpp / 8))];
+	screen_pixel = (unsigned char *)&p->imgd[(y * p->sl) + (x * (p->bpp / 8))];
+	i = 0;
+	while (i < (t->bpp / 8))
+	{
+		screen_pixel[i] = tex_pixel[i];
+		i++;
+	}
 }
