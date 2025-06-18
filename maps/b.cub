@@ -3,8 +3,8 @@ SO ./textures/Hamad/xpm/Hamad_Front_Side.xpm
 WE ./textures/Hamad/xpm/Hamad_Right_Side.xpm
 EA ./textures/Hamad/xpm/Hamad_Left_Side.xpm
 
-C 92,179,65
-F 255,255,255
+F 220,100,0
+C 225,30,0
 
 111111111111111111111111111
 100000000011000001100000001

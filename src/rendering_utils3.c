@@ -75,8 +75,10 @@ void	calc_texture(t_d *p, t_texture *t)
 	if (t->line_height >= HEIGHT)
 		t->line_height = HEIGHT - 1;
 	t->x_start = p->player->ray->ray_index * (WIDTH / N_RAYS);
-	t->x_end = (p->player->ray->ray_index
-			* (WIDTH / N_RAYS)) + (WIDTH / N_RAYS);
+	if (p->player->ray->ray_index == N_RAYS - 1)
+		t->x_end = WIDTH;
+	else
+		t->x_end = t->x_start + (WIDTH / N_RAYS);
 	if (p->player->ray->axis == HORIZONTAL)
 		t->wall_x = p->player->ppy
 			+ (p->player->ray->dist * p->player->ray->rdy);
