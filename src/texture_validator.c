@@ -6,7 +6,7 @@
 /*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:37:34 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/27 18:58:53 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/06/27 20:58:05 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	process_texture_line(char **tokens, t_d *p, int *count)
 {
-	if (!p->n && strcmp(tokens[0], "NO") == 0)
+	if (!p->n && ft_strcmp(tokens[0], "NO"))
 		p->n = init_texture(p->mlx, ft_strtrim(tokens[1], "\n"));
-	else if (!p->s && strcmp(tokens[0], "SO") == 0)
+	else if (!p->s && ft_strcmp(tokens[0], "SO"))
 		p->s = init_texture(p->mlx, ft_strtrim(tokens[1], "\n"));
-	else if (!p->w && strcmp(tokens[0], "WE") == 0)
+	else if (!p->w && ft_strcmp(tokens[0], "WE"))
 		p->w = init_texture(p->mlx, ft_strtrim(tokens[1], "\n"));
-	else if (!p->e && strcmp(tokens[0], "EA") == 0)
+	else if (!p->e && ft_strcmp(tokens[0], "EA"))
 		p->e = init_texture(p->mlx, ft_strtrim(tokens[1], "\n"));
 	else
 		return (0);
@@ -40,7 +40,7 @@ int	parse_texture_line(int fd, t_d *p, int *count)
 		{
 			tokens = ft_split(line, ' ');
 			if (!tokens || !process_texture_line(tokens, p, count))
-				return (free_split(tokens), free(line), 0);
+			return (free_split(tokens), free(line), 0);
 			free_split(tokens);
 		}
 		if (*count == 4)
