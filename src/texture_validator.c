@@ -6,7 +6,7 @@
 /*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:37:34 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/27 20:58:05 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/06/27 21:02:06 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	parse_texture_line(int fd, t_d *p, int *count)
 		{
 			tokens = ft_split(line, ' ');
 			if (!tokens || !process_texture_line(tokens, p, count))
-			return (free_split(tokens), free(line), 0);
+				return (free_split(tokens), free(line), 0);
 			free_split(tokens);
 		}
 		if (*count == 4)
