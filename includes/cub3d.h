@@ -99,4 +99,27 @@ size_t		get_max_width(char **map);
 char		set_direction(char c);
 void		normalize_map_2(char **om, char **nm, size_t mw, size_t mh);
 char		**normalize_map_1(char **om);
+
+int			get_max_line_length(char **map);
+void		free_map(char **map);
+
+int			validate_file_extension(const char *path);
+void		parse_input(const char *path, t_d *p);
+int			validate_texture(const char *path, t_d *p);
+int			validate_color(const char *path, t_d *p);
+int			map_validator(const char *path, t_d *p);
+int			map_checks(t_d *p);
+int			dfs(char **map, int y, int x);
+int			is_player(char c);
+void		init_player_direction(t_d *p, char dir);
+void		strip_newline(char *line);
+int			is_map_line(char *line);
+int			count_map_lines(const char *path);
+void		compute_dimensions(char **orig, int *height, int *width);
+char		**allocate_norm_map(int height, int width);
+void 		copy_map_contents(char **orig, char **norm, int height, int width);
+int			is_valid_chars(char **map);
+int			check_player(char **map, t_d *p);
+int			check_outer_walls(char **map, int height);
+
 #endif

@@ -255,6 +255,8 @@ typedef struct s_2d
 	t_player	*player;
 	int			grid_width;
 	int			grid_height;
+	int			player_width;
+	int			player_height;
 }	t_d;
 
 #endif

@@ -40,7 +40,10 @@
 # define INVALID_PLAYER "Error: Map must contain exactly one player\n\0"
 # define MAP_NOT_CLOSED "Error: Map must be surrounded by walls\n\0"
 # define TEXTURE_MISSING "Error: One or more textures are missing\n\0"
+# define ERROR_TEXTURE "Error parsing texture\n\0"
 # define COLOR_MISSING "Error: Floor or ceiling color is missing\n\0"
+# define ERROR_COLOR "Error parsing color\n\0"
 # define FTNM "Failed to normalize the Map\n\0"
+# define ELEM_MISSING "Error: One or more elements are missing in the header\n\0"
 
 #endif
