@@ -6,7 +6,7 @@
 /*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:53:59 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/27 17:04:03 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/06/27 18:59:00 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ int	parse_color_lines(int fd, t_d *p, int *count)
 				return (free_split(tokens), free(line), 0);
 			free_split(tokens);
 		}
+		if (*count == 4)
+			return (free(line), 1);
 		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	return (1);
 }
 

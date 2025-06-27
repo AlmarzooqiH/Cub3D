@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 00:31:03 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/18 02:28:49 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/06/27 18:56:25 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,9 @@ int	free_p(t_d *p)
 	free_texture(p->n, p->mlx);
 	free_color(p->floor);
 	free_color(p->ceiling);
+	if (!p)
+		return (1);
+	free_map(p->map);
 	if (p->mlx)
 		free(p->mlx);
 	if (p)

@@ -6,7 +6,7 @@
 /*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:37:34 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/27 16:24:58 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/06/27 18:58:53 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ int	parse_texture_line(int fd, t_d *p, int *count)
 				return (free_split(tokens), free(line), 0);
 			free_split(tokens);
 		}
+		if (*count == 4)
+			return (free(line), 1);
 		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	return (1);
 }
 
