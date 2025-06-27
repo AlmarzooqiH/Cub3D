@@ -31,9 +31,7 @@ int	main(int ac, char **av)
 
 	p = init();
 	init_player(p);
-	// if (!is_valid_parsing(ac, av, p))
-	// 	return (free_p(p), 1);
-	if(ac != 2)
+	if (ac != 2)
 		return (disp_err(WRONG_INPUT), free_p(p), 1);
 	parse_input(av[1], p);
 	mlx_hook(p->win, 2, 1L << 0, key_press, p);

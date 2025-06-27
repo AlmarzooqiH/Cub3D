@@ -6,7 +6,7 @@
 /*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:53:59 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/26 20:12:37 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/06/27 17:17:19 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	copy_map_contents(char **orig, char **norm, int height, int width)
 	int		i;
 	int		j;
 	size_t	len;
-	(void)	width;
 
+	(void) width;
 	i = 0;
 	while (i < height)
 	{

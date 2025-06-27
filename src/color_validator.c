@@ -6,7 +6,7 @@
 /*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:53:59 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/27 16:58:14 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/06/27 17:04:03 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int	process_color_line(char **tokens, t_d *p, int *count)
 {
-	if (!p->floor && strcmp(tokens[0], "F") == 0){
+	if (!p->floor && strcmp(tokens[0], "F") == 0)
 		p->floor = init_color(ft_strtrim(tokens[1], "\n"));
-	}
 	else if (!p->ceiling && strcmp(tokens[0], "C") == 0)
 		p->ceiling = init_color(ft_strtrim(tokens[1], "\n"));
 	else
@@ -30,7 +29,6 @@ int	parse_color_lines(int fd, t_d *p, int *count)
 	char	*line;
 	char	**tokens;
 
-	
 	line = get_next_line(fd);
 	while (line != NULL && *count < 2)
 	{
