@@ -6,7 +6,7 @@
 /*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:37:34 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/27 21:02:06 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/06/28 13:16:07 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	process_texture_line(char **tokens, t_d *p, int *count)
 {
+	if (!tokens[1])
+		return (0);
 	if (!p->n && ft_strcmp(tokens[0], "NO"))
 		p->n = init_texture(p->mlx, ft_strtrim(tokens[1], "\n"));
 	else if (!p->s && ft_strcmp(tokens[0], "SO"))
