@@ -6,7 +6,7 @@
 /*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 17:29:23 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/06/26 19:41:05 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/07/03 14:34:49 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	validate_file_extension(const char *path)
 	ext = ft_strrchr(path, '.');
 	if (!ext || ft_strcmp(ext, ".cub") != 1)
 	{
-		printf("DEBUG: ext=\"%s\", cmp=%d\n", ext, ft_strcmp(ext, ".cub"));
 		disp_err(INVALID_FILE);
 		return (0);
 	}

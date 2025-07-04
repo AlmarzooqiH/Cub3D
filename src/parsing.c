@@ -6,7 +6,7 @@
 /*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/27 17:17:40 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/07/03 11:23:24 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ void	parse_input(const char *path, t_d *p)
 	p->map_height = p->map_size;
 	p->player_width = (int)ceil((double)WIDTH / p->map_width);
 	p->player_height = (int)ceil((double)HEIGHT / p->map_height);
+	p->grid_width = p->player_width;
+	p->grid_height = p->player_height;
 }
