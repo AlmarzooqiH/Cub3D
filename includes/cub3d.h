@@ -69,7 +69,7 @@ int			is_suffix(const char *s, const char *suffix);
 int			is_valid_key(int keycode);
 int			ft_isprefix(const char *s, const char *prefix);
 int			validate_map(int fd, t_d *p);
-
+char        *skip_empty_lines(int fd);
 /*			Rendering related functions				*/
 int			game_loop(t_d *p);
 void		put_pixel(t_d *p, int x, int y, int color);

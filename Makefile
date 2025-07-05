@@ -1,4 +1,4 @@
-PROGRAM_NAME   = cub3d
+PROGRAM_NAME   = cub3D
 CC     = cc
 CFLAGS = -Wall -Wextra -Werror -Iincludes
 SRCLOC = src

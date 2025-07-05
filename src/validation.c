@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:18:32 by mthodi            #+#    #+#             */
-/*   Updated: 2025/06/09 17:54:33 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/05 22:12:01 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,4 +142,31 @@ int	is_valid_parsing(int ac, char **av, t_d *p)
 	p->grid_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));
 	p->grid_height = (int)ceil(((double)HEIGHT) / ((double)p->map_height));
 	return (1);
+}
+
+/**
+ * @brief This function will skip any empty line in a file and get a non empty
+ * line.
+ * @param fd The file descriptor of the file that we want to read.
+ * @return NULL if the file descriptor is not opened or the file is just fille
+ * d with empty lines, else it will return a non empty line.
+ * @note When calling this function make sure to check for NULL and remmemb
+ * er to free the line if it is not NULL.
+ */
+char	*skip_empty_lines(int fd)
+{
+	char	*l;
+
+	if (fd < 0)
+		return (NULL);
+	l = get_next_line(fd);
+	while (l != NULL)
+	{
+		if (!ft_isonlyspace(l))
+			return (l);
+		free(l);
+		l = NULL;
+		l = get_next_line(fd);
+	}
+	return (NULL);
 }

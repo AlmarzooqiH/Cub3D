@@ -14,14 +14,7 @@
 
 int	game_loop(t_d *p)
 {
-	clear_image_buffer(p);
-	render_ceiling(p);
-	render_floor(p);
-	render_map(p);
-	render_player(p);
-	raycast_in_2d(p);
-	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
-	p->player->rotate = 0;
+	render_frame(p);
 	return (0);
 }
 
@@ -33,9 +26,8 @@ int	main(int ac, char **av)
 	init_player(p);
 	if (!is_valid_parsing(ac, av, p))
 		return (free_p(p), 1);
-	mlx_hook(p->win, 2, 1L << 0, key_press, p);
-	mlx_hook(p->win, 3, 1L << 1, key_release, p);
-	mlx_loop_hook(p->mlx, game_loop, p);
+	game_loop(p);
+	mlx_put_image_to_window(p->mlx, p->win, p->s->img, 0, 0);
 	mlx_loop(p->mlx);
 	return (0);
 }
