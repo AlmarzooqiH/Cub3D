@@ -104,9 +104,9 @@ int			get_max_line_length(char **map);
 void		free_map(char **map);
 
 int			validate_file_extension(const char *path);
-void		parse_input(const char *path, t_d *p);
-int			validate_texture(const char *path, t_d *p);
-int			validate_color(const char *path, t_d *p);
+int 		parse_input(const char *path, t_d *p);
+int			validate_texture(int fd, t_d *p);
+int			validate_color(int fd, t_d *p);
 int			map_validator(const char *path, t_d *p);
 int			map_checks(t_d *p);
 int			dfs(char **map, int y, int x);

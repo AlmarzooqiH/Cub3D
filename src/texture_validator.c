@@ -54,18 +54,13 @@ int	parse_texture_line(int fd, t_d *p, int *count)
 	return (1);
 }
 
-int	validate_texture(const char *path, t_d *p)
+int	validate_texture(int fd, t_d *p)
 {
-	int		fd;
 	int		count;
 
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (disp_err(FILE_DOESNT_EXSIST), 0);
 	count = 0;
 	if (!parse_texture_line(fd, p, &count))
-		return (disp_err(ERROR_TEXTURE), close(fd), 0);
-	close(fd);
+		return (disp_err(ERROR_TEXTURE), 0);
 	if (count != 4)
 		return (disp_err(TEXTURE_MISSING), 0);
 	return (1);

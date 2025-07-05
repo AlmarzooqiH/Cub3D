@@ -24,23 +24,29 @@ void	struct_initialization(t_d *p)
 	p->map_size = 0;
 }
 
-void	parse_input(const char *path, t_d *p)
+int	parse_input(const char *path, t_d *p)
 {
+	int		fd;
+
 	struct_initialization(p);
 	if (!validate_file_extension(path))
-		exit(EXIT_FAILURE);
-	if (!validate_texture(path, p))
-		exit(EXIT_FAILURE);
-	if (!validate_color(path, p))
-		exit(EXIT_FAILURE);
+		return (free_p(p));
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (disp_err(FILE_DOESNT_EXSIST), 0);
+	if (!validate_texture(fd, p))
+		return (close(fd), free_p(p));
+	if (!validate_color(fd, p))
+		return (close(fd), free_p(p));
 	if (!map_validator(path, p))
-		exit(EXIT_FAILURE);
+		return (close(fd), free_p(p));
 	if (!map_checks(p))
-		exit(EXIT_FAILURE);
+		return (close(fd), free_p(p));
 	p->map_width = ft_strlen(p->map[0]);
 	p->map_height = p->map_size;
 	p->player_width = (int)ceil((double)WIDTH / p->map_width);
 	p->player_height = (int)ceil((double)HEIGHT / p->map_height);
 	p->grid_width = p->player_width;
 	p->grid_height = p->player_height;
+	return (close(fd));
 }

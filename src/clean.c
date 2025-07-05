@@ -90,6 +90,8 @@ void	free_player(t_player *p)
  */
 int	free_p(t_d *p)
 {
+	if (!p)
+		exit(EXIT_SUCCESS);
 	if (p->img)
 		mlx_destroy_image(p->mlx, p->img);
 	if (p->mlx)
@@ -102,9 +104,8 @@ int	free_p(t_d *p)
 	free_texture(p->n, p->mlx);
 	free_color(p->floor);
 	free_color(p->ceiling);
-	if (!p)
-		return (1);
-	free_map(p->map);
+	if (p->map)
+		free_split(p->map);
 	if (p->mlx)
 		free(p->mlx);
 	if (p)

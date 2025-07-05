@@ -50,18 +50,13 @@ int	parse_color_lines(int fd, t_d *p, int *count)
 	return (1);
 }
 
-int	validate_color(const char *path, t_d *p)
+int	validate_color(int fd, t_d *p)
 {
-	int		fd;
 	int		count;
 
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (disp_err(FILE_DOESNT_EXSIST), 0);
 	count = 0;
 	if (!parse_color_lines(fd, p, &count))
 		return (disp_err(ERROR_COLOR), close(fd), 0);
-	close(fd);
 	if (count != 2)
 		return (disp_err(COLOR_MISSING), 0);
 	return (1);
