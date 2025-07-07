@@ -6,7 +6,7 @@
 /*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/07/03 11:23:24 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/07/07 14:19:17 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	parse_input(const char *path, t_d *p)
 		return (free_p(p));
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (disp_err(FILE_DOESNT_EXSIST), 0);
+		return (disp_err(FILE_DOESNT_EXSIST), free_p(p), 0);
 	if (!validate_texture(fd, p))
 		return (close(fd), free_p(p));
 	if (!validate_color(fd, p))

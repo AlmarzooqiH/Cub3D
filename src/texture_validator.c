@@ -6,28 +6,39 @@
 /*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:37:34 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/28 13:16:07 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/07/07 17:42:35 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	process_texture_line(char **tokens, t_d *p, int *count)
+int process_texture_line(char **tokens, t_d *p, int *count)
 {
-	if (!tokens[1])
-		return (0);
-	if (!p->n && ft_strcmp(tokens[0], "NO"))
-		p->n = init_texture(p->mlx, ft_strtrim(tokens[1], "\n"));
-	else if (!p->s && ft_strcmp(tokens[0], "SO"))
-		p->s = init_texture(p->mlx, ft_strtrim(tokens[1], "\n"));
-	else if (!p->w && ft_strcmp(tokens[0], "WE"))
-		p->w = init_texture(p->mlx, ft_strtrim(tokens[1], "\n"));
-	else if (!p->e && ft_strcmp(tokens[0], "EA"))
-		p->e = init_texture(p->mlx, ft_strtrim(tokens[1], "\n"));
-	else
-		return (0);
-	(*count)++;
-	return (1);
+    char *raw;
+    char *ext;
+
+    if (!tokens[1] || tokens[2])
+        return (0);
+    raw = ft_strtrim(tokens[1], " \t\n");
+    if (!raw)
+        return (0);
+    ext = ft_strrchr(raw, '.');
+    if (!ext || ft_strcmp(ext, ".xpm") != 1)
+        return (free(raw), 0);
+    if (ft_strcmp(tokens[0], "NO") && !p->n)
+        p->n = init_texture(p->mlx, raw);
+    else if (ft_strcmp(tokens[0], "SO") && !p->s)
+        p->s = init_texture(p->mlx, raw);
+    else if (ft_strcmp(tokens[0], "WE") && !p->w)
+        p->w = init_texture(p->mlx, raw);
+    else if (ft_strcmp(tokens[0], "EA") && !p->e)
+        p->e = init_texture(p->mlx, raw);
+    else
+        return (0);
+    if (!(p->n || p->s || p->w || p->e))
+        return (0);
+    (*count)++;
+    return (1);
 }
 
 int	parse_texture_line(int fd, t_d *p, int *count)

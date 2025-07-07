@@ -6,24 +6,39 @@
 /*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:53:59 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/28 13:16:10 by mthodi           ###   ########.fr       */
+/*   Updated: 2025/07/07 17:34:53 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	process_color_line(char **tokens, t_d *p, int *count)
+int process_color_line(char **tokens, t_d *p, int *count)
 {
-	if (!tokens[1])
-		return (0);
-	if (!p->floor && ft_strcmp(tokens[0], "F"))
-		p->floor = init_color(ft_strtrim(tokens[1], "\n"));
-	else if (!p->ceiling && ft_strcmp(tokens[0], "C"))
-		p->ceiling = init_color(ft_strtrim(tokens[1], "\n"));
-	else
-		return (0);
-	(*count)++;
-	return (1);
+    char *raw;
+
+    if (!tokens[1] || tokens[2])
+        return (0);
+    raw = ft_strtrim(tokens[1], "\n");
+    if (!raw)
+        return (0);
+    if (ft_strchr(raw, ' ') || ft_strchr(raw, '\t'))
+        return (free(raw), 0);
+    if (ft_strcmp(tokens[0], "F") && !p->floor)
+    {
+        p->floor = init_color(raw);
+        if (!p->floor)
+            return (0);
+    }
+    else if (ft_strcmp(tokens[0], "C") && !p->ceiling)
+    {
+        p->ceiling = init_color(raw);
+        if (!p->ceiling)
+            return (0);
+    }
+    else
+        return (free(raw), 0);
+    (*count)++;
+    return (1);
 }
 
 int	parse_color_lines(int fd, t_d *p, int *count)
