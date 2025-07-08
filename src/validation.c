@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:18:32 by mthodi            #+#    #+#             */
-/*   Updated: 2025/07/05 22:12:01 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:18:02 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_colors(int fd, char *line, t_d *p)
 	int		i;
 
 	if (!line || !line[0])
-		line = get_next_line(fd);
+		line = skip_empty_lines(fd);
 	i = 0;
 	while (i < 2 && line != NULL)
 	{
@@ -43,7 +43,8 @@ int	check_colors(int fd, char *line, t_d *p)
 			return (free_split(tokenized_line), free(line), 0);
 		free_split(tokenized_line);
 		free(line);
-		line = get_next_line(fd);
+		if (p->ceiling == NULL || p->floor == NULL)
+			line = skip_empty_lines(fd);
 		i++;
 	}
 	return (p->floor && p->ceiling);
@@ -83,7 +84,8 @@ int	check_textures(int fd, char *line, t_d *p)
 			return (free_split(tokenized_line), free(line), 0);
 		free_split(tokenized_line);
 		free(line);
-		line = get_next_line(fd);
+		if (p->e == NULL || p->w == NULL || p->s == NULL || p->n == NULL)
+			line = skip_empty_lines(fd);
 		i++;
 	}
 	return (p->e && p->w && p->s && p->n);
@@ -103,7 +105,7 @@ int	is_valid_map(char *fname, t_d *p)
 	fd = open(fname, O_RDONLY);
 	if (fd < 0)
 		return (disp_err(FILE_DOESNT_EXSIST), 0);
-	line = get_next_line(fd);
+	line = skip_empty_lines(fd);
 	if (!line)
 		return (close(fd), disp_err(EMPTY_MAP), 0);
 	if (!check_textures(fd, line, p))
@@ -168,5 +170,7 @@ char	*skip_empty_lines(int fd)
 		l = NULL;
 		l = get_next_line(fd);
 	}
+	if (l)
+		free(l);
 	return (NULL);
 }

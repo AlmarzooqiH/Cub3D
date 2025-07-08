@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 00:31:03 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/18 02:28:49 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/08 19:15:01 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int	free_p(t_d *p)
 	free_texture(p->n, p->mlx);
 	free_color(p->floor);
 	free_color(p->ceiling);
+	if (p->map)
+		free_split(p->map);
 	if (p->mlx)
 		free(p->mlx);
 	if (p)

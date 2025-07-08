@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation_utils3.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 17:29:23 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/05/24 16:45:32 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/08 18:41:23 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
