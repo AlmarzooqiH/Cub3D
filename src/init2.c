@@ -12,12 +12,14 @@
 
 #include "../includes/cub3d.h"
 
-t_color	*init_ray_color(void)
+t_color	*init_macro_color(char *c)
 {
 	t_color	*new_c;
 	char	*color;
 
-	color = ft_strdup(RAY_COLOR);
+	if (!c)
+		return (NULL);
+	color = ft_strdup(c);
 	if (!color)
 		return (NULL);
 	new_c = init_color(color);
@@ -33,7 +35,7 @@ t_ray	*init_ray(t_d *p)
 	r = (t_ray *)ft_calloc(1, sizeof(t_ray));
 	if (!r)
 		return (disp_err(FTIR), NULL);
-	r->color = init_ray_color();
+	r->color = init_macro_color(RAY_COLOR);
 	if (!r->color)
 		return (free(r), disp_err(FTIC), NULL);
 	r->hit = 0;

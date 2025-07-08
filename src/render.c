@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:06:48 by mthodi            #+#    #+#             */
-/*   Updated: 2025/06/15 22:40:28 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/08 23:59:10 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ void	render_map(t_d *p)
 		while (p->map[i][j] != '\0')
 		{
 			if (p->map[i][j] == '1')
-				draw_grid(p, j, i, p->ceiling);
+				draw_grid(p, j, i, p->minimap_wall);
 			else
-				draw_grid(p, j, i, p->floor);
+				draw_grid(p, j, i, p->minimap_floor);
 			j++;
 		}
 		i++;

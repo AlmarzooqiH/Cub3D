@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/18 02:28:44 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/08 23:41:13 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,22 +107,12 @@ t_d	*init(void)
 	p->imgd = mlx_get_data_addr(p->img, &p->bpp, &p->sl, &p->edn);
 	if (!p->imgd)
 		return (disp_err(FTGID), free_p(p), NULL);
+	p->minimap_wall = init_macro_color(MINIMAP_WALL_COLOR);
+	p->minimap_floor = init_macro_color(MINIMAP_FLOOR_COLOR);
+	if (!p->minimap_wall || !p->minimap_floor)
+		return (disp_err(FTIC), free_p(p), NULL);
 	mlx_hook(p->win, WIN_EXIT, 0, free_p, (void *)p);
 	return (p);
-}
-
-t_color	*init_player_color(void)
-{
-	t_color	*new_c;
-	char	*color;
-
-	color = ft_strdup(PLAYER_COLOR);
-	if (!color)
-		return (NULL);
-	new_c = init_color(color);
-	if (!new_c)
-		return (free(color), NULL);
-	return (new_c);
 }
 
 void	init_player(t_d *p)
@@ -134,7 +124,7 @@ void	init_player(t_d *p)
 		free_p(p);
 		return ;
 	}
-	p->player->color = init_player_color();
+	p->player->color = init_macro_color(PLAYER_COLOR);
 	p->player->pdx = -1;
 	p->player->pdy = 0;
 	p->player->angle = M_PI / 2;

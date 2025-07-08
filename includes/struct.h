@@ -38,8 +38,6 @@
 # include <stdio.h>
 
 /*			Player Related Macros				*/
-# define PLAYER_COLOR "203,10,8\0"
-# define RAY_COLOR "46,90,192\0"
 # define ROTATION_SPEED 0.1f
 # define MOVEMENT_SPEED 0.25f
 # define N_RAYS 120
@@ -252,6 +250,8 @@ typedef struct s_2d
 	t_texture	*n;
 	t_color		*floor;
 	t_color		*ceiling;
+	t_color		*minimap_wall;
+	t_color		*minimap_floor;
 	t_player	*player;
 	int			grid_width;
 	int			grid_height;

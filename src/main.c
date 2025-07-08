@@ -14,6 +14,7 @@
 
 int	game_loop(t_d *p)
 {
+	printf("Player position: x = %f, y = %f\n", p->player->ppx, p->player->ppy);
 	clear_image_buffer(p);
 	render_ceiling(p);
 	render_floor(p);

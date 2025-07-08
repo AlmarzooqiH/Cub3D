@@ -19,6 +19,7 @@
 # include "struct.h"
 # include "error.h"
 # include "../libft/libft.h"
+# include "colors.h"
 
 # define CUBE "Cub3D"
 # define DOT_CUB ".cub\0"
@@ -51,7 +52,7 @@ t_color		*init_color(char *color);
 void		init_player(t_d *p);
 t_color		*init_player_color(void);
 t_ray		*init_ray(t_d *p);
-t_color		*init_ray_color(void);
+t_color		*init_macro_color(char *c);
 void		init_keys(t_player *p);
 /*			Event handlers					*/
 void		update_player(t_d *p);
@@ -69,7 +70,8 @@ int			is_suffix(const char *s, const char *suffix);
 int			is_valid_key(int keycode);
 int			ft_isprefix(const char *s, const char *prefix);
 int			validate_map(int fd, t_d *p);
-char        *skip_empty_lines(int fd);
+char		*skip_empty_lines(int fd);
+
 /*			Rendering related functions				*/
 int			game_loop(t_d *p);
 void		put_pixel(t_d *p, int x, int y, int color);

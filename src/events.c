@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:37:34 by hamad             #+#    #+#             */
-/*   Updated: 2025/06/16 00:24:09 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/08 23:29:23 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ void	update_player(t_d *p)
 		update_pos(p, p->player->ppx - MOVEMENT_SPEED * sin(p->player->angle),
 			p->player->ppy + MOVEMENT_SPEED * cos(p->player->angle));
 	}
+	if (p->player->ppx < 0)
+		p->player->ppx = 0;
+	if (p->player->ppy < 0)
+		p->player->ppy = 0;
 }
 
 /**
