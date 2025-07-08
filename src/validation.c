@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:18:32 by mthodi            #+#    #+#             */
-/*   Updated: 2025/07/08 18:18:02 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/08 20:20:37 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,18 @@
 int	check_colors(int fd, char *line, t_d *p)
 {
 	char	**tokenized_line;
-	int		i;
 
 	if (!line || !line[0])
 		line = skip_empty_lines(fd);
-	i = 0;
-	while (i < 2 && line != NULL)
+	p->i = 0;
+	while (p->i < 2 && line != NULL)
 	{
 		tokenized_line = ft_split(line, ' ');
 		if (!tokenized_line || !tokenized_line[0] || !tokenized_line[1])
 			return (0);
-		if (!p->floor && ft_strcmp(tokenized_line[0], F))
+		if (p->floor == NULL && ft_strcmp(tokenized_line[0], F))
 			p->floor = init_color(ft_strtrim(tokenized_line[1], "\n"));
-		else if (!p->ceiling && ft_strcmp(tokenized_line[0], C))
+		else if (p->ceiling == NULL && ft_strcmp(tokenized_line[0], C))
 			p->ceiling = init_color(ft_strtrim(tokenized_line[1], "\n"));
 		else
 			return (free_split(tokenized_line), free(line), 0);
@@ -45,7 +44,7 @@ int	check_colors(int fd, char *line, t_d *p)
 		free(line);
 		if (p->ceiling == NULL || p->floor == NULL)
 			line = skip_empty_lines(fd);
-		i++;
+		p->i++;
 	}
 	return (p->floor && p->ceiling);
 }
@@ -64,10 +63,9 @@ int	check_colors(int fd, char *line, t_d *p)
 int	check_textures(int fd, char *line, t_d *p)
 {
 	char	**tokenized_line;
-	int		i;
 
-	i = 0;
-	while (i < 4 && line != NULL)
+	p->i = 0;
+	while (p->i < 4 && line != NULL)
 	{
 		tokenized_line = ft_split(line, ' ');
 		if (!tokenized_line || !tokenized_line[0] || !tokenized_line[1])
@@ -86,7 +84,7 @@ int	check_textures(int fd, char *line, t_d *p)
 		free(line);
 		if (p->e == NULL || p->w == NULL || p->s == NULL || p->n == NULL)
 			line = skip_empty_lines(fd);
-		i++;
+		p->i++;
 	}
 	return (p->e && p->w && p->s && p->n);
 }
