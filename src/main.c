@@ -14,7 +14,6 @@
 
 int	game_loop(t_d *p)
 {
-	printf("Player position: x = %f, y = %f\n", p->player->ppx, p->player->ppy);
 	clear_image_buffer(p);
 	render_ceiling(p);
 	render_floor(p);
@@ -34,6 +33,7 @@ int	main(int ac, char **av)
 	init_player(p);
 	if (!is_valid_parsing(ac, av, p))
 		return (free_p(p), 1);
+	print_split(p->map);
 	mlx_hook(p->win, 2, 1L << 0, key_press, p);
 	mlx_hook(p->win, 3, 1L << 1, key_release, p);
 	mlx_loop_hook(p->mlx, game_loop, p);
