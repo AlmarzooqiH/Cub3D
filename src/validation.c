@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 14:18:32 by mthodi            #+#    #+#             */
-/*   Updated: 2025/07/09 11:05:19 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/09 13:29:18 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	is_valid_map(char *fname, t_d *p)
 		return (close(fd), 0);
 	if (!p->floor || !p->ceiling)
 		return (close(fd), disp_err(COLOR_MISSING), 0);
-	if (!validate_map(fd, p))
+	if (!validate_parsed_map(fname, p))
 		return (close(fd), 0);
 	return (close(fd), 1);
 }
@@ -134,9 +134,6 @@ int	is_valid_parsing(int ac, char **av, t_d *p)
 		return (disp_err(INVALID_FILE), 0);
 	if (!is_valid_map(av[1], p))
 		return (disp_err(MAP_FORMAT), 0);
-	p->map = normalize_map_1(p->map);
-	if (!p->map)
-		return (disp_err(FTNM), 0);
 	p->map_width = ft_strlen(p->map[0]);
 	p->map_height = count_split(p->map);
 	p->grid_width = (int)ceil(((double)WIDTH) / ((double)p->map_width));

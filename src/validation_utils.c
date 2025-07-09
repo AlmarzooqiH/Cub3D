@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 00:53:59 by hamad             #+#    #+#             */
-/*   Updated: 2025/05/17 22:45:24 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/09 14:50:50 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,66 +58,44 @@ int	is_suffix(const char *s, const char *suffix)
 }
 
 /**
- * @brief Counts the number of lines in the map.
- * @param fd The map file descriptor.
- * @param first_line The first line of the map (already read).
- * @return Number of lines in the map.
- * @note This function seeks back to the position after the first line.
+ * @brief Checks if there is exactly one player in the map.
+ * @param map The 2D array containing the map.
+ * @param p The program struct to store player position and direction.
+ * @return 1 if there is exactly one player, 0 otherwise.
  */
-int	count_map_lines(int fd, char *first_line)
+int	check_player(char **map, t_d *p)
 {
-	int		current_pos;
-	int		count;
-	char	*line;
+	int	i;
+	int	j;
+	int	player_count;
 
-	(void)first_line;
-	count = 1;
-	current_pos = lseek(fd, 0, SEEK_CUR);
-	line = get_next_line(fd);
-	while (line)
+	player_count = 0;
+	i = 0;
+	while (map[i])
 	{
-		count++;
-		free(line);
-		line = get_next_line(fd);
+		j = 0;
+		while (map[i][j] && map[i][j] != '\n')
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+				|| map[i][j] == 'E' || map[i][j] == 'W')
+			{
+				player_count++;
+				p->player->ppx = j + 1;
+				p->player->ppy = i + 1;
+				init_player_direction(p, map[i][j]);
+			}
+			j++;
+		}
+		i++;
 	}
-	lseek(fd, current_pos, SEEK_SET);
-	return (count);
+	return (player_count == 1);
 }
 
-/**
- * @brief Reads the map from the file descriptor and stores it in a 2D array.
- * @param fd The map file descriptor.
- * @param p The program struct.
- * @return 2D array containing the map. NULL if an error occurred.
- * @note This function skips empty lines before the map and reads until EOF.
- */
-char	**read_map(int fd, t_d *p)
+int	validate_parsed_map(const char *path, t_d *p)
 {
-	char	*line;
-	char	**map;
-	int		i;
-	int		map_size;
-
-	map_size = 0;
-	line = get_next_line(fd);
-	while (line && (line[0] == '\n' || line[0] == '\0'))
-	{
-		free(line);
-		line = get_next_line(fd);
-	}
-	if (!line)
-		return (NULL);
-	map_size = count_map_lines(fd, line);
-	if (map_size <= 0)
-		return (free(line), NULL);
-	map = malloc(sizeof(char *) * (map_size + 1));
-	if (!map)
-		return (free(line), NULL);
-	i = 0;
-	map[i++] = line;
-	while (i < map_size)
-		map[i++] = get_next_line(fd);
-	map[i] = NULL;
-	p->map_size = map_size;
-	return (map);
+	if (!map_validator(path, p))
+		return (0);
+	if (!map_checks(p))
+		return (0);
+	return (1);
 }

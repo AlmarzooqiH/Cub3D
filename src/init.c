@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 05:19:41 by hamad             #+#    #+#             */
-/*   Updated: 2025/07/08 23:41:13 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/09 15:13:31 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,7 @@ void	init_player(t_d *p)
 		return ;
 	}
 	p->player->color = init_macro_color(PLAYER_COLOR);
-	p->player->pdx = -1;
-	p->player->pdy = 0;
 	p->player->angle = M_PI / 2;
-	p->player->camera_x = 0;
-	p->player->camera_y = 0.66;
 	p->player->rotate = 0;
 	init_keys(p->player);
 	p->player->ray = init_ray(p);

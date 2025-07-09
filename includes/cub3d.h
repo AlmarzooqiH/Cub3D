@@ -29,8 +29,8 @@
 # define EA "EA\0"
 # define F "F\0"
 # define C "C\0"
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 1200
+# define HEIGHT 1200
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define TILE_SIZE 64
@@ -69,7 +69,6 @@ int			is_valid_parsing(int ac, char **av, t_d *p);
 int			is_suffix(const char *s, const char *suffix);
 int			is_valid_key(int keycode);
 int			ft_isprefix(const char *s, const char *prefix);
-int			validate_map(int fd, t_d *p);
 char		*skip_empty_lines(int fd);
 
 /*			Rendering related functions				*/
@@ -96,9 +95,22 @@ void		render_ceiling(t_d *p);
 void		render_floor(t_d *p);
 
 /*			Map related functions				*/
-char		**read_map(int fd, t_d *p);
-size_t		get_max_width(char **map);
-char		set_direction(char c);
-void		normalize_map_2(char **om, char **nm, size_t mw, size_t mh);
-char		**normalize_map_1(char **om);
+void		free_map(char **map);
+int			map_validator(const char *path, t_d *p);
+int			map_checks(t_d *p);
+int			dfs(char **map, int y, int x);
+int			is_player(char c);
+void		init_player_direction(t_d *p, char dir);
+void		strip_newline(char *line);
+int			is_map_line(char *line);
+int			count_map_lines(const char *path);
+void		compute_dimensions(char **orig, int *height, int *width);
+char		**allocate_norm_map(int height, int width);
+void		copy_map_contents(char **orig, char **norm, int height, int width);
+int			is_valid_chars(char **map);
+int			check_player(char **map, t_d *p);
+int			check_outer_walls(char **map, int height);
+int			validate_parsed_map(const char *path, t_d *p);
+char		*get_first_map_line(int fd);
+
 #endif

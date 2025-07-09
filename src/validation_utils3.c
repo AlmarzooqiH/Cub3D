@@ -3,119 +3,121 @@
 /*                                                        :::      ::::::::   */
 /*   validation_utils3.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: mthodi <mthodi@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 17:29:23 by hamalmar          #+#    #+#             */
-/*   Updated: 2025/07/09 11:05:43 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/07/09 13:31:44 by mthodi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-/**
- * @brief This function will get the maximum width inside the map.
- * @param map The map.
- * @return The maximum width inside the map.
- */
-size_t	get_max_width(char **map)
+void	strip_newline(char *line)
+{
+	size_t	len;
+
+	if (!line)
+		return ;
+	len = ft_strlen(line);
+	while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r'))
+	{
+		line[len - 1] = '\0';
+		len--;
+	}
+}
+
+int	is_map_line(char *line)
 {
 	int		i;
-	size_t	max;
-	size_t	curr;
+	char	c;
 
 	i = 0;
-	max = 0;
-	curr = 0;
-	while (map[i])
+	while (line[i] && line[i] != '\n')
 	{
-		curr = ft_strlen(map[i]);
-		if (curr > max)
-			max = curr;
+		c = line[i];
+		if (c != ' ' && c != '0' && c != '1' && !is_player(c))
+			return (0);
 		i++;
 	}
-	return (max);
+	return (i > 0);
+}
+
+int	count_map_lines(const char *path)
+{
+	int		fd;
+	int		count;
+	char	*line;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	line = get_next_line(fd);
+	while (line && !is_map_line(line))
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	count = 0;
+	while (line && is_map_line(line))
+	{
+		free(line);
+		count++;
+		line = get_next_line(fd);
+	}
+	if (line)
+		free(line);
+	close(fd);
+	return (count);
 }
 
 /**
- * @brief This function will set the direction.
- * @param c Is the direction that is in the old map.
- * @return A char one of the following {'E', 'W', 'S', 'N'}
+ * @brief Compute height and width of the raw map.
  */
-char	set_direction(char c)
+void	compute_dimensions(char **orig, int *height, int *width)
 {
-	if (c == 'E')
-		return ('E');
-	else if (c == 'W')
-		return ('W');
-	else if (c == 'S')
-		return ('S');
-	return ('N');
-}
+	int		i;
+	size_t	len;
 
-/**
- * @brief This function will set the data of the new map from the old map.
- * @param om The Old Map.
- * @param nm The New Map.
- * @param mw The Map Width.
- * @param mh The Map Height.
- * @note In this function we will free the Old Map.
- */
-void	normalize_map_2(char **om, char **nm, size_t mw, size_t mh)
-{
-	size_t	i;
-	size_t	j;
-	size_t	om_len;
-
+	*height = 0;
+	while (orig[*height] != NULL)
+		(*height)++;
+	*width = 0;
 	i = 0;
-	while (i < mh)
+	while (i < *height)
 	{
-		j = 0;
-		om_len = ft_strlen(om[i]);
-		while (j < mw)
-		{
-			if (j >= om_len || om[i][j] == '1' || ft_isspace(om[i][j]))
-				nm[i][j] = '1';
-			else if (om[i][j] == '0')
-				nm[i][j] = '0';
-			else if (om[i][j] == 'E' || om[i][j] == 'W'
-					|| om[i][j] == 'S' || om[i][j] == 'N')
-				nm[i][j] = set_direction(om[i][j]);
-			j++;
-		}
+		len = ft_strlen(orig[i]);
+		if ((int)len > *width)
+			*width = (int)len;
 		i++;
 	}
-	free_split(om);
 }
 
 /**
- * @brief This function will normalize the map size from nxm to nxn.
- * @param om Is the Old Map.
- * @return A char ** as the new nxn map.
- * @note This function will initalize the map and it's sizw also the
- * old map will be freed.
+ * @brief Allocate a new normalized map filled entirely with '1's.
  */
-char	**normalize_map_1(char **om)
+char	**allocate_norm_map(int height, int width)
 {
-	char	**nm;
-	size_t	i;
-	size_t	map_height;
-	size_t	map_width;
+	int		i;
+	char	**norm;
 
-	if (!om)
+	norm = malloc(sizeof(char *) * (height + 1));
+	if (!norm)
 		return (NULL);
-	map_height = count_split(om);
-	nm = (char **)ft_calloc(map_height + 1, sizeof(char *));
-	if (!nm)
-		return (free_split(om), NULL);
-	map_width = get_max_width(om);
 	i = 0;
-	while (i < map_height)
+	while (i < height)
 	{
-		nm[i] = (char *)ft_calloc(map_width + 1, sizeof(char));
-		if (!nm[i])
-			return (free_split(nm), free_split(om), NULL);
+		norm[i] = malloc(width + 1);
+		if (!norm[i])
+		{
+			while (i-- > 0)
+				free(norm[i]);
+			free(norm);
+			return (NULL);
+		}
+		ft_memset(norm[i], '1', width);
+		norm[i][width] = '\0';
 		i++;
 	}
-	normalize_map_2(om, nm, map_width, map_height);
-	return (nm);
+	norm[height] = NULL;
+	return (norm);
 }
