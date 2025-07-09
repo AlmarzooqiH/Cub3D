@@ -40,7 +40,7 @@
 /*			Player Related Macros				*/
 # define ROTATION_SPEED 0.1f
 # define MOVEMENT_SPEED 0.25f
-# define N_RAYS 120
+# define N_RAYS 240
 
 typedef enum e_side
 {

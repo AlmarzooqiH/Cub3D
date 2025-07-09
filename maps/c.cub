@@ -1,7 +1,7 @@
-NO ./textures/Hamad/xpm/Hamad_Back_Side.xpm
-SO ./textures/Hamad/xpm/Hamad_Front_Side.xpm
-WE ./textures/Hamad/xpm/Hamad_Right_Side.xpm
-EA ./textures/Hamad/xpm/Hamad_Left_Side.xpm
+NO ./textures/Piolo/xpm/Pilolo.xpm
+SO ./textures/Random/xpm/Cup_With_Sugar.xpm
+WE ./textures/Ahmed/xpm/Ahmed.xpm
+EA ./textures/Random/xpm/Boiler.xpm
 
 C 92,179,65
 F 255,255,255
